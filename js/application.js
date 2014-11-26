@@ -26,7 +26,7 @@ $(document).ready(function(){
     return false;
   })
 
-  bgObj.src= 'http://fc07.deviantart.net/fs70/i/2012/114/c/2/living_room_by_juniorgustabo-d4xfzug.png'
+  bgObj.src= './images/room.jpg'
 
 })
 
