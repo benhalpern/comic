@@ -1,0 +1,28 @@
+#container{
+	@include span-columns(12);
+	@include shift(1);
+	margin-top:30px;
+
+}
+#tv{
+	@include span-columns(8);
+	background:black;
+	width:800px;
+	height:600px;
+	border-radius:7px;
+}
+#resources{
+	@include span-columns(4);
+	li{
+		list-style:none;
+		img{
+			width:200px;
+			&:hover{
+				width:210px;
+
+			}
+		}
+		cursor:pointer;
+
+	}
+}

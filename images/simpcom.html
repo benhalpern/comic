@@ -1,0 +1,315 @@
+<html>
+  <head>
+    <style>
+      body {
+        margin: 0px;
+        padding: 0px;
+      }
+	#container{float:left;min-width:900px;}
+	#controls{float:left;height:600px;width:160px;}
+	.addSimpson,.addBackground,.addBubble{text-align:center;}
+	.addSimpson:hover{
+	   background-color:#b5b5b5;
+		cursor: pointer;
+	}
+	.addBackground:hover{
+	   background-color:#b5b5b5;
+		cursor: pointer;
+	}
+	.addBubble:hover{
+	   background-color:#b5b5b5;
+		cursor: pointer;
+	}
+
+	
+	#characterSelect{height:200px;overflow:scroll;}
+	#wrapper{padding:10px;}
+	#buttons{height:400px;overflow:scroll;}
+    </style>
+  </head>
+  <body>
+	<div id="wrapper">
+		<div id="controls">
+			<div id="characterSelect">
+				<ul>
+					<li>Homer</li>
+					<li>Lisa</li>
+					<li>Bart</li>
+					<li>Homer</li>
+					<li>Lisa</li>
+					<li>Bart</li>
+					<li>Homer</li>
+					<li>Lisa</li>
+					<li>Bart</li>
+					<li>Homer</li>
+					<li>Lisa</li>
+					<li>Bart</li>
+
+				</ul>	
+			</div>	
+			<div id="buttons">
+		      <div class="addBackground" data-source="../simp-com/room.jpg" data-name="room">
+		        <img src="../simp-com/room.jpg" width="130">
+		      </div>
+		      <div class="addBackground" data-source="http://images3.wikia.nocookie.net/__cb20100331224102/simpsons/images/4/48/SpringfieldElementary3.jpg" data-name="school">
+		        <img src="http://images3.wikia.nocookie.net/__cb20100331224102/simpsons/images/4/48/SpringfieldElementary3.jpg" width="130">
+		      </div>
+		    </div>
+
+
+		</div>
+    <div id="container">
+<!-- this is where the canvas is. -->
+    </div>
+	<div id="controls">
+		<div id="characterSelect">
+			<ul>
+				<li>Homer</li>
+				<li>Lisa</li>
+				<li>Bart</li>
+				<li>Homer</li>
+				<li>Lisa</li>
+				<li>Bart</li>
+				<li>Homer</li>
+				<li>Lisa</li>
+				<li>Bart</li>
+				<li>Homer</li>
+				<li>Lisa</li>
+				<li>Bart</li>
+				
+			</ul>	
+		</div>	
+		<div id="buttons">
+	      <div class="addSimpson" data-source="http://s3.amazonaws.com/rapgenius/Lisa_Simpson.png" data-name="bart">
+	        <img src="http://s3.amazonaws.com/rapgenius/Lisa_Simpson.png" width="130">
+	      </div>
+		  <div class="addSimpson" data-source="http://upload.wikimedia.org/wikipedia/en/0/02/Homer_Simpson_2006.png" data-name="homer">
+			<img src="http://upload.wikimedia.org/wikipedia/en/0/02/Homer_Simpson_2006.png" width="130">
+		  </div>	
+	      <div class="addSimpson" data-source="../simp-com/bart.png" data-name="bart">
+	        <img src="../simp-com/bart.png" width="130">
+	      </div>
+
+	    </div>
+	    
+		
+	</div>
+	<div id="controls">
+		<!-- <div id="characterSelect">
+			<ul>
+				<li>Homer</li>
+				<li>Lisa</li>
+				<li>Bart</li>
+				<li>Homer</li>
+				<li>Lisa</li>
+				<li>Bart</li>
+				<li>Homer</li>
+				<li>Lisa</li>
+				<li>Bart</li>
+				<li>Homer</li>
+				<li>Lisa</li>
+				<li>Bart</li>
+				
+			</ul>	
+		</div>	 -->
+		<div id="buttons">
+	      <div class="addBubble" data-source="http://s3.amazonaws.com/rapgenius/Lisa_Simpson.png" data-name="bart">
+	        Add Bubble
+	      </div>
+	    </div>
+	    
+		
+	</div>
+	
+</div>
+
+    <script src="../simp-com/kinetic-v4.5.0.min.js"></script>
+	<script src="http://code.jquery.com/jquery-2.0.0.js"></script>
+
+    <script defer="defer">
+
+	  // Handler for .ready() called.
+      function drawImage(background) { 
+        var stage = new Kinetic.Stage({
+          container: "container",
+          width: 900,
+          height: 600,
+        });
+        var layer = new Kinetic.Layer();
+
+        // darth vader
+
+
+        var background = new Kinetic.Image({
+          image: background,
+          width: 900,
+          height: 600,
+          draggable: false
+        });
+
+        // add cursor styling
+
+        layer.add(background);
+
+// ADD BY CLICK --- --- --- --- --- --- --- --- --- --- --- ---
+
+      function addPic(imgSrc,name) {
+		// alert("hello");
+		var imageObj = new Image();
+		imageObj.src = imgSrc;
+      
+        var name = new Kinetic.Image({
+          image: imageObj,
+		  height: 300,
+		  width: 200,
+          x: stage.getWidth() / 2 - 200 / 2,
+          y: stage.getHeight() / 2 - 137 / 2,
+          draggable: true
+        });
+// add cursor styling
+        name.on('mouseover', function() {
+          document.body.style.cursor = 'pointer';
+        });
+        name.on('mouseout', function() {
+          document.body.style.cursor = 'default';
+        });
+        
+        layer.add(name);
+        stage.add(layer);
+
+
+        /*
+         * since the stage toDataURL() method is asynchronous, we need
+         * to provide a callback
+         */
+      };
+	$(".addSimpson").click(function() {
+		
+		addPic(this.getAttribute("data-source"),this.getAttribute("data-name"))
+		
+	});
+
+
+	// END OF ADD BY CLICK --- --- --- --- --- --- --- --- --- --- --- ---
+	
+
+
+	// ADD BY CLICK --- --- --- --- --- --- --- --- --- --- --- ---
+
+	      function addBackground(imgSrc,name) {
+			var imageObj = new Image();
+			imageObj.src = imgSrc;
+
+	        var name = new Kinetic.Image({
+	          image: imageObj,
+			  height: 600,
+			  width: 900,
+	          draggable: false
+	        });
+	// add cursor styling
+	        name.on('mouseover', function() {
+	          document.body.style.cursor = 'pointer';
+	        });
+	        name.on('mouseout', function() {
+	          document.body.style.cursor = 'default';
+	        });
+
+	        layer.add(name);
+	        stage.add(layer);
+
+
+	        /*
+	         * since the stage toDataURL() method is asynchronous, we need
+	         * to provide a callback
+	         */
+	      };
+		$(".addBackground").click(function() {
+
+			addBackground(this.getAttribute("data-source"),this.getAttribute("data-name"))
+
+		});
+
+
+		// END OF ADD BY CLICK --- --- --- --- --- --- --- --- --- --- --- ---
+		
+		
+		// ADD WORD BUBBLE --- --- --- --- --- --- --- --- --- --- --- ---
+
+	      function addBubble() {
+
+	      var oval = new Kinetic.Ellipse({
+	        x: stage.getWidth() / 2,
+	        y: stage.getHeight() / 2,
+	        radius: {
+	          x: 200,
+	          y: 100
+	        },
+	        fill: 'white',
+	        stroke: 'black',
+	        strokeWidth: 1,
+			draggable: true
+	      });
+
+	      // add the shape to the layer
+		// add cursor styling
+		        oval.on('mouseover', function() {
+		          document.body.style.cursor = 'pointer';
+		        });
+		        oval.on('mouseout', function() {
+		          document.body.style.cursor = 'default';
+		        });
+
+		      	layer.add(oval);
+		        stage.add(layer);
+
+
+		        /*
+		         * since the stage toDataURL() method is asynchronous, we need
+		         * to provide a callback
+		         */
+		      };
+
+			$(".addBubble").click(function() {
+
+				addBubble();
+
+			});
+
+			// END OF ADD BY CLICK --- --- --- --- --- --- --- --- --- --- --- ---
+		
+
+
+
+        stage.add(layer);
+
+      document.getElementById('save').addEventListener('click', function() {
+        /*
+         * since the stage toDataURL() method is asynchronous, we need
+         * to provide a callback
+         */
+        stage.toDataURL({
+          callback: function(dataUrl) {
+            /*
+             * here you can do anything you like with the data url.
+             * In this tutorial we'll just open the url with the browser
+             * so that you can see the result as an image
+             */
+            window.open(dataUrl);
+          }
+        });
+      }, false);
+      }
+      var background = new Image();
+      var imageObj2 = new Image();
+
+      background.onload = function() {
+        drawImage(this);
+      };
+
+
+      background.src = '../simp-com/room.jpg';
+	  
+	
+    </script>
+  </body>
+</html>
