@@ -47,21 +47,49 @@ function drawImage(stage,imageObj){
 
 
   //bart
-  var bartImg = new Kinetic.Image({
+  var group = new Kinetic.Group({
+    x: 20,
+    y: 20,
+    draggable: true
+  });
+
+  layer.add(group);
+
+
+  var img = new Kinetic.Image({
     image: imageObj,
     x: 20,
     y:20,
-    draggable: true
+    height: imageObj.height,
+    width: imageObj.width,
+    name: "image"
   })
 
-  bartImg.on('mouseover', function(){
-    document.body.style.cursor = 'pointer';
+  group.add(img);
+  addAnchor(group, 0, 0, "topLeft");
+  addAnchor(group, imageObj.width, 0, "topRight");
+  addAnchor(group, imageObj.width, imageObj.height, "bottomRight");
+  addAnchor(group, 0, imageObj.height, "bottomLeft");
+
+  group.on("dragstart", function() {
+    this.moveToTop();
   });
-  bartImg.on('mouseout', function(){
+
+
+  group.on('mouseover', function(){
+    document.body.style.cursor = 'pointer';
+    this.find('Circle').show()
+    layer.draw();
+  });
+  group.on('mouseout', function(){
     document.body.style.cursor = 'default'
+    this.find('Circle').hide()
+    layer.draw();
   })
 
-  layer.add(bartImg);
+
+
+
   stage.add(layer);
 }
 
@@ -69,7 +97,6 @@ function drawImage(stage,imageObj){
 function drawBackground(stage,imageObj){
 
   var layer = new Kinetic.Layer();
-  //bart
   var img = new Kinetic.Image({
     image: imageObj,
     x: 0,
@@ -81,4 +108,160 @@ function drawBackground(stage,imageObj){
 
   layer.add(img);
   stage.add(layer);
+}
+
+function addAnchor(group, x, y, name) {
+  var stage = group.getStage();
+  var layer = group.getLayer();
+
+  var anchor = new Kinetic.Circle({
+    x: x,
+    y: y,
+    stroke: "#666",
+    fill: "#ddd",
+    strokeWidth: 2,
+    radius: 12,
+    name: name,
+    draggable: true,
+    visible: false
+  });
+
+  anchor.on("dragmove", function() {
+    update(group, this);
+    layer.draw();
+  });
+  anchor.on("mousedown touchstart", function() {
+    group.setDraggable(false);
+    this.moveToTop();
+  });
+  anchor.on("dragend", function() {
+    group.setDraggable(true);
+    layer.draw();
+  });
+  // add hover styling
+  anchor.on("mouseover", function() {
+    var layer = this.getLayer();
+    document.body.style.cursor = "pointer";
+    this.setStrokeWidth(4);
+    layer.draw();
+  });
+  anchor.on("mouseout", function() {
+    var layer = this.getLayer();
+    document.body.style.cursor = "default";
+    this.setStrokeWidth(2);
+    layer.draw();
+  });
+
+  group.add(anchor);
+}
+
+
+function update(group, activeHandle) {
+  var topLeft = group.get(".topLeft")[0],
+  topRight = group.get(".topRight")[0],
+  bottomRight = group.get(".bottomRight")[0],
+  bottomLeft = group.get(".bottomLeft")[0],
+  image = group.get(".image")[0],
+  activeHandleName = activeHandle.getName(),
+  newWidth,
+  newHeight,
+  minWidth = 32,
+  minHeight = 32,
+  oldX,
+  oldY,
+  imageX,
+  imageY;
+
+  // Update the positions of handles during drag.
+  // This needs to happen so the dimension calculation can use the
+  // handle positions to determine the new width/height.
+  switch (activeHandleName) {
+    case "topLeft":
+      oldY = topRight.getY();
+      oldX = bottomLeft.getX();
+      topRight.setY(activeHandle.getY());
+      bottomLeft.setX(activeHandle.getX());
+      break;
+    case "topRight":
+      oldY = topLeft.getY();
+      oldX = bottomRight.getX();
+      topLeft.setY(activeHandle.getY());
+      bottomRight.setX(activeHandle.getX());
+      break;
+    case "bottomRight":
+      oldY = bottomLeft.getY();
+      oldX = topRight.getX();
+      bottomLeft.setY(activeHandle.getY());
+      topRight.setX(activeHandle.getX());
+      break;
+    case "bottomLeft":
+      oldY = bottomRight.getY();
+      oldX = topLeft.getX();
+      bottomRight.setY(activeHandle.getY());
+      topLeft.setX(activeHandle.getX());
+      break;
+  }
+
+
+
+  // Calculate new dimensions. Height is simply the dy of the handles.
+  // Width is increased/decreased by a factor of how much the height changed.
+  newHeight = bottomLeft.getY() - topLeft.getY();
+  newWidth = image.getWidth() * newHeight / image.getHeight();
+
+  // It's too small: move the active handle back to the old position
+  if( newWidth < minWidth || newHeight < minHeight ){
+    activeHandle.setY(oldY);
+    activeHandle.setX(oldX);
+    switch (activeHandleName) {
+      case "topLeft":
+        topRight.setY(oldY);
+        bottomLeft.setX(oldX);
+        break;
+      case "topRight":
+        topLeft.setY(oldY);
+        bottomRight.setX(oldX);
+        break;
+      case "bottomRight":
+        bottomLeft.setY(oldY);
+        topRight.setX(oldX);
+        break;
+      case "bottomLeft":
+        bottomRight.setY(oldY);
+        topLeft.setX(oldX);
+        break;
+      }
+    }
+
+
+  newHeight = bottomLeft.getY() - topLeft.getY();
+  //comment the below line and uncomment the line below tha line to allow free resize of the images because the below line preserves the scale and aspect ratio
+  newWidth = image.getWidth() * newHeight / image.getHeight();//for restricted resizing
+  //newWidth = topRight.getX() - topLeft.getX();//for free resizing
+
+  // Move the image to adjust for the new dimensions.
+  // The position calculation changes depending on where it is anchored.
+  // ie. When dragging on the right, it is anchored to the top left,
+  //     when dragging on the left, it is anchored to the top right.
+  if(activeHandleName === "topRight" || activeHandleName === "bottomRight") {
+    image.setPosition(topLeft.getX(), topLeft.getY());
+  } else if(activeHandleName === "topLeft" || activeHandleName === "bottomLeft") {
+    image.setPosition(topRight.getX() - newWidth, topRight.getY());
+  }
+
+  imageX = image.getX();
+  imageY = image.getY();
+
+  // Update handle positions to reflect new image dimensions
+  topLeft.setPosition(imageX, imageY);
+  topRight.setPosition(imageX + newWidth, imageY);
+  bottomRight.setPosition(imageX + newWidth, imageY + newHeight);
+  bottomLeft.setPosition(imageX, imageY + newHeight);
+
+  // Set the image's size to the newly calculated dimensions
+  if(newWidth && newHeight) {
+    console.log(newWidth)
+    console.log(newHeight)
+    image.setSize({width: newWidth, height: newHeight});
+  }
 }
