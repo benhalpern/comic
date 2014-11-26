@@ -48,8 +48,8 @@ function drawImage(stage,imageObj){
 
   //bart
   var group = new Kinetic.Group({
-    x: 20,
-    y: 20,
+    x: 110,
+    y: 110,
     draggable: true
   });
 
@@ -58,18 +58,18 @@ function drawImage(stage,imageObj){
 
   var img = new Kinetic.Image({
     image: imageObj,
-    x: 20,
-    y:20,
+    x: 0,
+    y: 0,
     height: imageObj.height,
     width: imageObj.width,
     name: "image"
   })
 
   group.add(img);
-  addAnchor(group, 0, 0, "topLeft");
-  addAnchor(group, imageObj.width, 0, "topRight");
-  addAnchor(group, imageObj.width, imageObj.height, "bottomRight");
-  addAnchor(group, 0, imageObj.height, "bottomLeft");
+  addAnchor(group, 10, + 10, "topLeft");
+  addAnchor(group, imageObj.width - 10, + 10, "topRight");
+  addAnchor(group, imageObj.width - 10, imageObj.height - 10, "bottomRight");
+  addAnchor(group, 10, imageObj.height - 10, "bottomLeft");
 
   group.on("dragstart", function() {
     this.moveToTop();
@@ -120,7 +120,7 @@ function addAnchor(group, x, y, name) {
     stroke: "#666",
     fill: "#ddd",
     strokeWidth: 2,
-    radius: 12,
+    radius: 8,
     name: name,
     draggable: true,
     visible: false
@@ -165,8 +165,8 @@ function update(group, activeHandle) {
   activeHandleName = activeHandle.getName(),
   newWidth,
   newHeight,
-  minWidth = 32,
-  minHeight = 32,
+  minWidth = 50,
+  minHeight = 50,
   oldX,
   oldY,
   imageX,
@@ -177,6 +177,7 @@ function update(group, activeHandle) {
   // handle positions to determine the new width/height.
   switch (activeHandleName) {
     case "topLeft":
+
       oldY = topRight.getY();
       oldX = bottomLeft.getX();
       topRight.setY(activeHandle.getY());
@@ -189,6 +190,7 @@ function update(group, activeHandle) {
       bottomRight.setX(activeHandle.getX());
       break;
     case "bottomRight":
+
       oldY = bottomLeft.getY();
       oldX = topRight.getX();
       bottomLeft.setY(activeHandle.getY());
@@ -244,24 +246,22 @@ function update(group, activeHandle) {
   // ie. When dragging on the right, it is anchored to the top left,
   //     when dragging on the left, it is anchored to the top right.
   if(activeHandleName === "topRight" || activeHandleName === "bottomRight") {
-    image.setPosition(topLeft.getX(), topLeft.getY());
+    image.setPosition({x: topLeft.getX(), y: topLeft.getY()});
   } else if(activeHandleName === "topLeft" || activeHandleName === "bottomLeft") {
-    image.setPosition(topRight.getX() - newWidth, topRight.getY());
+    image.setPosition({x: topRight.getX() - newWidth, y: topRight.getY()});
   }
 
   imageX = image.getX();
   imageY = image.getY();
 
   // Update handle positions to reflect new image dimensions
-  topLeft.setPosition(imageX, imageY);
-  topRight.setPosition(imageX + newWidth, imageY);
-  bottomRight.setPosition(imageX + newWidth, imageY + newHeight);
-  bottomLeft.setPosition(imageX, imageY + newHeight);
+  topLeft.setPosition({x: imageX, y: imageY});
+  topRight.setPosition({x: imageX + newWidth, y: imageY});
+  bottomRight.setPosition({x: imageX + newWidth, y: imageY + newHeight});
+  bottomLeft.setPosition({x: imageX, y: imageY + newHeight});
 
   // Set the image's size to the newly calculated dimensions
   if(newWidth && newHeight) {
-    console.log(newWidth)
-    console.log(newHeight)
     image.setSize({width: newWidth, height: newHeight});
   }
 }
