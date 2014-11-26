@@ -10,6 +10,12 @@ body {
   font-family: "simpsons", Verdana, Tahoma;
   font-weight: 300; }
 
+#headline {
+  color: #1791ff; }
+  #headline h1 {
+    font-size: 48px;
+    margin: -10px 0 10px 0; }
+
 #container {
   *zoom: 1;
   max-width: 87.5em;
@@ -72,5 +78,7 @@ body {
     color: #ffd90f;
     background: #1791ff;
     padding: 16px 30px 10px 30px; }
+    #controls a:hover {
+      background: #319dff; }
 
 /*# sourceMappingURL=application.css.map */
