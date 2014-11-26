@@ -11,14 +11,18 @@ body {
   font-weight: 300; }
 
 #container {
-  display: block;
-  float: left;
-  margin-right: 2.12766%;
-  width: 100%;
-  margin-left: 8.51064%;
-  margin-top: 30px; }
-  #container:last-child {
-    margin-right: 0; }
+  *zoom: 1;
+  max-width: 87.5em;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+  min-width: 1280px;
+  margin-left: 40px; }
+  #container:before, #container:after {
+    content: " ";
+    display: table; }
+  #container:after {
+    clear: both; }
 
 #tv {
   display: block;
@@ -60,7 +64,7 @@ body {
   float: left;
   margin-right: 2.12766%;
   width: 100%;
-  padding: 40px; }
+  padding-top: 20px; }
   #controls:last-child {
     margin-right: 0; }
   #controls a {
