@@ -62,14 +62,15 @@ function drawImage(stage,imageObj){
     y: 0,
     height: imageObj.height,
     width: imageObj.width,
+    brightness: 0,
     name: "image"
   })
 
   group.add(img);
-  addAnchor(group, 10, + 10, "topLeft");
-  addAnchor(group, imageObj.width - 10, + 10, "topRight");
-  addAnchor(group, imageObj.width - 10, imageObj.height - 10, "bottomRight");
-  addAnchor(group, 10, imageObj.height - 10, "bottomLeft");
+  addAnchor(group, 0, 0, "topLeft");
+  addAnchor(group, imageObj.width, 0, "topRight");
+  addAnchor(group, imageObj.width, imageObj.height, "bottomRight");
+  addAnchor(group, 0, imageObj.height, "bottomLeft");
 
   group.on("dragstart", function() {
     this.moveToTop();
@@ -78,13 +79,15 @@ function drawImage(stage,imageObj){
 
   group.on('mouseover', function(){
     document.body.style.cursor = 'pointer';
-    this.find('Circle').show()
+    this.find('Circle').show();
+    img.fill('rgba(0, 0, 0, 0.3)');
     layer.draw();
   });
   group.on('mouseout', function(){
-    document.body.style.cursor = 'default'
-    this.find('Circle').hide()
-    layer.draw();
+      document.body.style.cursor = 'default'
+      group.find('Circle').hide()
+      img.fill(null)
+      layer.draw();
   })
 
 
@@ -120,7 +123,7 @@ function addAnchor(group, x, y, name) {
     stroke: "#666",
     fill: "#ddd",
     strokeWidth: 2,
-    radius: 8,
+    radius: 12,
     name: name,
     draggable: true,
     visible: false
@@ -136,19 +139,6 @@ function addAnchor(group, x, y, name) {
   });
   anchor.on("dragend", function() {
     group.setDraggable(true);
-    layer.draw();
-  });
-  // add hover styling
-  anchor.on("mouseover", function() {
-    var layer = this.getLayer();
-    document.body.style.cursor = "pointer";
-    this.setStrokeWidth(4);
-    layer.draw();
-  });
-  anchor.on("mouseout", function() {
-    var layer = this.getLayer();
-    document.body.style.cursor = "default";
-    this.setStrokeWidth(2);
     layer.draw();
   });
 
@@ -255,10 +245,13 @@ function update(group, activeHandle) {
   imageY = image.getY();
 
   // Update handle positions to reflect new image dimensions
-  topLeft.setPosition({x: imageX, y: imageY});
+  topLeft.setPosition({x: (imageX), y: (imageY)});
   topRight.setPosition({x: imageX + newWidth, y: imageY});
   bottomRight.setPosition({x: imageX + newWidth, y: imageY + newHeight});
   bottomLeft.setPosition({x: imageX, y: imageY + newHeight});
+
+
+
 
   // Set the image's size to the newly calculated dimensions
   if(newWidth && newHeight) {
