@@ -27,7 +27,7 @@ $(document).ready(function(){
     stage.toDataURL({
       callback: function(dataUrl) {
 
-        var a = $("<a>").attr("href", dataUrl).attr("download", "img.png").appendTo("body");
+        var a = $("<a>").attr("href", dataUrl).attr("download", "comic.png").appendTo("body");
 
         a[0].click();
 
