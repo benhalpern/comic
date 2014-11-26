@@ -1,3 +1,18 @@
+$light-gray: #EDEDED;
+$simpsons-yellow: #FFD90F;
+$simpsons-blue: #1791FF;
+
+@font-face {
+	font-family: "simpsons";
+	src: url(./simpfont.ttf) format("truetype");
+}
+
+
+body {
+	font-family: "simpsons", Verdana, Tahoma;
+	font-weight: 300;
+}
+
 #container{
 	@include span-columns(12);
 	@include shift(1);
@@ -13,16 +28,37 @@
 }
 #resources{
 	@include span-columns(4);
+	select{
+		width: 260px;
+		font-size:20px;
+	}
+	ul{
+		height:550px;
+		overflow:auto;
+	}
 	li{
 		list-style:none;
 		img{
 			width:200px;
 			&:hover{
-				width:210px;
-
+				background:$light-gray;
+			}
+			&.hidden{
+				display:none;
 			}
 		}
 		cursor:pointer;
 
+	}
+}
+#controls{
+	@include span-columns(12);
+	padding:40px;
+	a{
+		font-size:30px;
+		text-decoration:none;
+		color:$simpsons-yellow;
+		background: $simpsons-blue;
+		padding:16px 30px 10px 30px;
 	}
 }

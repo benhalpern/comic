@@ -1,5 +1,7 @@
 $(document).ready(function(){
 
+  //onload
+
   var stage = new Kinetic.Stage({
     container: "tv",
     width: 800,
@@ -11,6 +13,11 @@ $(document).ready(function(){
   bgObj.onload = function(){
     drawBackground(stage,this)
   }
+  bgObj.src= './images/room.jpg'
+
+
+
+  //events
 
   $('.image').click(function(){
     drawImage(stage,this)
@@ -26,7 +33,11 @@ $(document).ready(function(){
     return false;
   })
 
-  bgObj.src= './images/room.jpg'
+  $("select").change(function(){
+    $(".image").addClass("hidden")
+    $('*[data-character="' + this.value + '"]').removeClass("hidden");
+  })
+
 
 })
 
