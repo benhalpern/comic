@@ -24,7 +24,6 @@ body {
 	background:black;
 	width:800px;
 	height:600px;
-	border-radius:7px;
 }
 #resources{
 	@include span-columns(4);
