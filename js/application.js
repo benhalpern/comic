@@ -26,8 +26,12 @@ $(document).ready(function(){
   $("#save").click(function(){
     stage.toDataURL({
       callback: function(dataUrl) {
-        //document.getElementById('prova').src=dataUrl;
-        window.open(dataUrl);
+
+        var a = $("<a>").attr("href", dataUrl).attr("download", "img.png").appendTo("body");
+
+        a[0].click();
+
+        a.remove();
       }
     })
     return false;
