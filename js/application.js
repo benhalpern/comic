@@ -56,7 +56,6 @@ $(document).ready(function(){
     stage.toDataURL({
       callback: function(dataUrl) {
         console.log(dataURL)
-        
         $.ajax({
           url: 'https://api.imgur.com/3/image',
           headers: {
