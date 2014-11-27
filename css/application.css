@@ -89,7 +89,8 @@ body {
   float: left;
   margin-right: 2.12766%;
   width: 100%;
-  padding-top: 20px; }
+  padding-top: 20px;
+  margin-bottom: 20px; }
   #controls:last-child {
     margin-right: 0; }
   #controls a {
@@ -100,5 +101,7 @@ body {
     padding: 16px 30px 10px 30px; }
     #controls a:hover {
       background: #319dff; }
+    #controls a.uploaded {
+      background: #ff360f; }
 
 /*# sourceMappingURL=application.css.map */

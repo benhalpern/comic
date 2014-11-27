@@ -1,6 +1,6 @@
 //focusedText needs to be a global variable
 
-var focusedText,comicName = "";
+var focusedText,comicName = "comic", comicTitle = "Comic With";
 
 $(document).ready(function(){
 
@@ -26,6 +26,8 @@ $(document).ready(function(){
   $('.image').click(function(){
     drawImage(stage,this);
     comicName = comicName + "_" + $(this).data("character")
+    comicTitle = comicTitle + " " + $(this).data("character")
+
     console.log(comicName)
   })
 
@@ -37,7 +39,7 @@ $(document).ready(function(){
     stage.toDataURL({
       callback: function(dataUrl) {
 
-        var a = $("<a>").attr("href", dataUrl).attr("download", "comic" + comicName + ".png").appendTo("body");
+        var a = $("<a>").attr("href", dataUrl).attr("download", comicName + ".png").appendTo("body");
 
         a[0].click();
 
@@ -46,6 +48,39 @@ $(document).ready(function(){
     })
     return false;
   })
+  
+
+  $("#imgur").not( ".uploaded" ).click(function(){
+    $("#imgur").addClass("uploading")
+    $("#imgur").text("Uploading to Imgur")
+    stage.toDataURL({
+      callback: function(dataUrl) {
+        $.ajax({
+          url: 'https://api.imgur.com/3/image',
+          headers: {
+            'Authorization': 'Client-ID d2c784f95f3c2df'
+          },
+          type: 'POST',
+          data: {
+            'image': dataUrl,
+            'name': comicName + ".png",
+            'title': comicTitle,
+            'description': "Made with Comic Maker"
+          },
+          success: function(response) {
+            $("#imgur").addClass("uploaded")
+            $("#imgur").removeClass("uploading")
+            $("#imgur").text("View on Imgur")
+            $("#imgur").attr("href", "http://imgur.com/" + response["data"]["id"])
+            $("#imgur").attr("target","_blank")
+          }
+        });
+      }
+    })
+    return false;
+  })
+
+
 
   $("select").change(function(){
     $(".image").addClass("hidden")

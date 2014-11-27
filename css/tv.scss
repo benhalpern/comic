@@ -1,6 +1,8 @@
 $light-gray: #EDEDED;
 $simpsons-yellow: #FFD90F;
 $simpsons-blue: #1791FF;
+$simpsons-red: #FF360F;
+$marge-green: #53B642;
 $helvetica: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 
 @font-face {
@@ -76,6 +78,7 @@ body {
 
 	@include span-columns(12);
 	padding-top:20px;
+	margin-bottom:20px;
 	a{
 		font-size:30px;
 		text-decoration:none;
@@ -84,6 +87,9 @@ body {
 		padding:16px 30px 10px 30px;
 		&:hover{
 			background:lighten($simpsons-blue,5%)
+		}
+		&.uploaded{
+			background: $simpsons-red;
 		}
 	}
 }
