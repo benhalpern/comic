@@ -48,11 +48,12 @@ $(document).ready(function(){
     })
     return false;
   })
-  
+
 
   $("#imgur").not( ".uploaded" ).click(function(){
     $("#imgur").addClass("uploading")
     $("#imgur").text("Uploading to Imgur")
+    console.log(dataURL)
     stage.toDataURL({
       callback: function(dataUrl) {
         $.ajax({
