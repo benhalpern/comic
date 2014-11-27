@@ -55,7 +55,6 @@ $(document).ready(function(){
     $("#imgur").text("Uploading to Imgur")
     stage.toDataURL({
       callback: function(dataUrl) {
-        console.log(dataUrl)
         $.ajax({
           url: 'https://api.imgur.com/3/image',
           headers: {
