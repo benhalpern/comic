@@ -70,16 +70,12 @@ $(document).ready(function(){
     // if focusedText exists, two possibilities:
     // Either just clicked on an existing text, or
     // Clicked outside a focused text.
-    console.log("gello")
     if (focusedText != undefined) {
-      console.log(focusedText)
       if (focusedText.checkClick()) {
         focusedText.findCursorPosFromClick(true);
       }
       else {
         focusedText.unfocus(e);
-        console.log(focusedText.getX())
-        console.log(focusedText.getY())
 
       }
     }
@@ -201,6 +197,23 @@ function drawBubble(stage,e){
   group.add(oval);
   group.add(triangle);
 
+
+  //set faux stroke
+  var fill = "#454545"
+  var clone = oval.clone();
+  clone.setScale({x:1.03,y:1.04});
+  clone.setFill("#454545");
+  group.add(clone);
+  clone.moveToBottom();
+  var clone = triangle.clone();
+  clone.setScale({x:1.06,y:1.10});
+  clone.setFill("#454545");
+  group.add(clone);
+  clone.moveToBottom();
+
+
+
+
   stage.add(layer);
   addTextEdit(group,e);
   addAnchor(group, -100, -50, "topLeft");
@@ -225,8 +238,6 @@ function drawBubble(stage,e){
 
 
 function addTextEdit(group,e) {
-  console.log(group.getX())
-  console.log(group.getY())
   var newText = new Kinetic.EditableText({
     // find click position.
     x: e.pageX + getFullOffset().left - 80,
@@ -241,8 +252,6 @@ function addTextEdit(group,e) {
   newText.focus();
   focusedText = newText;
   focusedText.setPosition({x: -78, y: -20});
-
-  console.log(focusedText)
 
 }
 
