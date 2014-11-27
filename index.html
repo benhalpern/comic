@@ -5,7 +5,8 @@
     <link rel="stylesheet" href="css/application.css">
     <link rel="shortcut icon" type="image/png" href="./images/benpic.ico"/>
     <script type="text/javascript" src="./js/lib/jquery.js"></script>
-    <script src="./js/lib/kinetic-v5.1.0.min.js"></script>
+    <script type="text/javascript" src="./js/lib/kinetic-v5.1.0.min.js"></script>
+    <script src="./js/lib/kinetic.editable.js"></script>
     <script type="text/javascript" src="./js/application.js"></script>
 
 
@@ -15,6 +16,9 @@
     <section id="container">
       <div id="headline">
         <h1>Comic Maker, a Work in Progress</h1>
+      </div>
+      <div id="explainer">
+        Click character to add them to scene. Doubleclick scene to add speech bubble.
       </div>
 
       <div id="tv">
@@ -26,7 +30,6 @@
           <option value="homer">Homer</option>
           <option value="marge">Marge</option>
           <option value="maggie">Maggie</option>
-
         </select>
         <ul>
           <li>
@@ -84,9 +87,6 @@
             <img class="image hidden" src="./images/lisa3.png" data-character="lisa">
           </li>
           <li>
-            <img class="image hidden" src="./images/lisa4.png" data-character="lisa">
-          </li>
-          <li>
             <img class="image hidden" src="./images/maggie.png" data-character="maggie">
           </li>
           <li>
@@ -94,9 +94,6 @@
           </li>
           <li>
             <img class="image hidden" src="./images/maggie2.png" data-character="maggie">
-          </li>
-          <li>
-            <img class="image hidden" src="./images/maggie3.png" data-character="maggie">
           </li>
           <li>
             <img class="image hidden" src="./images/maggie4.png" data-character="maggie">

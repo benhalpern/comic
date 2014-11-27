@@ -11,10 +11,27 @@ body {
   font-weight: 300; }
 
 #headline {
+  display: block;
+  float: left;
+  margin-right: 2.12766%;
+  width: 59.14894%;
   color: #1791ff; }
+  #headline:last-child {
+    margin-right: 0; }
   #headline h1 {
     font-size: 48px;
     margin: -10px 0 10px 0; }
+
+#explainer {
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-size: 13px;
+  margin-top: -10px;
+  display: block;
+  float: left;
+  margin-right: 2.12766%;
+  width: 28.51064%; }
+  #explainer:last-child {
+    margin-right: 0; }
 
 #container {
   *zoom: 1;
@@ -42,6 +59,8 @@ body {
     margin-right: 0; }
 
 #resources {
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 300;
   display: block;
   float: left;
   margin-right: 2.12766%;
@@ -52,7 +71,7 @@ body {
     width: 260px;
     font-size: 20px; }
   #resources ul {
-    height: 550px;
+    height: 560px;
     overflow: auto; }
   #resources li {
     list-style: none;
@@ -65,6 +84,7 @@ body {
         display: none; }
 
 #controls {
+  font-weight: 300;
   display: block;
   float: left;
   margin-right: 2.12766%;

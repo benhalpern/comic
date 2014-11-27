@@ -1,6 +1,7 @@
 $light-gray: #EDEDED;
 $simpsons-yellow: #FFD90F;
 $simpsons-blue: #1791FF;
+$helvetica: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 
 @font-face {
 	font-family: "simpsons";
@@ -14,11 +15,20 @@ body {
 }
 
 #headline{
+	@include span-columns(7.2);
+
 	color: $simpsons-blue;
 	h1{
 		font-size:48px;
 		margin:-10px 0 10px 0;
 	}
+}
+#explainer{
+	font-family: $helvetica;
+	font-size:13px;
+	margin-top:-10px;
+	@include span-columns(3.6);
+
 }
 
 #container{
@@ -34,13 +44,16 @@ body {
 	height:600px;
 }
 #resources{
+	font-family: $helvetica;
+	font-weight: 300;
+
 	@include span-columns(4);
 	select{
 		width: 260px;
 		font-size:20px;
 	}
 	ul{
-		height:550px;
+		height:560px;
 		overflow:auto;
 	}
 	li{
@@ -59,6 +72,8 @@ body {
 	}
 }
 #controls{
+	font-weight: 300;
+
 	@include span-columns(12);
 	padding-top:20px;
 	a{

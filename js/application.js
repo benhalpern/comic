@@ -1,3 +1,9 @@
+//focusedText needs to be a global variable
+
+var focusedText,
+focusRectW = 100,
+focusRectH = 100;
+
 $(document).ready(function(){
 
   //onload
@@ -20,7 +26,11 @@ $(document).ready(function(){
   //events
 
   $('.image').click(function(){
-    drawImage(stage,this)
+    drawImage(stage,this);
+  })
+
+  $('#tv').dblclick(function(e){
+    drawBubble(stage,e);
   })
 
   $("#save").click(function(){
@@ -41,6 +51,42 @@ $(document).ready(function(){
     $(".image").addClass("hidden")
     $('*[data-character="' + this.value + '"]').removeClass("hidden");
   })
+
+
+  //text edit
+
+
+  //click outside TV
+  $(document).on('mousedown', function(e) {
+    if (focusedText != undefined) {
+      focusedText.unfocus(e);
+      focusedText = undefined;
+    }
+  });
+
+
+  // when clicked inside TV
+  $(document).on('mousedown', '#tv', function(e) {
+    // if focusedText exists, two possibilities:
+    // Either just clicked on an existing text, or
+    // Clicked outside a focused text.
+    console.log("gello")
+    if (focusedText != undefined) {
+      console.log(focusedText)
+      if (focusedText.checkClick()) {
+        focusedText.findCursorPosFromClick(true);
+      }
+      else {
+        focusedText.unfocus(e);
+        console.log(focusedText.getX())
+        console.log(focusedText.getY())
+
+      }
+    }
+    else{
+    }
+    return false;
+  });
 
 
 })
@@ -115,6 +161,89 @@ function drawBackground(stage,imageObj){
 
   layer.add(img);
   stage.add(layer);
+}
+
+function drawBubble(stage,e){
+
+  var layer,oval,group,trangle,bubble;
+
+  layer = new Kinetic.Layer();
+  oval = new Kinetic.Ellipse({
+    radius: {
+      x: 100,
+      y: 50
+    },
+    fill: 'white'
+  });
+
+  triangle = new Kinetic.Shape({
+    sceneFunc: function(context) {
+      context.beginPath();
+      context.moveTo(40, 0);
+      context.lineTo(80, 20);
+      context.quadraticCurveTo(100, 50, 120, 80);
+      context.closePath();
+      // KineticJS specific context method
+      context.fillStrokeShape(this);
+    },
+    fill: 'white'
+  });
+
+  group = new Kinetic.Group({
+    x: e.pageX -50,
+    y: e.pageY - 50,
+    draggable: true
+  });
+
+
+
+  layer.add(group);
+  group.add(oval);
+  group.add(triangle);
+
+  stage.add(layer);
+  addTextEdit(group,e);
+  addAnchor(group, -100, -50, "topLeft");
+  addAnchor(group, 100, -50, "topRight");
+  addAnchor(group, 100, 50, "bottomRight");
+  addAnchor(group, -100, 50, "bottomLeft");
+
+  group.on('mouseover', function(){
+    document.body.style.cursor = 'pointer';
+    this.find('Circle').show();
+    layer.draw();
+  });
+  group.on('mouseout', function(){
+    document.body.style.cursor = 'default'
+    group.find('Circle').hide()
+    layer.draw();
+  })
+
+  // add the layer to the stage
+
+}
+
+
+function addTextEdit(group,e) {
+  console.log(group.getX())
+  console.log(group.getY())
+  var newText = new Kinetic.EditableText({
+    // find click position.
+    x: e.pageX + getFullOffset().left - 80,
+    y: e.pageY + getFullOffset().top +9,
+    fontFamily: 'Comic Sans MS',
+    fill: '#000000',
+    // pasteModal id to support ctrl+v paste.
+    pasteModal: "pasteModalArea"
+  });
+  group.add(newText);
+
+  newText.focus();
+  focusedText = newText;
+  focusedText.setPosition({x: -78, y: -20});
+
+  console.log(focusedText)
+
 }
 
 function addAnchor(group, x, y, name) {
@@ -260,5 +389,14 @@ function update(group, activeHandle) {
   // Set the image's size to the newly calculated dimensions
   if(newWidth && newHeight) {
     image.setSize({width: newWidth, height: newHeight});
+  }
+}
+
+// helper function for mouse click position.
+function getFullOffset() {
+  var container = $("#tv");
+  return {
+    left: container.scrollLeft() - container.offset().left,
+    top: container.scrollTop() - container.offset().top
   }
 }
