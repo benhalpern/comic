@@ -1,8 +1,6 @@
 //focusedText needs to be a global variable
 
-var focusedText,
-focusRectW = 100,
-focusRectH = 100;
+var focusedText,comicName = "";
 
 $(document).ready(function(){
 
@@ -27,6 +25,8 @@ $(document).ready(function(){
 
   $('.image').click(function(){
     drawImage(stage,this);
+    comicName = comicName + "_" + $(this).data("character")
+    console.log(comicName)
   })
 
   $('#tv').dblclick(function(e){
@@ -37,7 +37,7 @@ $(document).ready(function(){
     stage.toDataURL({
       callback: function(dataUrl) {
 
-        var a = $("<a>").attr("href", dataUrl).attr("download", "comic.png").appendTo("body");
+        var a = $("<a>").attr("href", dataUrl).attr("download", "comic" + comicName + ".png").appendTo("body");
 
         a[0].click();
 
