@@ -53,9 +53,10 @@ $(document).ready(function(){
   $("#imgur").not( ".uploaded" ).click(function(){
     $("#imgur").addClass("uploading")
     $("#imgur").text("Uploading to Imgur")
-    console.log(dataURL)
     stage.toDataURL({
       callback: function(dataUrl) {
+        console.log(dataURL)
+        
         $.ajax({
           url: 'https://api.imgur.com/3/image',
           headers: {
