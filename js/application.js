@@ -62,6 +62,7 @@ $(document).ready(function(){
           },
           type: 'POST',
           data: {
+            'type': 'base64',
             'image': dataUrl,
             'name': comicName + ".png",
             'title': comicTitle,
