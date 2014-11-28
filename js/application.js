@@ -462,6 +462,8 @@ function update(group, activeHandle) {
   bottomRight = group.get(".bottomRight")[0],
   bottomLeft = group.get(".bottomLeft")[0],
   deleteButton = group.get(".delete")[0],
+  layerDownButton = group.get(".layerDown")[0],
+  layerUpButton = group.get(".layerUp")[0],
   image = group.get(".image")[0],
   activeHandleName = activeHandle.getName(),
   newWidth,
@@ -560,11 +562,18 @@ function update(group, activeHandle) {
   topRight.setPosition({x: imageX + newWidth, y: imageY});
   bottomRight.setPosition({x: imageX + newWidth, y: imageY + newHeight});
   bottomLeft.setPosition({x: imageX, y: imageY + newHeight});
-
   deleteButton.setPosition({x: imageX + newWidth -  38, y: imageY -18});
+  layerUpButton.setPosition({x: imageX + newWidth -  75, y: imageY -18});
+  layerDownButton.setPosition({x: imageX + newWidth -  102, y: imageY -18});
 
-
-
+  if(newWidth < 130){
+    layerDownButton.hide();
+    layerUpButton.hide();
+  }
+  else{
+    layerDownButton.show();
+    layerUpButton.show();
+  }
 
   // Set the image's size to the newly calculated dimensions
   if(newWidth && newHeight) {
