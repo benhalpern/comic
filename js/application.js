@@ -63,7 +63,7 @@ $(document).ready(function(){
           type: 'POST',
           data: {
             'type': 'base64',
-            'image': dataUrl,
+            'image': dataUrl.split(',')[1],
             'name': comicName + ".png",
             'title': comicTitle,
             'description': "Made with Comic Maker"
