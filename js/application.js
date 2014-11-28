@@ -3,10 +3,10 @@
 var focusedText,
     comicName = "comic",
     comicTitle = "Comic With",
-    bubbleObj = new Image(),
-    hypnoToadObj = new Image();
+    hypnoToadObj = new Image(),
+    focusRectW = 200,
+    focusRectH = 60;
 
-bubbleObj.src = './images/bubble.png'
 hypnoToadObj.src = './images/hypnotoad.gif'
 
 
@@ -38,7 +38,7 @@ $(document).ready(function(){
   })
 
   $('#tv').dblclick(function(e){
-    drawBubble(stage,e);
+    drawBubble(stage,e,$("img.active")[0]);
   })
 
   $("#save").click(function(){
@@ -88,6 +88,12 @@ $(document).ready(function(){
   $("select").change(function(){
     $(".image").addClass("hidden")
     $('*[data-character="' + this.value + '"]').removeClass("hidden");
+  })
+
+  $("#bubbles img").click(function(){
+    $("#bubbles img").removeClass("active");
+    $(this).addClass("active");
+
   })
 
 
@@ -164,9 +170,6 @@ function drawImage(stage,imageObj,character){
   });
 
   group.character = character
-  console.log(group.character)
-
-
 
   group.on('mouseover', function(){
     document.body.style.cursor = 'pointer';
@@ -206,20 +209,20 @@ function drawBackground(stage,imageObj){
 
   layer.add(img);
   stage.add(layer);
-  console.log(layer.getZIndex())
 }
 
-function drawBubble(stage,e){
+function drawBubble(stage,e,activeBubble){
 
-  var layer,group,bubble,imageObj = bubbleObj;
-
+  var layer,group,bubble,imageObj = activeBubble,
+      imageHeight = 200,
+      imageWidth = 300;
   layer = new Kinetic.Layer();
   bubble = new Kinetic.Image({
     image: imageObj,
-    x: -(imageObj.width/2),
-    y: -(imageObj.height/2),
-    height: imageObj.height,
-    width: imageObj.width,
+    x: -(imageWidth/2),
+    y: -(imageHeight/2),
+    height: imageHeight,
+    width: imageWidth,
     brightness: 0,
     name: "image"
   })
@@ -236,14 +239,14 @@ function drawBubble(stage,e){
   group.add(bubble);
   stage.add(layer);
   addTextEdit(group,e);
-  addAnchor(group, -(imageObj.width/2), -(imageObj.height/2), "topLeft");
-  addAnchor(group, imageObj.width/2, -(imageObj.height/2), "topRight");
-  addAnchor(group, imageObj.width/2, imageObj.height/2, "bottomRight");
-  addAnchor(group, -(imageObj.width/2), imageObj.height/2, "bottomLeft");
+  addAnchor(group, -(imageWidth/2), -(imageHeight/2), "topLeft");
+  addAnchor(group, imageWidth/2, -(imageHeight/2), "topRight");
+  addAnchor(group, imageWidth/2, imageHeight/2, "bottomRight");
+  addAnchor(group, -(imageWidth/2), imageHeight/2, "bottomLeft");
 
-  addDeleteButton(group, (imageObj.width/2) - 38, -(imageObj.height/2) -18);
-  addLayerDownButton(group, (imageObj.width/2) - 102, -(imageObj.height/2) -18);
-  addLayerUpButton(group, (imageObj.width/2) - 75, -(imageObj.height/2) -18);
+  addDeleteButton(group, (imageWidth/2) - 38, -(imageHeight/2) -18);
+  addLayerDownButton(group, (imageWidth/2) - 102, -(imageHeight/2) -18);
+  addLayerUpButton(group, (imageWidth/2) - 75, -(imageHeight/2) -18);
 
   group.on('mouseover', function(){
     document.body.style.cursor = 'pointer';
@@ -272,8 +275,8 @@ function drawBubble(stage,e){
 function addTextEdit(group,e) {
   var newText = new Kinetic.EditableText({
     // find click position.
-    x: e.pageX + getFullOffset().left - 120,
-    y: e.pageY + getFullOffset().top -51,
+    x: e.pageX + getFullOffset().left - 90,
+    y: e.pageY + getFullOffset().top -11,
     fontFamily: 'Comic Sans MS',
     fill: '#000000',
     // pasteModal id to support ctrl+v paste.
@@ -283,7 +286,7 @@ function addTextEdit(group,e) {
 
   newText.focus();
   focusedText = newText;
-  focusedText.setPosition({x: -118, y: -80});
+  focusedText.setPosition({x: -88, y: -35});
 
   newText.on("click", function(evt) {
     evt.cancelBubble = true;

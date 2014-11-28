@@ -58,6 +58,15 @@ body {
   #tv:last-child {
     margin-right: 0; }
 
+#bubbles img {
+  width: 50px;
+  padding: 10px;
+  cursor: pointer; }
+  #bubbles img.active {
+    background: #ff360f; }
+  #bubbles img:hover:not(.active) {
+    background: #ff9d89; }
+
 #resources {
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 300;
