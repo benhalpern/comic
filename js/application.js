@@ -32,11 +32,9 @@ $(document).ready(function(){
   //events
 
   $('.image').click(function(){
-    drawImage(stage,this);
+    drawImage(stage,this,$(this).data("character"));
     comicName = comicName + "_" + $(this).data("character")
     comicTitle = comicTitle + " " + $(this).data("character")
-
-    console.log(comicName)
   })
 
   $('#tv').dblclick(function(e){
@@ -116,7 +114,7 @@ $(document).ready(function(){
       }
       else {
         focusedText.unfocus(e);
-
+        focusedText = undefined
       }
     }
     else{
@@ -128,7 +126,7 @@ $(document).ready(function(){
 })
 
 
-function drawImage(stage,imageObj){
+function drawImage(stage,imageObj,character){
   var layer = new Kinetic.Layer();
 
 
@@ -157,31 +155,33 @@ function drawImage(stage,imageObj){
   addAnchor(group, imageObj.width, 0, "topRight");
   addAnchor(group, imageObj.width, imageObj.height, "bottomRight");
   addAnchor(group, 0, imageObj.height, "bottomLeft");
-
+  addDeleteButton(group, imageObj.width - 38, -18);
   group.on("dragstart", function() {
     this.moveToTop();
   });
+
+  group.character = character
+  console.log(group.character)
+
 
 
   group.on('mouseover', function(){
     document.body.style.cursor = 'pointer';
     this.find('Circle').show();
+    this.find('.delete').show();
     img.fill('rgba(0, 0, 0, 0.3)');
     layer.draw();
   });
   group.on('mouseout', function(){
       document.body.style.cursor = 'default'
       group.find('Circle').hide()
+      this.find('.delete').hide();
+
       img.fill(null)
       layer.draw();
   })
-
-
-
-
   stage.add(layer);
 }
-
 
 function drawBackground(stage,imageObj){
 
@@ -231,14 +231,19 @@ function drawBubble(stage,e){
   addAnchor(group, imageObj.width/2, imageObj.height/2, "bottomRight");
   addAnchor(group, -(imageObj.width/2), imageObj.height/2, "bottomLeft");
 
+  addDeleteButton(group, (imageObj.width/2) - 38, -(imageObj.height/2) -18);
+
+
   group.on('mouseover', function(){
     document.body.style.cursor = 'pointer';
     this.find('Circle').show();
+    this.find('.delete').show();
     layer.draw();
   });
   group.on('mouseout', function(){
     document.body.style.cursor = 'default'
     group.find('Circle').hide()
+    this.find('.delete').hide();
     layer.draw();
   })
 
@@ -262,6 +267,13 @@ function addTextEdit(group,e) {
   newText.focus();
   focusedText = newText;
   focusedText.setPosition({x: -118, y: -80});
+
+  newText.on("click", function(evt) {
+    evt.cancelBubble = true;
+    this.focus();
+    self.focusedText = this;
+    return false
+  })
 
 }
 
@@ -297,12 +309,65 @@ function addAnchor(group, x, y, name) {
   group.add(anchor);
 }
 
+function addDeleteButton(group, x, y){
+
+  var stage = group.getStage();
+  var layer = group.getLayer();
+
+  var butt = new Kinetic.Group({
+    x: x,
+    y: y,
+    draggable: true,
+    name: 'delete',
+    visible: false
+
+  });
+
+
+
+  var text = new Kinetic.Text({
+    x: 0,
+    y: 0,
+    text: 'x',
+    fontSize: 31,
+    fontFamily: 'Helvetica',
+    fill: '#fff',
+    name: 'delete'
+  });
+
+  var circle = new Kinetic.Circle({
+    x: 7.5,
+    y: 18,
+    stroke: "#ddd",
+    fill: "#000",
+    strokeWidth: 2,
+    radius: 12
+  });
+
+  butt.on("mousedown", function() {
+    layer.remove(group)
+    comicName = comicName.replace("_" + group.character, "")
+    comicTitle = comicTitle.replace(" " + group.character, "")
+  });
+
+
+
+
+  butt.add(circle)
+  butt.add(text)
+
+  group.add(butt);
+
+
+}
+
 
 function update(group, activeHandle) {
   var topLeft = group.get(".topLeft")[0],
   topRight = group.get(".topRight")[0],
   bottomRight = group.get(".bottomRight")[0],
   bottomLeft = group.get(".bottomLeft")[0],
+  deleteButton = group.get(".delete")[0],
   image = group.get(".image")[0],
   activeHandleName = activeHandle.getName(),
   newWidth,
@@ -401,6 +466,8 @@ function update(group, activeHandle) {
   topRight.setPosition({x: imageX + newWidth, y: imageY});
   bottomRight.setPosition({x: imageX + newWidth, y: imageY + newHeight});
   bottomLeft.setPosition({x: imageX, y: imageY + newHeight});
+
+  deleteButton.setPosition({x: imageX + newWidth -  38, y: imageY -18});
 
 
 
