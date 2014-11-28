@@ -58,14 +58,16 @@ body {
   #tv:last-child {
     margin-right: 0; }
 
-#bubbles img {
-  width: 50px;
-  padding: 10px;
-  cursor: pointer; }
-  #bubbles img.active {
-    background: #ff360f; }
-  #bubbles img:hover:not(.active) {
-    background: #ff9d89; }
+#bubbles {
+  margin-bottom: 5px; }
+  #bubbles img {
+    width: 50px;
+    padding: 10px;
+    cursor: pointer; }
+    #bubbles img.active {
+      background: #ff360f; }
+    #bubbles img:hover:not(.active) {
+      background: #ff9d89; }
 
 #resources {
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
@@ -80,7 +82,7 @@ body {
     width: 260px;
     font-size: 20px; }
   #resources ul {
-    height: 560px;
+    height: 505px;
     overflow: auto; }
   #resources li {
     list-style: none;
