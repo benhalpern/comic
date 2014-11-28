@@ -69,11 +69,7 @@ $(document).ready(function(){
             'description': "Made with Comic Maker"
           },
           success: function(response) {
-            $("#imgur").addClass("uploaded")
-            $("#imgur").removeClass("uploading")
-            $("#imgur").text("View on Imgur")
-            $("#imgur").attr("href", "http://imgur.com/" + response["data"]["id"])
-            $("#imgur").attr("target","_blank")
+            $("#imgur").replaceWith('<a class="uploaded" href="http://imgur.com/' + response["data"]["id"] + '" target="_blank">View on Imgur</a>')
           }
         });
       }
