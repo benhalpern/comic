@@ -94,6 +94,7 @@ body {
   #controls:last-child {
     margin-right: 0; }
   #controls a {
+    position: relative;
     font-size: 30px;
     text-decoration: none;
     color: #ffd90f;
@@ -103,5 +104,10 @@ body {
       background: #319dff; }
     #controls a.uploaded {
       background: #ff360f; }
+  #controls img.loading {
+    height: 140px;
+    position: absolute;
+    right: -170px;
+    top: -60px; }
 
 /*# sourceMappingURL=application.css.map */

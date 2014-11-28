@@ -52,7 +52,7 @@ $(document).ready(function(){
 
   $("#imgur").not( ".uploaded" ).click(function(){
     $("#imgur").addClass("uploading")
-    $("#imgur").text("Uploading to Imgur")
+    $("#imgur").html('Uploading to Imgur <img class="loading" src="https://media.giphy.com/media/13ayyyRnHJKrug/giphy.gif">')
     stage.toDataURL({
       callback: function(dataUrl) {
         $.ajax({

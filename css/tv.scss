@@ -80,6 +80,7 @@ body {
 	padding-top:20px;
 	margin-bottom:20px;
 	a{
+		position:relative;
 		font-size:30px;
 		text-decoration:none;
 		color:$simpsons-yellow;
@@ -91,5 +92,12 @@ body {
 		&.uploaded{
 			background: $simpsons-red;
 		}
+	}
+
+	img.loading{
+		height:140px;
+		position:absolute;
+		right:-170px;
+		top:-60px;
 	}
 }
