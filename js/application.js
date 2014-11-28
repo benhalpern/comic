@@ -1,6 +1,14 @@
 //focusedText needs to be a global variable
 
-var focusedText,comicName = "comic", comicTitle = "Comic With";
+var focusedText,
+    comicName = "comic",
+    comicTitle = "Comic With",
+    bubbleObj = new Image(),
+    hypnoToadObj = new Image();
+
+bubbleObj.src = './images/bubble.png'
+hypnoToadObj.src = './images/hypnotoad.gif'
+
 
 $(document).ready(function(){
 
@@ -52,7 +60,7 @@ $(document).ready(function(){
 
   $("#imgur").not( ".uploaded" ).click(function(){
     $("#imgur").addClass("uploading")
-    $("#imgur").html('Uploading to Imgur <img class="loading" src="https://media.giphy.com/media/13ayyyRnHJKrug/giphy.gif">')
+    $("#imgur").html('Uploading to Imgur <img class="loading" src="' + hypnoToadObj.src + '">')
     stage.toDataURL({
       callback: function(dataUrl) {
         $.ajax({
@@ -193,29 +201,18 @@ function drawBackground(stage,imageObj){
 
 function drawBubble(stage,e){
 
-  var layer,oval,group,trangle,bubble;
+  var layer,group,bubble,imageObj = bubbleObj;
 
   layer = new Kinetic.Layer();
-  oval = new Kinetic.Ellipse({
-    radius: {
-      x: 100,
-      y: 50
-    },
-    fill: 'white'
-  });
-
-  triangle = new Kinetic.Shape({
-    sceneFunc: function(context) {
-      context.beginPath();
-      context.moveTo(40, 0);
-      context.lineTo(80, 20);
-      context.quadraticCurveTo(100, 50, 120, 80);
-      context.closePath();
-      // KineticJS specific context method
-      context.fillStrokeShape(this);
-    },
-    fill: 'white'
-  });
+  bubble = new Kinetic.Image({
+    image: imageObj,
+    x: -(imageObj.width/2),
+    y: -(imageObj.height/2),
+    height: imageObj.height,
+    width: imageObj.width,
+    brightness: 0,
+    name: "image"
+  })
 
   group = new Kinetic.Group({
     x: e.pageX -50,
@@ -226,32 +223,13 @@ function drawBubble(stage,e){
 
 
   layer.add(group);
-  group.add(oval);
-  group.add(triangle);
-
-
-  //set faux stroke
-  var fill = "#454545"
-  var clone = oval.clone();
-  clone.setScale({x:1.03,y:1.04});
-  clone.setFill("#454545");
-  group.add(clone);
-  clone.moveToBottom();
-  var clone = triangle.clone();
-  clone.setScale({x:1.06,y:1.10});
-  clone.setFill("#454545");
-  group.add(clone);
-  clone.moveToBottom();
-
-
-
-
+  group.add(bubble);
   stage.add(layer);
   addTextEdit(group,e);
-  addAnchor(group, -100, -50, "topLeft");
-  addAnchor(group, 100, -50, "topRight");
-  addAnchor(group, 100, 50, "bottomRight");
-  addAnchor(group, -100, 50, "bottomLeft");
+  addAnchor(group, -(imageObj.width/2), -(imageObj.height/2), "topLeft");
+  addAnchor(group, imageObj.width/2, -(imageObj.height/2), "topRight");
+  addAnchor(group, imageObj.width/2, imageObj.height/2, "bottomRight");
+  addAnchor(group, -(imageObj.width/2), imageObj.height/2, "bottomLeft");
 
   group.on('mouseover', function(){
     document.body.style.cursor = 'pointer';
@@ -272,8 +250,8 @@ function drawBubble(stage,e){
 function addTextEdit(group,e) {
   var newText = new Kinetic.EditableText({
     // find click position.
-    x: e.pageX + getFullOffset().left - 80,
-    y: e.pageY + getFullOffset().top +9,
+    x: e.pageX + getFullOffset().left - 120,
+    y: e.pageY + getFullOffset().top -51,
     fontFamily: 'Comic Sans MS',
     fill: '#000000',
     // pasteModal id to support ctrl+v paste.
@@ -283,7 +261,7 @@ function addTextEdit(group,e) {
 
   newText.focus();
   focusedText = newText;
-  focusedText.setPosition({x: -78, y: -20});
+  focusedText.setPosition({x: -118, y: -80});
 
 }
 
