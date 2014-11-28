@@ -38,7 +38,7 @@ $(document).ready(function(){
   })
 
   $('#tv').dblclick(function(e){
-    drawBubble(stage,e,$("img.active")[0]);
+    drawBubble(stage,e.pageX -50,e.pageY -50,$("img.active")[0]);
   })
 
   $("#save").click(function(){
@@ -93,6 +93,8 @@ $(document).ready(function(){
   $("#bubbles img").click(function(){
     $("#bubbles img").removeClass("active");
     $(this).addClass("active");
+    drawBubble(stage,360,120,$("img.active")[0]);
+
 
   })
 
@@ -155,7 +157,7 @@ function drawImage(stage,imageObj,character){
   //bart
   var group = new Kinetic.Group({
     x: 110,
-    y: 110,
+    y: 180,
     draggable: true
   });
 
@@ -227,7 +229,7 @@ function drawBackground(stage,imageObj){
   stage.add(layer);
 }
 
-function drawBubble(stage,e,activeBubble){
+function drawBubble(stage,x,y,activeBubble){
 
   var layer,group,bubble,imageObj = activeBubble,
       imageHeight = 200,
@@ -244,8 +246,8 @@ function drawBubble(stage,e,activeBubble){
   })
 
   group = new Kinetic.Group({
-    x: e.pageX -50,
-    y: e.pageY - 50,
+    x: x,
+    y: y,
     draggable: true
   });
 
@@ -254,7 +256,7 @@ function drawBubble(stage,e,activeBubble){
   layer.add(group);
   group.add(bubble);
   stage.add(layer);
-  addTextEdit(group,e);
+  addTextEdit(group,x + 50,y + 50);
   addAnchor(group, -(imageWidth/2), -(imageHeight/2), "topLeft");
   addAnchor(group, imageWidth/2, -(imageHeight/2), "topRight");
   addAnchor(group, imageWidth/2, imageHeight/2, "bottomRight");
@@ -288,11 +290,11 @@ function drawBubble(stage,e,activeBubble){
 }
 
 
-function addTextEdit(group,e) {
+function addTextEdit(group,x,y) {
   var newText = new Kinetic.EditableText({
     // find click position.
-    x: e.pageX + getFullOffset().left - 90,
-    y: e.pageY + getFullOffset().top -11,
+    x: x + getFullOffset().left - 90,
+    y: y + getFullOffset().top -11,
     fontFamily: 'Comic Sans MS',
     fill: '#000000',
     // pasteModal id to support ctrl+v paste.
