@@ -156,6 +156,9 @@ function drawImage(stage,imageObj,character){
   addAnchor(group, imageObj.width, imageObj.height, "bottomRight");
   addAnchor(group, 0, imageObj.height, "bottomLeft");
   addDeleteButton(group, imageObj.width - 38, -18);
+  addLayerDownButton(group, imageObj.width - 102, -18);
+  addLayerUpButton(group, imageObj.width - 75, -18);
+
   group.on("dragstart", function() {
     this.moveToTop();
   });
@@ -169,6 +172,9 @@ function drawImage(stage,imageObj,character){
     document.body.style.cursor = 'pointer';
     this.find('Circle').show();
     this.find('.delete').show();
+    this.find('.layerUp').show();
+    this.find('.layerDown').show();
+
     img.fill('rgba(0, 0, 0, 0.3)');
     layer.draw();
   });
@@ -176,6 +182,9 @@ function drawImage(stage,imageObj,character){
       document.body.style.cursor = 'default'
       group.find('Circle').hide()
       this.find('.delete').hide();
+      this.find('.layerUp').hide();
+      this.find('.layerDown').hide();
+
 
       img.fill(null)
       layer.draw();
@@ -197,6 +206,7 @@ function drawBackground(stage,imageObj){
 
   layer.add(img);
   stage.add(layer);
+  console.log(layer.getZIndex())
 }
 
 function drawBubble(stage,e){
@@ -232,18 +242,25 @@ function drawBubble(stage,e){
   addAnchor(group, -(imageObj.width/2), imageObj.height/2, "bottomLeft");
 
   addDeleteButton(group, (imageObj.width/2) - 38, -(imageObj.height/2) -18);
-
+  addLayerDownButton(group, (imageObj.width/2) - 102, -(imageObj.height/2) -18);
+  addLayerUpButton(group, (imageObj.width/2) - 75, -(imageObj.height/2) -18);
 
   group.on('mouseover', function(){
     document.body.style.cursor = 'pointer';
     this.find('Circle').show();
     this.find('.delete').show();
+    this.find('.layerUp').show();
+    this.find('.layerDown').show();
+
     layer.draw();
   });
   group.on('mouseout', function(){
     document.body.style.cursor = 'default'
     group.find('Circle').hide()
     this.find('.delete').hide();
+    this.find('.layerUp').hide();
+    this.find('.layerDown').hide();
+
     layer.draw();
   })
 
@@ -317,13 +334,10 @@ function addDeleteButton(group, x, y){
   var butt = new Kinetic.Group({
     x: x,
     y: y,
-    draggable: true,
     name: 'delete',
     visible: false
 
   });
-
-
 
   var text = new Kinetic.Text({
     x: 0,
@@ -350,9 +364,6 @@ function addDeleteButton(group, x, y){
     comicTitle = comicTitle.replace(" " + group.character, "")
   });
 
-
-
-
   butt.add(circle)
   butt.add(text)
 
@@ -360,6 +371,89 @@ function addDeleteButton(group, x, y){
 
 
 }
+
+function addLayerUpButton(group, x, y){
+  var stage = group.getStage();
+  var layer = group.getLayer();
+
+  var butt = new Kinetic.Group({
+    x: x,
+    y: y,
+    name: 'layerUp',
+    visible: false
+  });
+
+  var text = new Kinetic.Text({
+    x: -1.5,
+    y: -1,
+    text: '+',
+    fontSize: 31,
+    fontFamily: 'Helvetica',
+    fill: '#fff',
+  });
+
+  var circle = new Kinetic.Circle({
+    x: 7.5,
+    y: 18,
+    stroke: "#ddd",
+    fill: "#000",
+    strokeWidth: 2,
+    radius: 12
+  });
+
+  butt.on("mousedown", function() {
+    layer.moveUp();
+  });
+
+  butt.add(circle)
+  butt.add(text)
+
+  group.add(butt);
+
+}
+
+function addLayerDownButton(group, x, y){
+  var stage = group.getStage();
+  var layer = group.getLayer();
+
+  var butt = new Kinetic.Group({
+    x: x,
+    y: y,
+    name: 'layerDown',
+    visible: false
+  });
+
+  var text = new Kinetic.Text({
+    x: 2,
+    y: 0,
+    text: '-',
+    fontSize: 31,
+    fontFamily: 'Helvetica',
+    fill: '#fff',
+  });
+
+  var circle = new Kinetic.Circle({
+    x: 7.5,
+    y: 18,
+    stroke: "#ddd",
+    fill: "#000",
+    strokeWidth: 2,
+    radius: 12
+  });
+
+  butt.on("mousedown", function() {
+    if( layer.getZIndex() > 1 ){
+      layer.moveDown();
+    }
+  });
+
+  butt.add(circle)
+  butt.add(text)
+
+  group.add(butt);
+
+}
+
 
 
 function update(group, activeHandle) {
@@ -372,8 +466,8 @@ function update(group, activeHandle) {
   activeHandleName = activeHandle.getName(),
   newWidth,
   newHeight,
-  minWidth = 50,
-  minHeight = 50,
+  minWidth = 60,
+  minHeight = 60,
   oldX,
   oldY,
   imageX,
