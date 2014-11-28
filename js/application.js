@@ -119,11 +119,27 @@ $(document).ready(function(){
         focusedText.findCursorPosFromClick(true);
       }
       else {
+        console.log("unfocusing editor")
+        var layer = focusedText.getLayer();
+
         focusedText.unfocus(e);
+        console.log(focusedText.getParent().getX())
+        console.log(focusedText.getX())
+        console.log(focusedText)
+
+        focusedText.setPosition({
+          x: focusedText.getX() - focusedText.getParent().getX(),
+          y: focusedText.getY() - focusedText.getParent().getY(),
+        });
+
+        //focusedText.setPosition({x: -88, y: -35});
         focusedText = undefined
+        layer.draw();
       }
     }
     else{
+      console.log("focusing editor")
+
     }
     return false;
   });
@@ -280,20 +296,32 @@ function addTextEdit(group,e) {
     fontFamily: 'Comic Sans MS',
     fill: '#000000',
     // pasteModal id to support ctrl+v paste.
-    pasteModal: "pasteModalArea"
+    pasteModal: "pasteModalArea",
+    draggable: true
   });
   group.add(newText);
 
   newText.focus();
   focusedText = newText;
-  focusedText.setPosition({x: -88, y: -35});
+  console.log(focusedText.getY())
+
+  //focusedText.setPosition({x: -88, y: -35});
+  console.log(focusedText.getY())
 
   newText.on("click", function(evt) {
     evt.cancelBubble = true;
+    console.log(evt['evt'])
+    console.log(group.getX())
+    this.setPosition({
+      x: group.getX() + newText.getX(),
+      y: group.getY() + newText.getY(),
+    });
     this.focus();
     self.focusedText = this;
     return false
   })
+
+
 
 }
 
