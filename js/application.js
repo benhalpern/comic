@@ -121,21 +121,21 @@ $(document).ready(function(){
         focusedText.findCursorPosFromClick(true);
       }
       else {
-        console.log("unfocusing editor")
-        var layer = focusedText.getLayer();
 
+        var layer = focusedText.getLayer(),
+        newX = focusedText.getX() - focusedText.getParent().getX(),
+        newY = focusedText.getY() - focusedText.getParent().getY();
         focusedText.unfocus(e);
-        console.log(focusedText.getParent().getX())
-        console.log(focusedText.getX())
-        console.log(focusedText)
 
         focusedText.setPosition({
-          x: focusedText.getX() - focusedText.getParent().getX(),
-          y: focusedText.getY() - focusedText.getParent().getY(),
+          x: newX,
+          y: newY,
         });
+        if ( focusedText["attrs"]["text"].length > 1 ){
+          focusedText = undefined
+          console.log("there is text")
+        }
 
-        //focusedText.setPosition({x: -88, y: -35});
-        focusedText = undefined
         layer.draw();
       }
     }
@@ -145,6 +145,17 @@ $(document).ready(function(){
     }
     return false;
   });
+
+  $(document).on('mouseup', '#tv', function(e) {
+    if(focusedText != undefined && focusedText["attrs"]["text"].length < 2 ){
+      addTextEdit(focusedText.getParent(),
+      focusedText.getParent().getX() + 50,
+      focusedText.getParent().getY() + 50)
+    }
+
+
+  });
+
 
 
 })
@@ -234,6 +245,9 @@ function drawBubble(stage,x,y,activeBubble){
   var layer,group,bubble,imageObj = activeBubble,
       imageHeight = 200,
       imageWidth = 300;
+  if( focusedText != undefined ){
+    focusedText.unfocus();
+  }
   layer = new Kinetic.Layer();
   bubble = new Kinetic.Image({
     image: imageObj,
@@ -297,6 +311,7 @@ function addTextEdit(group,x,y) {
     y: y + getFullOffset().top -11,
     fontFamily: 'Comic Sans MS',
     fill: '#000000',
+    //text: "placeholder",
     // pasteModal id to support ctrl+v paste.
     pasteModal: "pasteModalArea",
     draggable: true
@@ -305,11 +320,8 @@ function addTextEdit(group,x,y) {
 
   newText.focus();
   focusedText = newText;
-  console.log(focusedText.getY())
 
   //focusedText.setPosition({x: -88, y: -35});
-  console.log(focusedText.getY())
-
   newText.on("click", function(evt) {
     evt.cancelBubble = true;
     console.log(evt['evt'])
@@ -323,8 +335,9 @@ function addTextEdit(group,x,y) {
     return false
   })
 
-
-
+  newText.on("mouseover", function(){
+    document.body.style.cursor = 'text';
+  })
 }
 
 function addAnchor(group, x, y, name) {
@@ -573,7 +586,8 @@ function update(group, activeHandle) {
 
 
   newHeight = bottomLeft.getY() - topLeft.getY();
-  //comment the below line and uncomment the line below tha line to allow free resize of the images because the below line preserves the scale and aspect ratio
+  //comment the below line and uncomment the line below tha line to allow
+  //free resize of the images because the below line preserves the scale and aspect ratio
   newWidth = image.getWidth() * newHeight / image.getHeight();//for restricted resizing
   //newWidth = topRight.getX() - topLeft.getX();//for free resizing
 
