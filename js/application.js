@@ -8,6 +8,8 @@ var focusedText,
 
 $(document).ready(function(){
 
+  loadCollections()
+
   //onload
 
   var stage = new Kinetic.Stage({
@@ -640,4 +642,17 @@ function getFullOffset() {
     left: container.scrollLeft() - container.offset().left,
     top: container.scrollTop() - container.offset().top
   }
+}
+
+function loadCollections(){
+  $.ajax( "http://192.168.0.2:3000/collections.json" )
+  .done(function() {
+    console.log( "success" );
+  })
+  .fail(function() {
+    console.log( "error" );
+  })
+  .always(function() {
+    console.log( "complete" );
+  });
 }
