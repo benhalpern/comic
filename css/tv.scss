@@ -96,7 +96,7 @@ body {
 	@include span-columns(12);
 	padding-top:2px;
 	height:90px;
-	margin-bottom:20px;
+	margin-bottom:5px;
 	a{
 		position:absolute;
 		font-size:30px;
@@ -135,5 +135,14 @@ body {
 			background: $simpsons-red;
 			padding:16px 30px 10px 30px;
 		}
+	}
+}
+
+#footer{
+	@include span-columns(12);
+	margin-bottom:10px;
+	a{
+		text-decoration:none;
+		color:$simpsons-red;
 	}
 }

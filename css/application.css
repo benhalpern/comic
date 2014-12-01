@@ -102,7 +102,7 @@ body {
   width: 100%;
   padding-top: 2px;
   height: 90px;
-  margin-bottom: 20px; }
+  margin-bottom: 5px; }
   #controls:last-child {
     margin-right: 0; }
   #controls a {
@@ -133,5 +133,17 @@ body {
     #controls a.uploaded {
       background: #FF360F;
       padding: 16px 30px 10px 30px; }
+
+#footer {
+  display: block;
+  float: left;
+  margin-right: 2.12766%;
+  width: 100%;
+  margin-bottom: 10px; }
+  #footer:last-child {
+    margin-right: 0; }
+  #footer a {
+    text-decoration: none;
+    color: #FF360F; }
 
 /*# sourceMappingURL=application.css.map */
