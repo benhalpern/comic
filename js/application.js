@@ -77,8 +77,8 @@ $(document).ready(function(){
           },
           success: function(response) {
             $("#uploaded").animate({"width":"400px"},150)
-            $("#imgur").text("Uploaded to Imgur")
-            $("#imgur").attr("href", 'http://imgur.com/' + response["data"]["id"])
+            $("#uploaded").text("Uploaded to Imgur")
+            $("#uploaded").attr("href", 'http://imgur.com/' + response["data"]["id"])
           }
         });
       }
