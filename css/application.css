@@ -126,6 +126,8 @@ body {
       background: #FF360F;
       overflow-x: hidden;
       height: 56px; }
+      #controls a#uploaded .hidden-text {
+        opacity: 0; }
     #controls a.uploading {
       padding: 0; }
     #controls a.uploaded {
