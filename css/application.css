@@ -124,7 +124,8 @@ body {
       width: 0px;
       background: #FF360F;
       overflow-x: hidden;
-      height: 56px;
+      height: 56px; }
+    #controls a.uploading {
       padding: 0; }
     #controls a.uploaded {
       background: #FF360F;

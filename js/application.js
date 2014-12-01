@@ -77,6 +77,7 @@ $(document).ready(function(){
           },
           success: function(response) {
             $("#uploaded").animate({"width":"400px"},180);
+            $("#uploaded").addClass("uploading");
             $("#uploaded").addClass("uploaded");
             $("#uploaded").text("Uploaded to Imgur");
             $("#uploaded").attr("href", 'http://imgur.com/' + response["data"]["id"]);
