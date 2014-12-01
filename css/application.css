@@ -114,9 +114,6 @@ body {
     padding: 16px 30px 10px 30px; }
     #controls a:hover {
       background: #319dff; }
-    #controls a.uploaded {
-      background: #FF360F;
-      padding: 16px 30px 10px 30px; }
     #controls a#save {
       left: 50;
       min-width: 230px; }
@@ -129,5 +126,8 @@ body {
       overflow-x: hidden;
       height: 56px;
       padding: 0; }
+    #controls a.uploaded {
+      background: #FF360F;
+      padding: 16px 30px 10px 30px; }
 
 /*# sourceMappingURL=application.css.map */

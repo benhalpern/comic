@@ -107,11 +107,7 @@ body {
 		&:hover{
 			background:lighten($simpsons-blue,5%)
 		}
-		&.uploaded{
-			background: $simpsons-red;
-			padding:16px 30px 10px 30px;
-			
-		}
+
 		&#save{
 			left:50;
 			min-width:230px;
@@ -127,6 +123,10 @@ body {
 			overflow-x:hidden;
 			height:56px;
 			padding:0;
+		}
+		&.uploaded{
+			background: $simpsons-red;
+			padding:16px 30px 10px 30px;
 		}
 	}
 }
