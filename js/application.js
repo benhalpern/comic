@@ -56,7 +56,7 @@ $(document).ready(function(){
     $("#imgur").animate({"width":"476px"},450)
     setTimeout(function(){
       $("#imgur").html('Uploading to Imgur')
-      $("#uploaded").animate({"width":"360px"},4000)
+      $("#uploaded").animate({"width":"370px"},5000)
 
     },560)
     stage.toDataURL({
