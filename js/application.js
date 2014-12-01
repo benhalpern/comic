@@ -55,7 +55,6 @@ $(document).ready(function(){
   $("#imgur").not( ".uploaded" ).click(function(){
     $("#imgur").animate({"width":"400px"},450)
     setTimeout(function(){
-      $("#imgur").addClass("uploading")
       $("#imgur").html('Uploading to Imgur')
       $("#uploaded").animate({"width":"340px"},3050)
 

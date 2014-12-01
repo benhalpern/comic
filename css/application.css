@@ -118,7 +118,8 @@ body {
       left: 50;
       min-width: 230px; }
     #controls a#imgur {
-      left: 370px; }
+      left: 370px;
+      height: 56px; }
     #controls a#uploaded {
       left: 370px;
       width: 0px;
