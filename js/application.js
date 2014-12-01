@@ -80,7 +80,7 @@ $(document).ready(function(){
             $("#uploaded").addClass("uploaded");
             $(".hidden-text").text("Uploaded to Imgur");
             $("#uploaded").attr("href", 'http://imgur.com/' + response["data"]["id"]);
-            $('.hidden-text').animate({"opacity":"1"},300);
+            $('.hidden-text').animate({"opacity":"1"},380);
           }
         });
       }
