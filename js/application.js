@@ -53,10 +53,10 @@ $(document).ready(function(){
 
 
   $("#imgur").not( ".uploaded" ).click(function(){
-    $("#imgur").animate({"width":"400px"},450)
+    $("#imgur").animate({"width":"476px"},450)
     setTimeout(function(){
       $("#imgur").html('Uploading to Imgur')
-      $("#uploaded").animate({"width":"340px"},3050)
+      $("#uploaded").animate({"width":"360px"},4000)
 
     },560)
     stage.toDataURL({
@@ -75,7 +75,7 @@ $(document).ready(function(){
             'description': "Made with Comic Maker"
           },
           success: function(response) {
-            $("#uploaded").animate({"width":"400px"},180);
+            $("#uploaded").animate({"width":"476px"},180);
             $("#uploaded").addClass("uploading");
             $("#uploaded").addClass("uploaded");
             $("#uploaded").text("Uploaded to Imgur");
