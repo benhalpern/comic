@@ -57,7 +57,7 @@ $(document).ready(function(){
     setTimeout(function(){
       $("#imgur").addClass("uploading")
       $("#imgur").html('Uploading to Imgur')
-      $("#uploaded").animate({"width":"340px"},2850)
+      $("#uploaded").animate({"width":"340px"},3050)
 
     },560)
     stage.toDataURL({
@@ -76,9 +76,10 @@ $(document).ready(function(){
             'description': "Made with Comic Maker"
           },
           success: function(response) {
-            $("#uploaded").animate({"width":"400px"},150)
-            $("#uploaded").text("Uploaded to Imgur")
-            $("#uploaded").attr("href", 'http://imgur.com/' + response["data"]["id"])
+            $("#uploaded").animate({"width":"400px"},180);
+            $("#uploaded").addClass("uploaded");
+            $("#uploaded").text("Uploaded to Imgur");
+            $("#uploaded").attr("href", 'http://imgur.com/' + response["data"]["id"]);
           }
         });
       }
