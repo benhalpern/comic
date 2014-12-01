@@ -95,9 +95,10 @@ body {
 
 	@include span-columns(12);
 	padding-top:20px;
+	height:100px;
 	margin-bottom:20px;
 	a{
-		position:relative;
+		position:absolute;
 		font-size:30px;
 		text-decoration:none;
 		color:$simpsons-yellow;
@@ -109,12 +110,21 @@ body {
 		&.uploaded{
 			background: $simpsons-red;
 		}
-	}
+		&#save{
+			left:50;
+			min-width:230px;
 
-	img.loading{
-		height:180px;
-		position:absolute;
-		right:-190px;
-		top:-90px;
+		}
+		&#imgur{
+			left:370px;
+		}
+		&#uploaded{
+			left:370px;
+			width:0px;
+			background:$simpsons-red;
+			overflow-x:hidden;
+			height:56px;
+			padding:0;
+		}
 	}
 }

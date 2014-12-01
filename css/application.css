@@ -15,7 +15,7 @@ body {
   float: left;
   margin-right: 2.12766%;
   width: 59.14894%;
-  color: #1791ff; }
+  color: #1791FF; }
   #headline:last-child {
     margin-right: 0; }
   #headline h1 {
@@ -65,7 +65,7 @@ body {
     padding: 10px;
     cursor: pointer; }
     #bubbles img.active {
-      background: #ff360f; }
+      background: #FF360F; }
     #bubbles img:hover:not(.active) {
       background: #ff9d89; }
 
@@ -90,7 +90,7 @@ body {
     #resources li img {
       width: 200px; }
       #resources li img:hover {
-        background: #ededed; }
+        background: #EDEDED; }
       #resources li img.hidden {
         display: none; }
 
@@ -101,24 +101,32 @@ body {
   margin-right: 2.12766%;
   width: 100%;
   padding-top: 20px;
+  height: 100px;
   margin-bottom: 20px; }
   #controls:last-child {
     margin-right: 0; }
   #controls a {
-    position: relative;
+    position: absolute;
     font-size: 30px;
     text-decoration: none;
-    color: #ffd90f;
-    background: #1791ff;
+    color: #FFD90F;
+    background: #1791FF;
     padding: 16px 30px 10px 30px; }
     #controls a:hover {
       background: #319dff; }
     #controls a.uploaded {
-      background: #ff360f; }
-  #controls img.loading {
-    height: 180px;
-    position: absolute;
-    right: -190px;
-    top: -90px; }
+      background: #FF360F; }
+    #controls a#save {
+      left: 50;
+      min-width: 230px; }
+    #controls a#imgur {
+      left: 370px; }
+    #controls a#uploaded {
+      left: 370px;
+      width: 0px;
+      background: #FF360F;
+      overflow-x: hidden;
+      height: 56px;
+      padding: 0; }
 
 /*# sourceMappingURL=application.css.map */

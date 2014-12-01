@@ -3,12 +3,8 @@
 var focusedText,
     comicName = "comic",
     comicTitle = "Comic With",
-    hypnoToadObj = new Image(),
     focusRectW = 200,
     focusRectH = 60;
-
-hypnoToadObj.src = './images/hypnotoad.gif'
-
 
 $(document).ready(function(){
 
@@ -57,8 +53,13 @@ $(document).ready(function(){
 
 
   $("#imgur").not( ".uploaded" ).click(function(){
-    $("#imgur").addClass("uploading")
-    $("#imgur").html('Uploading to Imgur <img class="loading" src="' + hypnoToadObj.src + '">')
+    $("#imgur").animate({"width":"400px"},450)
+    setTimeout(function(){
+      $("#imgur").addClass("uploading")
+      $("#imgur").html('Uploading to Imgur')
+      $("#uploaded").animate({"width":"340px"},2850)
+
+    },560)
     stage.toDataURL({
       callback: function(dataUrl) {
         $.ajax({
@@ -75,7 +76,9 @@ $(document).ready(function(){
             'description': "Made with Comic Maker"
           },
           success: function(response) {
-            $("#imgur").replaceWith('<a class="uploaded" href="http://imgur.com/' + response["data"]["id"] + '" target="_blank">View on Imgur</a>')
+            $("#uploaded").animate({"width":"400px"},150)
+            $("#imgur").text("Uploaded to Imgur")
+            $("#imgur").attr("href", 'http://imgur.com/' + response["data"]["id"])
           }
         });
       }
