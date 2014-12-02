@@ -19,7 +19,7 @@ body {
   #headline:last-child {
     margin-right: 0; }
   #headline h1 {
-    font-size: 43px;
+    font-size: 40px;
     margin: -10px 0 10px 0; }
 
 #explainer {
@@ -39,7 +39,7 @@ body {
   margin-left: auto;
   margin-right: auto;
   margin-top: 30px;
-  min-width: 1280px;
+  min-width: 1160px;
   margin-left: 40px; }
   #container:before, #container:after {
     content: " ";
@@ -54,9 +54,30 @@ body {
   width: 65.95745%;
   background: black;
   width: 800px;
-  height: 600px; }
+  height: 600px;
+  display: none; }
   #tv:last-child {
     margin-right: 0; }
+
+#bg-holder {
+  display: block;
+  float: left;
+  margin-right: 2.12766%;
+  width: 65.95745%;
+  background: black;
+  width: 800px;
+  height: 600px; }
+  #bg-holder:last-child {
+    margin-right: 0; }
+  #bg-holder .background-image {
+    cursor: pointer;
+    width: 25%;
+    height: 150px;
+    overflow: hidden;
+    float: left;
+    margin-top: 0; }
+    #bg-holder .background-image img {
+      width: 100%; }
 
 #bubbles {
   margin-bottom: 5px; }
@@ -75,15 +96,18 @@ body {
   display: block;
   float: left;
   margin-right: 2.12766%;
-  width: 31.91489%; }
+  width: 14.89362%;
+  min-width: 270px; }
   #resources:last-child {
     margin-right: 0; }
   #resources select {
     width: 260px;
     font-size: 20px; }
-  #resources ul {
+  #resources #poses {
     height: 505px;
-    overflow: auto; }
+    overflow: auto;
+    font-size: 12px;
+    margin-left: -50px; }
   #resources li {
     list-style: none;
     cursor: pointer; }
@@ -139,6 +163,8 @@ body {
   float: left;
   margin-right: 2.12766%;
   width: 100%;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  line-height: 22px;
   margin-bottom: 10px; }
   #footer:last-child {
     margin-right: 0; }

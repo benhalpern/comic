@@ -4,7 +4,8 @@ var focusedText,
     comicName = "comic",
     comicTitle = "Comic With",
     focusRectW = 200,
-    focusRectH = 60;
+    focusRectH = 60,
+    serverDomain = "http://comicmaker.herokuapp.com";
 
 $(document).ready(function(){
 
@@ -16,20 +17,12 @@ $(document).ready(function(){
     container: "tv",
     width: 800,
     height: 600
-  })
-
-
-  var bgObj = new Image();
-  bgObj.onload = function(){
-    drawBackground(stage,this)
-  }
-  bgObj.src= './images/room.jpg'
+  });
 
 
 
   //events
-
-  $('.image').click(function(){
+  $( "body" ).delegate( ".image", "click", function() {
     drawImage(stage,this,$(this).data("character"));
     comicName = comicName + "_" + $(this).data("character")
     comicTitle = comicTitle + " " + $(this).data("character")
@@ -37,6 +30,13 @@ $(document).ready(function(){
 
   $('#tv').dblclick(function(e){
     drawBubble(stage,e.pageX -50,e.pageY -50,$("img.active")[0]);
+  })
+
+  $( "body" ).delegate( ".background-image", "click", function() {
+    console.log($("img",this)[0])
+    $("#bg-holder").hide();
+    $("#tv").show();
+    drawBackground(stage,$("img",this)[0]);
   })
 
   $("#save").click(function(){
@@ -92,10 +92,17 @@ $(document).ready(function(){
 
 
 
-  $("select").change(function(){
-    $(".image").addClass("hidden")
-    $('*[data-character="' + this.value + '"]').removeClass("hidden");
+  $("#collections").change(function(){
+    loadCharacters(this.value)
+    loadBackgrounds(this.value)
+    $("#bg-holder").show();
+    $("#tv").hide();
+
   })
+  $("#characters").change(function(){
+    loadPoses(this.value)
+  })
+
 
   $("#bubbles img").click(function(){
     $("#bubbles img").removeClass("active");
@@ -645,14 +652,62 @@ function getFullOffset() {
 }
 
 function loadCollections(){
-  $.ajax( "http://192.168.0.2:3000/collections.json" )
-  .done(function() {
-    console.log( "success" );
+  $.ajax( serverDomain + "/collections.json" )
+  .done(function(data) {
+    $.each(data, function( index, value ) {
+      $("#collections").append('<option value="'+ value.id +'">'+ value.name +'</option>')
+    });
+    loadCharacters(data[0]["id"])
+    loadBackgrounds(data[0]["id"])
   })
   .fail(function() {
-    console.log( "error" );
+    console.log( "error loading collections" );
   })
-  .always(function() {
-    console.log( "complete" );
-  });
+}
+
+function loadBackgrounds(id){
+  $("#bg-holder").html("")
+  $.ajax( serverDomain + "/backgrounds.json?c=" + id )
+  .done(function(data) {
+    $.each(data, function( index, value ) {
+      $("#bg-holder").append('<div class="background-image"><img src="'+ value.image.image.url +'"></div>')
+    });
+  })
+  .fail(function() {
+    console.log( "error loading characters" );
+  })
+
+}
+
+function loadCharacters(id){
+  $.ajax( serverDomain + "/characters.json?c=" + id )
+  .done(function(data) {
+    $("#characters").html("<option>" + data.length + " Characters Found</option>")
+    $.each(data, function( index, value ) {
+      $("#characters").append('<option value="'+ value.id +'">'+ value.name +'</option>')
+    });
+  })
+  .fail(function() {
+    console.log( "error loading characters" );
+  })
+}
+
+function loadPoses(id){
+  $("#poses").html("")
+  $.ajax( serverDomain + "/poses.json?c=" + id )
+  .done(function(data) {
+    if(data.length == 1){
+      $('#poses').append(data.length + ' Pose Found<hr>')
+    }
+    else{
+      $('#poses').append(data.length + ' Poses Found')
+    }
+
+    $.each(data, function( index, value ) {
+      $('#poses').append('<li><img class="image" src="'+ value.image.image.url +'" data-character="bart"></li>')
+    });
+  })
+  .fail(function() {
+    console.log( "error loading characters" );
+  })
 }
