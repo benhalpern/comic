@@ -663,9 +663,10 @@ function loadCollections(){
 }
 
 function loadBackgrounds(id){
-  $("#bg-holder").html("")
+  $("#bg-holder").html("<div class='loading-message'>Loading backgrounds...</div>")
   $.ajax( serverDomain + "/backgrounds.json?c=" + id)
   .done(function(data) {
+    $("#bg-holder").html("")
     $.each(data, function( index, value ) {
       var bg = new Image();
       bg.src = value.image.image.url;
@@ -692,9 +693,11 @@ function loadCharacters(id){
 }
 
 function loadPoses(id){
-  $("#poses").html("")
+  $("#poses").html("Loading poses...")
   $.ajax( serverDomain + "/poses.json?c=" + id )
   .done(function(data) {
+    $("#poses").html("")
+
     if(data.length == 1){
       $('#poses').append(data.length + ' Pose Found<hr>')
     }

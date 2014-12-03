@@ -51,6 +51,12 @@ body {
 	background:black;
 	width:800px;
 	height:600px;
+	color:$simpsons-yellow;
+	.loading-message{
+		margin-left:210px;
+		margin-top:250px;
+		font-size:30px;
+	}
 	.background-image{
 		cursor:pointer;
 		width:25%;

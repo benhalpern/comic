@@ -66,9 +66,14 @@ body {
   width: 65.95745%;
   background: black;
   width: 800px;
-  height: 600px; }
+  height: 600px;
+  color: #FFD90F; }
   #bg-holder:last-child {
     margin-right: 0; }
+  #bg-holder .loading-message {
+    margin-left: 210px;
+    margin-top: 250px;
+    font-size: 30px; }
   #bg-holder .background-image {
     cursor: pointer;
     width: 25%;
