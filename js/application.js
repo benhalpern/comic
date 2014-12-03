@@ -675,10 +675,28 @@ function loadCollections(){
 }
 
 function loadBackgrounds(id){
-  $("#bg-holder").html("<div class='loading-message'>Loading backgrounds...</div>")
+  $("#bg-holder").html("")
+  $("#bg-holder").append('<div class="background-image loading-image"><img src="http://www.goodboyfilm.com/images/loading2.gif"></div>')
+  $("#bg-holder").append('<div class="background-image loading-image"><img src="http://www.goodboyfilm.com/images/loading2.gif"></div>')
+  $("#bg-holder").append('<div class="background-image loading-image"><img src="http://www.goodboyfilm.com/images/loading2.gif"></div>')
+  $("#bg-holder").append('<div class="background-image loading-image"><img src="http://www.goodboyfilm.com/images/loading2.gif"></div>')
+  $("#bg-holder").append('<div class="background-image loading-image"><img src="http://www.goodboyfilm.com/images/loading2.gif"></div>')
+  $("#bg-holder").append('<div class="background-image loading-image"><img src="http://www.goodboyfilm.com/images/loading2.gif"></div>')
+  $("#bg-holder").append('<div class="background-image loading-image"><img src="http://www.goodboyfilm.com/images/loading2.gif"></div>')
+  $("#bg-holder").append('<div class="background-image loading-image"><img src="http://www.goodboyfilm.com/images/loading2.gif"></div>')
+  $("#bg-holder").append('<div class="background-image loading-image"><img src="http://www.goodboyfilm.com/images/loading2.gif"></div>')
+  $("#bg-holder").append('<div class="background-image loading-image"><img src="http://www.goodboyfilm.com/images/loading2.gif"></div>')
+  $("#bg-holder").append('<div class="background-image loading-image"><img src="http://www.goodboyfilm.com/images/loading2.gif"></div>')
+  $("#bg-holder").append('<div class="background-image loading-image"><img src="http://www.goodboyfilm.com/images/loading2.gif"></div>')
+  $("#bg-holder").append('<div class="background-image loading-image"><img src="http://www.goodboyfilm.com/images/loading2.gif"></div>')
+  $("#bg-holder").append('<div class="background-image loading-image"><img src="http://www.goodboyfilm.com/images/loading2.gif"></div>')
+  $("#bg-holder").append('<div class="background-image loading-image"><img src="http://www.goodboyfilm.com/images/loading2.gif"></div>')
+  $("#bg-holder").append('<div class="background-image loading-image"><img src="http://www.goodboyfilm.com/images/loading2.gif"></div>')
+
+
   $.ajax( serverDomain + "/backgrounds.json?c=" + id)
   .done(function(data) {
-    $("#bg-holder").html("")
+    $(".loading-image").remove("")
     $.each(data, function( index, value ) {
       $("#bg-holder").append('<div class="background-image"><img crossorigin= "" src="'+ value.image.image.url +'"></div>')
     });
