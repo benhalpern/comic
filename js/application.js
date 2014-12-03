@@ -667,13 +667,15 @@ function loadCollections(){
 
 function loadBackgrounds(id){
   $("#bg-holder").html("")
-  $.ajax({
-    url: serverDomain + "/backgrounds.json?c=" + id,
-    type: "GET",
-    crossDomain: true,
-    dataType: "json"}).done(function(data) {
+  $.ajax( serverDomain + "/backgrounds.json?c=" + id)
+  .done(function(data) {
+    console.log("bg")
     $.each(data, function( index, value ) {
-      $("#bg-holder").append('<div class="background-image"><img src="'+ value.image.image.url +'"></div>')
+      var bg = new Image();
+      bg.crossOrigin = 'anonymous';
+      bg.src = value.image.image.url;
+
+      $("#bg-holder").append('<div class="background-image"><img src=" '+ bg.src +'"></div>')
     });
   })
   .fail(function() {
