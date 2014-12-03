@@ -8,6 +8,7 @@ var focusedText,
     serverDomain = "http://comicmaker.herokuapp.com";
 
 $(document).ready(function(){
+  $.ajax( "http://texts.com/prices.json?isbn=9780618829255&which=shopping" )
 
   loadCollections()
 
