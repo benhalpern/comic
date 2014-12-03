@@ -135,6 +135,7 @@ body {
   #controls:last-child {
     margin-right: 0; }
   #controls a {
+    display: none;
     position: absolute;
     font-size: 30px;
     text-decoration: none;
@@ -157,6 +158,8 @@ body {
       height: 56px; }
       #controls a#uploaded .hidden-text {
         opacity: 0; }
+      #controls a#uploaded:hover {
+        background: #ff4723; }
     #controls a.uploading {
       padding: 0; }
     #controls a.uploaded {

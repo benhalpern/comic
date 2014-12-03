@@ -34,6 +34,9 @@ $(document).ready(function(){
   $( "body" ).delegate( ".background-image", "click", function() {
     $("#bg-holder").hide();
     $("#tv").show();
+    setTimeout(function(){
+      $("#controls a").slideDown('slow');
+    },200)
     drawBackground(stage,$("img",this)[0]);
   })
 
@@ -53,7 +56,12 @@ $(document).ready(function(){
 
 
   $("#imgur").not( ".uploaded" ).click(function(){
-    $("#imgur").animate({"width":"476px"},450)
+    $("#imgur").animate({"width":"478px"},450)
+    $("#uploaded").css("left","370px");
+    $("#uploaded").css("width","0px");
+    $(".hidden-text").text("Uploaded to Imgur");
+    $('.hidden-text').css("opacity","0");
+
     setTimeout(function(){
       $("#imgur").html('Uploading to Imgur')
       $("#uploaded").animate({"width":"370px"},4200)
@@ -75,12 +83,19 @@ $(document).ready(function(){
             'description': "Made with Comic Maker"
           },
           success: function(response) {
-            $("#uploaded").animate({"width":"476px"},180);
+            $("#uploaded").animate({"width":"478px"},180);
             $("#uploaded").addClass("uploading");
             $("#uploaded").addClass("uploaded");
             $(".hidden-text").text("Uploaded to Imgur");
             $("#uploaded").attr("href", 'http://imgur.com/' + response["data"]["id"]);
             $('.hidden-text').animate({"opacity":"1"},380);
+            $("#imgur").html('Save to Imgur')
+            setTimeout(function(){
+              $("#uploaded").animate({"left":"660px"},100);
+              $("#uploaded").animate({"width":"272px"},90);
+              $("#imgur").animate({"width":"275px"},180);
+              $(".hidden-text").text("View on Imgur");
+            },520)
           }
         });
       }
