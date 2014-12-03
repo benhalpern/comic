@@ -8,8 +8,6 @@ var focusedText,
     serverDomain = "http://comicmaker.herokuapp.com";
 
 $(document).ready(function(){
-  $.ajax( "http://texts.com/prices.json?isbn=9780618829255&which=shopping" )
-
   loadCollections()
 
   //onload
@@ -674,9 +672,7 @@ function loadBackgrounds(id){
   .done(function(data) {
     $("#bg-holder").html("")
     $.each(data, function( index, value ) {
-      var bg = new Image();
-      bg.src = value.image.image.url;
-      $("#bg-holder").append('<div class="background-image"><img crossorigin= "" src="'+ bg.src +'"></div>')
+      $("#bg-holder").append('<div class="background-image"><img crossorigin= "" src="'+ value.image.image.url +'"></div>')
     });
   })
   .fail(function() {
@@ -712,9 +708,7 @@ function loadPoses(id){
     }
 
     $.each(data, function( index, value ) {
-      var character = new Image();
-      character.src = value.image.image.url;
-      $('#poses').append('<li><img crossorigin class="image" src="'+ character.src +'" data-character="bart"></li>')
+      $('#poses').append('<li><img crossorigin class="image" src="'+ value.image.image.url +'" data-character="bart"></li>')
     });
   })
   .fail(function() {
