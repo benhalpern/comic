@@ -669,8 +669,7 @@ function loadBackgrounds(id){
     $.each(data, function( index, value ) {
       var bg = new Image();
       bg.src = value.image.image.url;
-      bg.crossOriginPolicy = "Anonymous";
-      $("#bg-holder").append('<div class="background-image"><img crossorigin= "'+ bg.crossOrigin + '" src=" '+ bg.src +'"></div>')
+      $("#bg-holder").append('<div class="background-image"><img crossorigin= "" src="'+ bg.src +'"></div>')
     });
   })
   .fail(function() {
@@ -706,9 +705,7 @@ function loadPoses(id){
     $.each(data, function( index, value ) {
       var character = new Image();
       character.src = value.image.image.url;
-      character.crossOrigin = "Anonymous";
-
-      $('#poses').append('<li><img class="image" crossorigin= "'+ character.crossOrigin + '" src="'+ character.src +'" data-character="bart"></li>')
+      $('#poses').append('<li><img crossorigin class="image" src="'+ character.src +'" data-character="bart"></li>')
     });
   })
   .fail(function() {
