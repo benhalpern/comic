@@ -667,8 +667,11 @@ function loadCollections(){
 
 function loadBackgrounds(id){
   $("#bg-holder").html("")
-  $.ajax( serverDomain + "/backgrounds.json?c=" + id )
-  .done(function(data) {
+  $.ajax({
+    url: serverDomain + "/backgrounds.json?c=" + id,
+    type: "GET",
+    crossDomain: true,
+    dataType: "json"}).done(function(data) {
     $.each(data, function( index, value ) {
       $("#bg-holder").append('<div class="background-image"><img src="'+ value.image.image.url +'"></div>')
     });
