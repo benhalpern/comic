@@ -2,7 +2,7 @@
 
 var focusedText,
     comicName = "comic",
-    comicTitle = "Comic With",
+    comicTitle,
     focusRectW = 200,
     focusRectH = 60,
     serverDomain = "http://comicmaker.herokuapp.com";
@@ -32,6 +32,7 @@ $(document).ready(function(){
   })
 
   $( "body" ).delegate( ".background-image", "click", function() {
+    comicTitle = $("#collections option:selected").text() + " Comic:"
     $("#bg-holder").hide();
     $("#tv").show();
     setTimeout(function(){
@@ -117,7 +118,7 @@ $(document).ready(function(){
       $('#poses').html("Choose a Character")
     }
     else{
-      loadPoses(this.value)
+      loadPoses(this.value,$(this).find("option:selected").text())
     }
   })
 
@@ -165,15 +166,10 @@ $(document).ready(function(){
         });
         if ( focusedText["attrs"]["text"].length > 1 ){
           focusedText = undefined
-          console.log("there is text")
         }
 
         layer.draw();
       }
-    }
-    else{
-      console.log("focusing editor")
-
     }
     return false;
   });
@@ -709,7 +705,7 @@ function loadCharacters(id){
   })
 }
 
-function loadPoses(id){
+function loadPoses(id,characterName){
   $("#poses").html("Loading poses...")
   $.ajax( serverDomain + "/poses.json?c=" + id )
   .done(function(data) {
@@ -723,7 +719,7 @@ function loadPoses(id){
     }
 
     $.each(data, function( index, value ) {
-      $('#poses').append('<li><img crossorigin class="image" src="'+ value.image.image.url +'" data-character="bart"></li>')
+      $('#poses').append('<li><img crossorigin class="image" src="'+ value.image.image.url +'" data-character="'+ characterName +'"></li>')
     });
   })
   .fail(function() {
