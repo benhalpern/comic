@@ -699,7 +699,7 @@ function loadBackgrounds(id){
 function loadCharacters(id){
   $.ajax( serverDomain + "/characters.json?c=" + id )
   .done(function(data) {
-    $("#characters").html("<option value='0'>" + data.length + " Characters Found</option>")
+    $("#characters").html("<option value='0'>" + data.length + " Characters To Select From</option>")
     $.each(data, function( index, value ) {
       $("#characters").append('<option value="'+ value.id +'">'+ value.name +'</option>')
     });
