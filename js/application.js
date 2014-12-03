@@ -704,7 +704,7 @@ function loadPoses(id){
     }
 
     $.each(data, function( index, value ) {
-      $('#poses').append('<li><img class="image" src="'+ value.image.image.url +'" data-character="bart"></li>')
+      $('#poses').append('<li><img class="image" crossorigin="" src="'+ value.image.image.url +'" data-character="bart"></li>')
     });
   })
   .fail(function() {
