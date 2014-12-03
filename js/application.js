@@ -672,9 +672,8 @@ function loadBackgrounds(id){
     console.log("bg")
     $.each(data, function( index, value ) {
       var bg = new Image();
-      bg.crossOrigin = 'anonymous';
       bg.src = value.image.image.url;
-
+      bg.crossOrigin = "Anonymous";
       $("#bg-holder").append('<div class="background-image"><img src=" '+ bg.src +'"></div>')
     });
   })
@@ -709,7 +708,11 @@ function loadPoses(id){
     }
 
     $.each(data, function( index, value ) {
-      $('#poses').append('<li><img class="image" src="'+ value.image.image.url +'" data-character="bart"></li>')
+      var character = new Image();
+      character.src = value.image.image.url;
+      character.crossOrigin = "Anonymous";
+
+      $('#poses').append('<li><img class="image" src="'+ character.src +'" data-character="bart"></li>')
     });
   })
   .fail(function() {
