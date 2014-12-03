@@ -99,7 +99,12 @@ $(document).ready(function(){
 
   })
   $("#characters").change(function(){
-    loadPoses(this.value)
+    if(this.value == 0){
+      $('#poses').html("Choose a Character")
+    }
+    else{
+      loadPoses(this.value)
+    }
   })
 
 
@@ -682,7 +687,7 @@ function loadBackgrounds(id){
 function loadCharacters(id){
   $.ajax( serverDomain + "/characters.json?c=" + id )
   .done(function(data) {
-    $("#characters").html("<option>" + data.length + " Characters Found</option>")
+    $("#characters").html("<option value='0'>" + data.length + " Characters Found</option>")
     $.each(data, function( index, value ) {
       $("#characters").append('<option value="'+ value.id +'">'+ value.name +'</option>')
     });
