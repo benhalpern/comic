@@ -33,7 +33,6 @@ $(document).ready(function(){
   })
 
   $( "body" ).delegate( ".background-image", "click", function() {
-    console.log($("img",this)[0])
     $("#bg-holder").hide();
     $("#tv").show();
     drawBackground(stage,$("img",this)[0]);
@@ -338,8 +337,6 @@ function addTextEdit(group,x,y) {
   //focusedText.setPosition({x: -88, y: -35});
   newText.on("click", function(evt) {
     evt.cancelBubble = true;
-    console.log(evt['evt'])
-    console.log(group.getX())
     this.setPosition({
       x: group.getX() + newText.getX(),
       y: group.getY() + newText.getY(),
@@ -669,11 +666,10 @@ function loadBackgrounds(id){
   $("#bg-holder").html("")
   $.ajax( serverDomain + "/backgrounds.json?c=" + id)
   .done(function(data) {
-    console.log("bg")
     $.each(data, function( index, value ) {
       var bg = new Image();
       bg.src = value.image.image.url;
-      bg.crossOrigin = "Anonymous";
+      bg.crossOriginPolicy = "Anonymous";
       $("#bg-holder").append('<div class="background-image"><img src=" '+ bg.src +'"></div>')
     });
   })
@@ -710,7 +706,7 @@ function loadPoses(id){
     $.each(data, function( index, value ) {
       var character = new Image();
       character.src = value.image.image.url;
-      character.crossOrigin = "Anonymous";
+      character.crossOriginPolicy = "Anonymous";
 
       $('#poses').append('<li><img class="image" src="'+ character.src +'" data-character="bart"></li>')
     });
