@@ -109,9 +109,6 @@ $(document).ready(function(){
   $("#collections").change(function(){
     loadCharacters(this.value)
     loadBackgrounds(this.value)
-    $("#bg-holder").show();
-    $("#tv").hide();
-
   })
   $("#characters").change(function(){
     if(this.value == 0){
