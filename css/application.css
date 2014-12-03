@@ -67,6 +67,7 @@ body {
   background: black;
   width: 800px;
   height: 600px;
+  overflow: auto;
   color: #FFD90F; }
   #bg-holder:last-child {
     margin-right: 0; }

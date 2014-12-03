@@ -51,6 +51,7 @@ body {
 	background:black;
 	width:800px;
 	height:600px;
+	overflow:auto;
 	color:$simpsons-yellow;
 	.loading-message{
 		margin-left:210px;
@@ -127,7 +128,7 @@ body {
 	margin-bottom:5px;
 	a{
 		display:none;
-		
+
 		position:absolute;
 		font-size:30px;
 		text-decoration:none;
