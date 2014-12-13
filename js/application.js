@@ -5,20 +5,22 @@ var focusedText,
     comicTitle,
     focusRectW = 200,
     focusRectH = 60,
-    serverDomain = "http://comicmaker.herokuapp.com";
-
+    serverDomain = "http://comicmaker.herokuapp.com",
+    stage,
+    stages = [],
+    results = [];
 $(document).ready(function(){
   loadCollections()
 
   //onload
 
-  var stage = new Kinetic.Stage({
-    container: "tv",
+  stage = new Kinetic.Stage({
+    container: "tv_0",
     width: 800,
     height: 600
   });
 
-
+  stages.push(stage);
 
   //events
   $( "body" ).delegate( ".image", "click", function() {
@@ -27,18 +29,53 @@ $(document).ready(function(){
     comicTitle = comicTitle + " " + $(this).data("character")
   })
 
-  $('#tv').dblclick(function(e){
-    drawBubble(stage,e.pageX -50,e.pageY -50,$("img.active")[0]);
+  $('.tv').dblclick(function(e){
+    //stage = stages[$('.tv').index($('.tv.active'))]
+    //drawBubble(stage,e.pageX -50,e.pageY -50,$("img.active")[0]);
+  })
+
+  $( "body" ).delegate( ".tv:not(.active)", "click", function() {
+    $('.tv').removeClass("active")
+    $(this).addClass("active")
+
+    stage = stages[$('.tv').index(this)]
+
+
   })
 
   $( "body" ).delegate( ".background-image", "click", function() {
     comicTitle = $("#collections option:selected").text() + " Comic:"
-    $("#bg-holder").hide();
-    $("#tv").show();
+    $(".bg-holder.active").hide();
+    $('.tv').removeClass("active")
+    $(".tv:last").addClass("active")
+    $(".tv.active").show();
+    $(".add-scene").remove();
+    $("#story-wrapper").append('<button id="add-scene" class="add-scene">+</button>');
     setTimeout(function(){
       $("#controls a").slideDown('slow');
     },200)
+    stage = stages[$('.tv').index($('.tv.active'))]
     drawBackground(stage,$("img",this)[0]);
+  })
+
+  $( "body" ).delegate( ".add-scene", "click", function() {
+    var random = Math.floor(Math.random() * 1000) + 1
+    //var tvIndex = $()
+    $(".tv,.bg-holder").removeClass("active")
+    $(this).after('<div id="bg_'+random+'" class="bg-holder active"></div><div id="tv_'+random+'" class="tv active"></div><br><br>')
+    $(this).remove();
+
+    $("#story-wrapper").animate({ scrollTop: $('#story-wrapper')[0].scrollHeight}, 1000);
+    $(".bg-holder.active").html($("#bg_0").html())
+    stage = new Kinetic.Stage({
+      container: "tv_" + random,
+      width: 800,
+      height: 600
+    });
+    stages.push(stage);
+
+
+
   })
 
   $("#save").click(function(){
@@ -62,47 +99,37 @@ $(document).ready(function(){
     $("#uploaded").css("width","0px");
     $(".hidden-text").text("Uploaded to Imgur");
     $('.hidden-text').css("opacity","0");
+    $("#uploaded").prepend('<img class="dancer-loader" src="./images/robot-duckling.gif"><img class="dancer-loader" src="./images/robot-duckling.gif"><img class="dancer-loader" src="./images/robot-duckling.gif"><img class="dancer-loader" src="./images/robot-duckling.gif"><img class="dancer-loader" src="./images/robot-duckling.gif"><img class="dancer-loader" src="./images/robot-duckling.gif"><img class="dancer-loader" src="./images/robot-duckling.gif"><img class="dancer-loader" src="./images/robot-duckling.gif">')
 
     setTimeout(function(){
       $("#imgur").html('Uploading to Imgur')
       $("#uploaded").animate({"width":"370px"},4200)
 
+
     },560)
-    stage.toDataURL({
-      callback: function(dataUrl) {
-        $.ajax({
-          url: 'https://api.imgur.com/3/image',
-          headers: {
-            'Authorization': 'Client-ID d2c784f95f3c2df'
-          },
-          type: 'POST',
-          data: {
-            'type': 'base64',
-            'image': dataUrl.split(',')[1],
-            'name': comicName + ".png",
-            'title': comicTitle,
-            'description': "Made with Comic Maker"
-          },
-          success: function(response) {
-            $("#uploaded").animate({"width":"478px"},180);
-            $("#uploaded").addClass("uploading");
-            $("#uploaded").addClass("uploaded");
-            $(".hidden-text").text("Uploaded to Imgur");
-            $("#uploaded").attr("href", 'http://imgur.com/' + response["data"]["id"]);
-            $('.hidden-text').animate({"opacity":"1"},380);
-            $("#imgur").html('Save to Imgur')
-            setTimeout(function(){
-              $("#uploaded").animate({"left":"660px"},100);
-              $("#uploaded").animate({"width":"272px"},90);
-              $("#imgur").animate({"width":"275px"},180);
-              $(".hidden-text").text("View on Imgur");
-            },520)
-          }
-        });
-      }
-    })
+    //do it for all stages
+    $.each(stages, function( index, stage ) {
+      stage.toDataURL({
+        callback: function(dataUrl) {
+          uploadImage(dataUrl);
+        }
+      })
+    });
+
     return false;
   })
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -121,8 +148,11 @@ $(document).ready(function(){
 
 
   $("#bubbles img").click(function(){
+    //var adjustedY = ($('.tv').index($('.tv.active')) * 300)
+    //console.log(adjustedY)
     $("#bubbles img").removeClass("active");
     $(this).addClass("active");
+    console.log(stage.getY())
     drawBubble(stage,360,120,$("img.active")[0]);
 
 
@@ -142,7 +172,7 @@ $(document).ready(function(){
 
 
   // when clicked inside TV
-  $(document).on('mousedown', '#tv', function(e) {
+  $(document).on('mousedown', '.tv', function(e) {
     // if focusedText exists, two possibilities:
     // Either just clicked on an existing text, or
     // Clicked outside a focused text.
@@ -171,8 +201,8 @@ $(document).ready(function(){
     return false;
   });
 
-  $(document).on('mouseup', '#tv', function(e) {
-    if(focusedText != undefined && focusedText["attrs"]["text"].length < 2 ){
+  $(document).on('mouseup', '.tv', function(e) {
+    if(focusedText != undefined && focusedText["attrs"]["text"] && focusedText["attrs"]["text"].length < 2 ){
       addTextEdit(focusedText.getParent(),
       focusedText.getParent().getX() + 50,
       focusedText.getParent().getY() + 50)
@@ -295,6 +325,8 @@ function drawBubble(stage,x,y,activeBubble){
   layer.add(group);
   group.add(bubble);
   stage.add(layer);
+  console.log(x)
+  console.log(y)
   addTextEdit(group,x + 50,y + 50);
   addAnchor(group, -(imageWidth/2), -(imageHeight/2), "topLeft");
   addAnchor(group, imageWidth/2, -(imageHeight/2), "topRight");
@@ -332,8 +364,8 @@ function drawBubble(stage,x,y,activeBubble){
 function addTextEdit(group,x,y) {
   var newText = new Kinetic.EditableText({
     // find click position.
-    x: x + getFullOffset().left - 90,
-    y: y + getFullOffset().top -11,
+    x: x - 150,
+    y: y -101,
     fontFamily: 'Comic Sans MS',
     fill: '#000000',
     //text: "placeholder",
@@ -341,6 +373,8 @@ function addTextEdit(group,x,y) {
     pasteModal: "pasteModalArea",
     draggable: true
   });
+  console.log(getFullOffset().top)
+  console.log(x)
   group.add(newText);
 
   newText.focus();
@@ -653,7 +687,7 @@ function update(group, activeHandle) {
 
 // helper function for mouse click position.
 function getFullOffset() {
-  var container = $("#tv");
+  var container = $(".tv");
   return {
     left: container.scrollLeft() - container.offset().left,
     top: container.scrollTop() - container.offset().top
@@ -675,30 +709,30 @@ function loadCollections(){
 }
 
 function loadBackgrounds(id){
-  $("#bg-holder").html("")
-  $("#bg-holder").append('<div class="background-image loading-image"><img src="./images/loading.gif"></div>')
-  $("#bg-holder").append('<div class="background-image loading-image"><img src="./images/loading.gif"></div>')
-  $("#bg-holder").append('<div class="background-image loading-image"><img src="./images/loading.gif"></div>')
-  $("#bg-holder").append('<div class="background-image loading-image"><img src="./images/loading.gif"></div>')
-  $("#bg-holder").append('<div class="background-image loading-image"><img src="./images/loading.gif"></div>')
-  $("#bg-holder").append('<div class="background-image loading-image"><img src="./images/loading.gif"></div>')
-  $("#bg-holder").append('<div class="background-image loading-image"><img src="./images/loading.gif"></div>')
-  $("#bg-holder").append('<div class="background-image loading-image"><img src="./images/loading.gif"></div>')
-  $("#bg-holder").append('<div class="background-image loading-image"><img src="./images/loading.gif"></div>')
-  $("#bg-holder").append('<div class="background-image loading-image"><img src="./images/loading.gif"></div>')
-  $("#bg-holder").append('<div class="background-image loading-image"><img src="./images/loading.gif"></div>')
-  $("#bg-holder").append('<div class="background-image loading-image"><img src="./images/loading.gif"></div>')
-  $("#bg-holder").append('<div class="background-image loading-image"><img src="./images/loading.gif"></div>')
-  $("#bg-holder").append('<div class="background-image loading-image"><img src="./images/loading.gif"></div>')
-  $("#bg-holder").append('<div class="background-image loading-image"><img src="./images/loading.gif"></div>')
-  $("#bg-holder").append('<div class="background-image loading-image"><img src="./images/loading.gif"></div>')
+  $(".bg-holder.active").html("")
+  $(".bg-holder.active").append('<div class="background-image loading-image"><img src="./images/loading.gif"></div>')
+  $(".bg-holder.active").append('<div class="background-image loading-image"><img src="./images/loading.gif"></div>')
+  $(".bg-holder.active").append('<div class="background-image loading-image"><img src="./images/loading.gif"></div>')
+  $(".bg-holder.active").append('<div class="background-image loading-image"><img src="./images/loading.gif"></div>')
+  $(".bg-holder.active").append('<div class="background-image loading-image"><img src="./images/loading.gif"></div>')
+  $(".bg-holder.active").append('<div class="background-image loading-image"><img src="./images/loading.gif"></div>')
+  $(".bg-holder.active").append('<div class="background-image loading-image"><img src="./images/loading.gif"></div>')
+  $(".bg-holder.active").append('<div class="background-image loading-image"><img src="./images/loading.gif"></div>')
+  $(".bg-holder.active").append('<div class="background-image loading-image"><img src="./images/loading.gif"></div>')
+  $(".bg-holder.active").append('<div class="background-image loading-image"><img src="./images/loading.gif"></div>')
+  $(".bg-holder.active").append('<div class="background-image loading-image"><img src="./images/loading.gif"></div>')
+  $(".bg-holder.active").append('<div class="background-image loading-image"><img src="./images/loading.gif"></div>')
+  $(".bg-holder.active").append('<div class="background-image loading-image"><img src="./images/loading.gif"></div>')
+  $(".bg-holder.active").append('<div class="background-image loading-image"><img src="./images/loading.gif"></div>')
+  $(".bg-holder.active").append('<div class="background-image loading-image"><img src="./images/loading.gif"></div>')
+  $(".bg-holder.active").append('<div class="background-image loading-image"><img src="./images/loading.gif"></div>')
 
 
   $.ajax( serverDomain + "/backgrounds.json?c=" + id)
   .done(function(data) {
     $(".loading-image").remove("")
     $.each(data, function( index, value ) {
-      $("#bg-holder").append('<div class="background-image"><img crossorigin= "" src="'+ value.image.image.url +'"></div>')
+      $(".bg-holder.active").append('<div class="background-image"><img crossorigin= "" src="'+ value.image.image.url +'"></div>')
     });
   })
   .fail(function() {
@@ -740,4 +774,61 @@ function loadPoses(id,characterName){
   .fail(function() {
     console.log( "error loading characters" );
   })
+}
+
+
+function uploadImage(dataUrl){
+  $.ajax({
+    url: 'https://api.imgur.com/3/image',
+    headers: {
+      'Authorization': 'Client-ID d2c784f95f3c2df'
+    },
+    type: 'POST',
+    data: {
+      'type': 'base64',
+      'image': dataUrl.split(',')[1],
+      'name': comicName + ".png",
+    },
+    success: function(response) {
+      results.push(response["data"]["id"])
+      if( results.length == stages.length ){
+        uploadAlbum()
+      }
+    }
+  });
+
+}
+
+
+function uploadAlbum(){
+  $.ajax({
+    url: 'https://api.imgur.com/3/album',
+    headers: {
+      'Authorization': 'Client-ID d2c784f95f3c2df'
+    },
+    type: 'POST',
+    data: {
+      'ids': results,
+      'title': comicTitle,
+      'layout': 'blog',
+      'description': "Made with Comic Maker"
+    },
+    success: function(response) {
+      $(".dancer-loader").remove();
+      $("#uploaded").animate({"width":"478px"},180);
+      $("#uploaded").addClass("uploading");
+      $("#uploaded").addClass("uploaded");
+      $(".hidden-text").text("Uploaded to Imgur");
+      $("#uploaded").attr("href", 'http://imgur.com/a/' + response["data"]["id"]);
+      $('.hidden-text').animate({"opacity":"1"},380);
+      $("#imgur").html('Save to Imgur')
+      setTimeout(function(){
+        $("#uploaded").animate({"left":"660px"},100);
+        $("#uploaded").animate({"width":"272px"},90);
+        $("#imgur").animate({"width":"275px"},180);
+        $(".hidden-text").text("View on Imgur");
+      },520)
+    }
+  });
+
 }

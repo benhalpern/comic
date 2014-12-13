@@ -14,44 +14,85 @@ $helvetica: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Hel
 body {
 	font-family: "simpsons", Verdana, Tahoma;
 	font-weight: 300;
+	background:$simpsons-blue;
+
 }
 
 #headline{
-	@include span-columns(7.2);
+	@include span-columns(8);
 
 	color: $simpsons-blue;
 	h1{
-		font-size:40px;
-		margin:-10px 0 10px 0;
+		font-size:30px;
+		margin:3px;
+		padding:16px;
 	}
 }
 #explainer{
 	font-family: $helvetica;
 	font-size:13px;
-	margin-top:-10px;
+	padding:10px;
+	margin:3px 10px 3px 3px;
 	@include span-columns(3.6);
-
 }
 
 #container{
-	@include outer-container;
-	margin-top:30px;
+	@include span-columns(6);
+	@include shift(0.2);
+	box-shadow: 0 0 20px darken($simpsons-blue,20%);
+
+	margin-top:10px;
 	min-width:1160px;
-	margin-left:40px;
+	background:white;
+	border-radius:5px;
+
 }
-#tv{
+#story-wrapper{
+	@include span-columns(8);
+	width:800px;
+	height:650px;
+	overflow:auto;
+	#add-scene{
+		background:$simpsons-red;
+		color:$simpsons-yellow;
+		margin-left:10px;
+		margin-top:-28px;
+		font-size:30px;
+		border:0;
+		border-radius:5px;
+		padding:10px 20px 10px 20px;
+		z-index:3;
+		cursor:pointer;
+		font-family: "simpsons", Verdana, Tahoma;
+
+	}
+}
+.tv{
 	@include span-columns(8);
 	background:black;
 	width:800px;
 	height:600px;
 	display:none;
+	opacity:0.4;
+	cursor:pointer;
+	margin-bottom:20px;
+	&:hover{
+		opacity:0.5;
+	}
+	&.active{
+		opacity:1;
+		cursor:default;
+
+	}
+
 }
-#bg-holder{
+.bg-holder{
 	@include span-columns(8);
 	background:black;
 	width:800px;
 	height:600px;
 	overflow:auto;
+	margin-bottom:20px;
 	color:$simpsons-yellow;
 	.loading-message{
 		margin-left:210px;
@@ -133,10 +174,10 @@ body {
 		font-size:30px;
 		text-decoration:none;
 		color:$simpsons-yellow;
-		background: $simpsons-blue;
+		background: lighten($simpsons-blue,5%);
 		padding:16px 30px 10px 30px;
 		&:hover{
-			background:lighten($simpsons-blue,5%)
+			background:lighten($simpsons-blue,8%)
 		}
 
 		&#save{
@@ -182,4 +223,8 @@ body {
 		text-decoration:none;
 		color:$simpsons-red;
 	}
+}
+
+.dancer-loader{
+	margin-bottom:30px;
 }
