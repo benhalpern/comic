@@ -55,23 +55,27 @@ body {
   float: left;
   margin-right: 2.12766%;
   width: 65.95745%;
-  width: 800px;
-  height: 650px;
-  overflow: auto; }
+  width: 820px;
+  height: 680px;
+  overflow: auto;
+  position: relative;
+  z-index: 0; }
   #story-wrapper:last-child {
     margin-right: 0; }
   #story-wrapper #add-scene {
     background: #FF360F;
     color: #FFD90F;
-    margin-left: 10px;
-    margin-top: -28px;
+    margin-left: 5px;
+    margin-top: -10px;
+    margin-bottom: 10px;
     font-size: 30px;
     border: 0;
-    border-radius: 5px;
+    border-radius: 15px;
     padding: 10px 20px 10px 20px;
-    z-index: 3;
+    z-index: 30;
     cursor: pointer;
-    font-family: "simpsons", Verdana, Tahoma; }
+    font-family: "simpsons", Verdana, Tahoma;
+    opacity: 0; }
 
 .tv {
   display: block;
@@ -84,7 +88,8 @@ body {
   display: none;
   opacity: 0.4;
   cursor: pointer;
-  margin-bottom: 20px; }
+  margin-bottom: 20px;
+  z-index: 1; }
   .tv:last-child {
     margin-right: 0; }
   .tv:hover {
@@ -176,10 +181,10 @@ body {
     font-size: 30px;
     text-decoration: none;
     color: #FFD90F;
-    background: #319dff;
+    background: #3ba2ff;
     padding: 16px 30px 10px 30px; }
     #controls a:hover {
-      background: #40a4ff; }
+      background: #4aa9ff; }
     #controls a#save {
       left: 50;
       min-width: 230px; }

@@ -49,22 +49,27 @@ body {
 }
 #story-wrapper{
 	@include span-columns(8);
-	width:800px;
-	height:650px;
+	width:820px;
+	height:680px;
 	overflow:auto;
+	position:relative;
+	z-index:0;
+
 	#add-scene{
 		background:$simpsons-red;
 		color:$simpsons-yellow;
-		margin-left:10px;
-		margin-top:-28px;
+		//position:absolute;
+		margin-left:5px;
+		margin-top:-10px;
+		margin-bottom:10px;
 		font-size:30px;
 		border:0;
-		border-radius:5px;
+		border-radius:15px;
 		padding:10px 20px 10px 20px;
-		z-index:3;
+		z-index:30;
 		cursor:pointer;
 		font-family: "simpsons", Verdana, Tahoma;
-
+		opacity:0;
 	}
 }
 .tv{
@@ -76,6 +81,8 @@ body {
 	opacity:0.4;
 	cursor:pointer;
 	margin-bottom:20px;
+	z-index:1;
+
 	&:hover{
 		opacity:0.5;
 	}
@@ -174,10 +181,10 @@ body {
 		font-size:30px;
 		text-decoration:none;
 		color:$simpsons-yellow;
-		background: lighten($simpsons-blue,5%);
+		background: lighten($simpsons-blue,7%);
 		padding:16px 30px 10px 30px;
 		&:hover{
-			background:lighten($simpsons-blue,8%)
+			background:lighten($simpsons-blue,10%)
 		}
 
 		&#save{

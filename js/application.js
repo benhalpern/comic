@@ -54,14 +54,15 @@ $(document).ready(function(){
     $("#story-wrapper").append('<button id="add-scene" class="add-scene">+</button>');
     setTimeout(function(){
       $("#controls a").slideDown('slow');
+      $(".add-scene").animate({"opacity":"1"},400);
     },200)
     stage = stages[$('.tv').index($('.tv.active'))]
     drawBackground(stage,$("img",this)[0]);
+
   })
 
   $( "body" ).delegate( ".add-scene", "click", function() {
     var random = Math.floor(Math.random() * 1000) + 1
-    //var tvIndex = $()
     $(".tv,.bg-holder").removeClass("active")
     $(this).after('<div id="bg_'+random+'" class="bg-holder active"></div><div id="tv_'+random+'" class="tv active"></div><br><br>')
     $(this).remove();
@@ -82,11 +83,8 @@ $(document).ready(function(){
   $("#save").click(function(){
     stage.toDataURL({
       callback: function(dataUrl) {
-
         var a = $("<a>").attr("href", dataUrl).attr("download", comicName + ".png").appendTo("body");
-
         a[0].click();
-
         a.remove();
       }
     })
