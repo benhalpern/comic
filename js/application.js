@@ -8,7 +8,8 @@ var focusedText,
     serverDomain = "http://comicmaker.herokuapp.com",
     stage,
     stages = [],
-    results = [];
+    results = [],
+    uploadedAlbum = false;
 $(document).ready(function(){
   loadCollections()
 
@@ -97,21 +98,19 @@ $(document).ready(function(){
     $("#imgur").animate({"width":"478px"},450)
     $("#uploaded").css("left","370px");
     $("#uploaded").css("width","0px");
-    $(".hidden-text").text("Uploaded to Imgur");
     $('.hidden-text').css("opacity","0");
-    $("#uploaded").prepend('<img class="dancer-loader" src="./images/robot-duckling.gif"><img class="dancer-loader" src="./images/robot-duckling.gif"><img class="dancer-loader" src="./images/robot-duckling.gif"><img class="dancer-loader" src="./images/robot-duckling.gif"><img class="dancer-loader" src="./images/robot-duckling.gif"><img class="dancer-loader" src="./images/robot-duckling.gif"><img class="dancer-loader" src="./images/robot-duckling.gif"><img class="dancer-loader" src="./images/robot-duckling.gif">')
+    $("#uploaded").prepend('<img class="dancer-loader" src="./images/robot-duckling.gif"><img class="dancer-loader" src="./images/robot-duckling.gif"><img class="dancer-loader" src="./images/robot-duckling.gif"><img class="dancer-loader" src="./images/robot-duckling.gif"><img class="dancer-loader" src="./images/robot-duckling.gif"><img class="dancer-loader" src="./images/robot-duckling.gif"><img class="dancer-loader" src="./images/robot-duckling.gif"><img class="dancer-loader" src="./images/robot-duckling.gif"><img class="dancer-loader" src="./images/robot-duckling.gif"><img class="dancer-loader" src="./images/robot-duckling.gif"><img class="dancer-loader" src="./images/robot-duckling.gif"><img class="dancer-loader" src="./images/robot-duckling.gif"><img class="dancer-loader" src="./images/robot-duckling.gif">')
 
     setTimeout(function(){
       $("#imgur").html('Uploading to Imgur')
-      $("#uploaded").animate({"width":"370px"},6200 + (stages.length * 500))
-
+      inchForward(28);
 
     },560)
     //do it for all stages
     $.each(stages, function( index, stage ) {
       stage.toDataURL({
         callback: function(dataUrl) {
-          uploadImage(dataUrl);
+          uploadImage(dataUrl,index);
         }
       })
     });
@@ -777,7 +776,7 @@ function loadPoses(id,characterName){
 }
 
 
-function uploadImage(dataUrl){
+function uploadImage(dataUrl, index){
   $.ajax({
     url: 'https://api.imgur.com/3/image',
     headers: {
@@ -790,7 +789,7 @@ function uploadImage(dataUrl){
       'name': comicName + ".png",
     },
     success: function(response) {
-      results.push(response["data"]["id"])
+      results[index] = response["data"]["id"]
       if( results.length == stages.length ){
         uploadAlbum()
       }
@@ -818,17 +817,36 @@ function uploadAlbum(){
       $("#uploaded").animate({"width":"478px"},180);
       $("#uploaded").addClass("uploading");
       $("#uploaded").addClass("uploaded");
-      $(".hidden-text").text("Uploaded to Imgur");
       $("#uploaded").attr("href", 'http://imgur.com/a/' + response["data"]["id"]);
-      $('.hidden-text').animate({"opacity":"1"},380);
-      $("#imgur").html('Save to Imgur')
+      uploadedAlbum = true;
       setTimeout(function(){
         $("#uploaded").animate({"left":"660px"},100);
         $("#uploaded").animate({"width":"272px"},90);
         $("#imgur").animate({"width":"275px"},180);
         $(".hidden-text").text("View on Imgur");
+        $('.hidden-text').animate({"opacity":"1"},380);
+        $("#imgur").html('Save to Imgur')
+
       },520)
     }
   });
+
+}
+
+
+function inchForward(pixels){
+  $("#uploaded").animate({"width":"+=" + pixels},300)
+  setTimeout(function(){
+    if(!uploadedAlbum){
+      console.log("should be uploading")
+      if( pixels == 4 ){
+        inchForward(pixels)
+
+      }
+      else{
+        inchForward(pixels -1)
+      }
+    }
+  },302)
 
 }
