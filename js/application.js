@@ -103,7 +103,7 @@ $(document).ready(function(){
 
     setTimeout(function(){
       $("#imgur").html('Uploading to Imgur')
-      $("#uploaded").animate({"width":"370px"},4200)
+      $("#uploaded").animate({"width":"370px"},6200 + (stages.length * 500))
 
 
     },560)
