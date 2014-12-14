@@ -790,6 +790,8 @@ function uploadImage(dataUrl, index){
     },
     success: function(response) {
       results[index] = response["data"]["id"]
+      console.log(results)
+      console.log(results.length)
       if( results.length == stages.length ){
         uploadAlbum()
       }
@@ -838,7 +840,6 @@ function inchForward(pixels){
   $("#uploaded").animate({"width":"+=" + pixels},300)
   setTimeout(function(){
     if(!uploadedAlbum){
-      console.log("should be uploading")
       if( pixels == 4 ){
         inchForward(pixels)
 
