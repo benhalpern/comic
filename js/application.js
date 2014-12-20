@@ -744,7 +744,7 @@ function loadBackgrounds(id){
   .done(function(data) {
     $(".loading-image").remove("")
     $.each(data, function( index, value ) {
-      $(".bg-holder.active").append('<div class="background-image" data-fitted= "'+ value.image.image.fitted.url +'"><img crossorigin= "" src="'+ value.image.image.thumb.url +'"></div>')
+      $(".bg-holder.active").append('<div id="bg_image_'+ index +'" class="background-image" data-fitted= "'+ value.image.image.fitted.url +'" data-tiny= "'+ value.image.image.fitted.url +'"><img crossorigin= "" src="'+ value.image.image.thumb.url +'"></div>')
     });
   })
   .fail(function() {
