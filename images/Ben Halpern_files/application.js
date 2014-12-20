@@ -25,14 +25,7 @@ $(document).ready(function(){
 
   //events
   $( "body" ).delegate( ".image", "click", function() {
-    var myImage = new Image();
-    myImage.crossOrigin = ""
-    console.log($(this).data('fitted'))
-    $(myImage).one("load", function() {
-      drawImage(stage,myImage,$(this).data("character"));
-      console.log("image loaded")
-    }).attr("src", $(this).data('fitted'));
-
+    drawImage(stage,this,$(this).data("character"));
     comicName = comicName + "_" + $(this).data("character")
     comicTitle = comicTitle + " " + $(this).data("character")
   })
@@ -52,7 +45,6 @@ $(document).ready(function(){
   })
 
   $( "body" ).delegate( ".background-image", "click", function() {
-    var myImage = new Image(), thisBg = $(this);
     comicTitle = $("#collections option:selected").text() + " Comic:"
     $(".bg-holder.active").hide();
     $('.tv').removeClass("active")
@@ -65,16 +57,8 @@ $(document).ready(function(){
       $(".add-scene").animate({"opacity":"1"},400);
     },200)
     stage = stages[$('.tv').index($('.tv.active'))]
-
-    myImage.crossOrigin = ""
     drawBackground(stage,$("img",this)[0]);
-    setTimeout(function(){
-      $(myImage).one("load", function() {
-        drawBackground(stage,myImage);
-        console.log("image loaded")
-      }).attr("src", thisBg.data('fitted'));
 
-    },70)
   })
 
   $( "body" ).delegate( ".add-scene", "click", function() {
@@ -233,9 +217,10 @@ function drawImage(stage,imageObj,character){
   var layer = new Kinetic.Layer();
 
 
+  //bart
   var group = new Kinetic.Group({
-    x: 200,
-    y: 10,
+    x: 110,
+    y: 180,
     draggable: true
   });
 
@@ -744,7 +729,7 @@ function loadBackgrounds(id){
   .done(function(data) {
     $(".loading-image").remove("")
     $.each(data, function( index, value ) {
-      $(".bg-holder.active").append('<div class="background-image" data-fitted= "'+ value.image.image.fitted.url +'"><img crossorigin= "" src="'+ value.image.image.thumb.url +'"></div>')
+      $(".bg-holder.active").append('<div class="background-image"><img crossorigin= "" src="'+ value.image.image.url +'"></div>')
     });
   })
   .fail(function() {
@@ -780,7 +765,7 @@ function loadPoses(id,characterName){
     }
 
     $.each(data, function( index, value ) {
-      $('#poses').append('<li><img crossorigin  data-fitted= "'+ value.image.image.fitted.url +'" class="image" src="'+ value.image.image.thumb.url +'" data-character="'+ characterName +'"></li>')
+      $('#poses').append('<li><img crossorigin class="image" src="'+ value.image.image.url +'" data-character="'+ characterName +'"></li>')
     });
   })
   .fail(function() {

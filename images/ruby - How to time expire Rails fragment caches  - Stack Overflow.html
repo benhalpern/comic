@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<!-- saved from url=(0083)http://stackoverflow.com/questions/7491290/how-to-time-expire-rails-fragment-caches -->
+<html itemscope="" itemtype="http://schema.org/QAPage"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>ruby - How to time expire Rails fragment caches? - Stack Overflow</title>
+    <link rel="shortcut icon" href="http://cdn.sstatic.net/stackoverflow/img/favicon.ico?v=038622610830">
+    <link rel="apple-touch-icon image_src" href="http://cdn.sstatic.net/stackoverflow/img/apple-touch-icon.png?v=fd7230a85918">
+    <link rel="search" type="application/opensearchdescription+xml" title="Stack Overflow" href="http://stackoverflow.com/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:domain" content="stackoverflow.com">
+    <meta property="og:type" content="website">
+    <meta property="og:image" itemprop="image primaryImageOfPage" content="http://cdn.sstatic.net/stackoverflow/img/apple-touch-icon@2.png?v=fde65a5a78c6">
+    <meta name="twitter:title" property="og:title" itemprop="title name" content="How to time expire Rails fragment caches?">
+    <meta name="twitter:description" property="og:description" itemprop="description" content="How would I go about expiring a fragment cache after a period of time. I came across references to a timed_fragment_cache gem, but it seems out-dated. 
+">
+    <meta property="og:url" content="http://stackoverflow.com/questions/7491290/how-to-time-expire-rails-fragment-caches">
+    <link rel="canonical" href="./ruby - How to time expire Rails fragment caches  - Stack Overflow_files/ruby - How to time expire Rails fragment caches  - Stack Overflow.html">
+
+    
+    
+    <script async="" src="./ruby - How to time expire Rails fragment caches  - Stack Overflow_files/quant.js"></script><script async="" src="./ruby - How to time expire Rails fragment caches  - Stack Overflow_files/beacon.js"></script><script async="" src="./ruby - How to time expire Rails fragment caches  - Stack Overflow_files/analytics.js"></script><script type="text/javascript" async="" src="http://static.adzerk.net/ados.js"></script><script src="./ruby - How to time expire Rails fragment caches  - Stack Overflow_files/jquery.min.js"></script>
+    <script src="./ruby - How to time expire Rails fragment caches  - Stack Overflow_files/stub.en.js"></script>
+    <link rel="stylesheet" type="text/css" href="./ruby - How to time expire Rails fragment caches  - Stack Overflow_files/all.css">
+    
+    <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;How to time expire Rails fragment caches?&#39;" href="http://stackoverflow.com/feeds/question/7491290">
+    <meta name="twitter:app:country" content="US">
+    <meta name="twitter:app:name:iphone" content="Stack Exchange iOS">
+    <meta name="twitter:app:id:iphone" content="871299723">
+    <meta name="twitter:app:url:iphone" content="se-zaphod://stackoverflow.com/questions/7491290/how-to-time-expire-rails-fragment-caches">
+    <meta name="twitter:app:name:ipad" content="Stack Exchange iOS">
+    <meta name="twitter:app:id:ipad" content="871299723">
+    <meta name="twitter:app:url:ipad" content="se-zaphod://stackoverflow.com/questions/7491290/how-to-time-expire-rails-fragment-caches">
+    <meta name="twitter:app:name:googleplay" content="Stack Exchange Android">
+    <meta name="twitter:app:url:googleplay" content="http://stackoverflow.com/questions/7491290/how-to-time-expire-rails-fragment-caches">
+    <meta name="twitter:app:id:googleplay" content="com.stackexchange.marvin">
+    <script>
+        
+        StackExchange.ready(function () {
+                
+                StackExchange.using("snippets", function () {
+                    StackExchange.snippets.initSnippetRenderer();
+                });
+                
+
+            StackExchange.using("postValidation", function () {
+                StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+            });
+
+            
+            StackExchange.question.init({canOpenBounty:true,votesCast:[],totalCommentCount:0,shownCommentCount:0,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:7491290});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('1', '7491290');
+            
+                    });
+    </script>
+
+            <script>
+                StackExchange.ready(function () {
+                    try {
+                        if (!document.createElementNS('http://www.w3.org/2000/svg', "svg").createSVGTransform)
+                            return;
+                    } catch (ex) {
+                        return;
+                    }
+                    var d = 100;
+                    $.ajax({url:"//cdn-prom.sstatic.net/WinterBash/js/core.js?v=24",cache:true,dataType:"script"}).done(function tryInit() {
+                        if (window.WinterBash) {
+                            WinterBash.core.init('winterbash2014.stackexchange.com', '//cdn-prom.sstatic.net/WinterBash/');
+                        } else {
+                            if (d <= 800)
+                                setTimeout(tryInit, d);
+                            d *= 2;
+                        }
+                    });
+                });
+            </script>
+
+    <script>
+        StackExchange.ready(function () {
+            StackExchange.realtime.init('wss://qa.sockets.stackexchange.com,ws://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToInboxNotifications();
+                    StackExchange.realtime.subscribeToReputationNotifications('1');
+                StackExchange.realtime.subscribeToTopBarNotifications('1');
+        });
+    </script>
+    <script>
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1419009266,"networkMetaHostname":"meta.stackexchange.com","routeName":"Questions/Show","styleCode":true,"enableUserHovercards":true,"snippets":{"enabled":true,"domain":"stacksnippets.net"},"site":{"name":"Stack Overflow","description":"Q&A for professional and enthusiast programmers","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdchgIAAAAAAJwGpIzRQSOFaO0pU6s44Xt8aTwc","recaptchaAudioLang":"en","enableNewTagCreationWarning":true,"nonAsciiTags":true,"enableSocialMediaInSharePopup":true},"user":{"fkey":"d75a80833917e9b40a5656e79786c8ce","isRegistered":true,"userType":3,"userId":1884428,"accountId":2121238,"gravatar":"<div class=\"gravatar-wrapper-32\"><img src=\"http://i.stack.imgur.com/Xlvpk.jpg?s=32&g=1\" alt=\"\" width=\"32\" height=\"32\"></div>","profileUrl":"http://stackoverflow.com/users/1884428/spitfire109","notificationsUnviewedCount":0,"inboxUnviewedCount":0,"ab":{"search_improvements":{"v":"experiment_8","g":1}}}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"042aec21ca3a","js/moderator.en.js":"7ae78f8d46ec","js/full-anon.en.js":"28b8bceed753","js/full.en.js":"40eb3d3d2fbf","js/wmd.en.js":"4d7d9894b9c0","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"1871f23e40dd","js/help.en.js":"637a173e1aa4","js/tageditor.en.js":"9c54855bf167","js/tageditornew.en.js":"970eaf82315f","js/inline-tag-editing.en.js":"48f13b102998","js/revisions.en.js":"8e050c5bb5cd","js/review.en.js":"53c4e909368a","js/tagsuggestions.en.js":"d1ff9b84abe5","js/post-validation.en.js":"87fd09adbf17","js/explore-qlist.en.js":"257ba4cb7b04","js/events.en.js":"d686dade59a0","js/keyboard-shortcuts.en.js":"663194b5d64d","js/external-editor.en.js":"49dac339584c","js/external-editor.en.js":"49dac339584c","js/snippet-javascript.en.js":"00dd61e74dcb","js/snippet-javascript-codemirror.en.js":"98a626b5b35a"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+    </script>
+    
+    
+    
+<script async="" src="./ruby - How to time expire Rails fragment caches  - Stack Overflow_files/full.en.js"></script><script async="" src="./ruby - How to time expire Rails fragment caches  - Stack Overflow_files/snippet-javascript.en.js"></script><script async="" src="./ruby - How to time expire Rails fragment caches  - Stack Overflow_files/post-validation.en.js"></script><script async="" src="./ruby - How to time expire Rails fragment caches  - Stack Overflow_files/prettify-full.en.js"></script><script async="" src="./ruby - How to time expire Rails fragment caches  - Stack Overflow_files/external-editor.en.js"></script><script async="" src="./ruby - How to time expire Rails fragment caches  - Stack Overflow_files/wmd.en.js"></script><link rel="stylesheet" type="text/css" href="./ruby - How to time expire Rails fragment caches  - Stack Overflow_files/wb-include.css"><style type="text/css"> .wmd-snippet-button span { background-position: 0 0; } .wmd-snippet-button:hover span { background-position: 0 -40px; }</style></head>
+<body class="question-page new-topbar">
+    <noscript>&lt;div id="noscript-padding"&gt;&lt;/div&gt;</noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+
+
+
+
+<div class="topbar">
+    <div class="topbar-wrapper">
+
+        <div class="js-topbar-dialog-corral">
+
+<div class="topbar-dialog siteSwitcher-dialog dno">
+    <div class="header">
+        <h3><a href="http://stackoverflow.com/">current community</a></h3>
+    </div>
+    <div class="modal-content current-site-container">
+        <ul class="current-site">
+                <li>
+                        <div class="related-links">
+            <a href="http://chat.stackoverflow.com/" class="js-gps-track" data-gps-track="site_switcher.click({ item_type:6 })">chat</a>
+                    <a href="http://blog.stackoverflow.com/" class="js-gps-track" data-gps-track="site_switcher.click({ item_type:7 })">blog</a>
+                    <a href="http://stackoverflow.com/users/logout" class="js-gps-track" data-gps-track="site_switcher.click({ item_type:8 })">log out</a>
+    </div>
+
+
+
+
+    <a href="http://stackoverflow.com/" class="current-site-link site-link js-gps-track" data-id="1" data-gps-track="
+        site_switcher.click({ item_type:3 })">
+        <div class="site-icon favicon favicon-stackoverflow" title="Stack Overflow"></div>
+        Stack Overflow
+    </a>
+
+                </li>
+                <li class="related-site">
+                        <div class="L-shaped-icon-container">
+        <span class="L-shaped-icon"></span>
+    </div>
+
+                    
+
+
+
+    <a href="http://meta.stackoverflow.com/" class="site-link js-gps-track" data-id="552" data-gps-track="
+            site.switch({ target_site:552, item_type:3 }),
+        site_switcher.click({ item_type:4 })">
+        <div class="site-icon favicon favicon-stackoverflowmeta" title="Meta Stack Overflow"></div>
+        Meta Stack Overflow
+    </a>
+
+                </li>
+                            <li class="related-site">
+                        <div class="L-shaped-icon-container">
+        <span class="L-shaped-icon"></span>
+    </div>
+
+                    <a class="site-link js-gps-track" href="http://careers.stackoverflow.com/?utm_source=stackoverflow.com&utm_medium=site-ui&utm_campaign=multicollider" data-gps-track="site_switcher.click({ item_type:9 })">
+                        <div class="site-icon favicon favicon-careers" title="Stack Overflow Careers"></div>
+                        Stack Overflow Careers
+                    </a>
+                </li>
+        </ul>
+    </div>
+    
+    <div class="header" id="your-communities-header">
+        <h3>
+                <a href="http://stackexchange.com/users/2121238/?tab=accounts">your communities</a>
+        </h3>
+            
+            <a href="http://stackoverflow.com/questions/7491290/how-to-time-expire-rails-fragment-caches#" id="edit-pinned-sites">edit</a>
+            <a href="http://stackoverflow.com/questions/7491290/how-to-time-expire-rails-fragment-caches#" id="cancel-pinned-sites" style="display: none;">cancel</a>
+    </div>
+    <div class="modal-content" id="your-communities-section">
+            
+            <ul class="my-sites">
+                    <li>
+                        
+
+
+
+    <a href="http://stackoverflow.com/" class="site-link js-gps-track" data-id="1" data-gps-track="
+            site.switch({ target_site:1, item_type:3 }),
+        site_switcher.click({ item_type:1 })">
+        <div class="site-icon favicon favicon-stackoverflow" title="Stack Overflow"></div>
+        Stack Overflow
+            <span class="rep-score">237</span>
+    </a>
+
+                    </li>
+            </ul>
+                <div class="pinned-site-editor-container" style="display: none;">
+                    <input id="js-site-search-txt" type="text" class="site-filter-input" value="" placeholder="Add a Stack Exchange community">
+                    <input type="submit" id="pin-site-btn" value="Add" disabled="disabled">
+                    <ul class="js-found-sites found-sites"></ul>
+                    <ul class="pinned-site-list sortable" data-custom-list="False">
+                    </ul>
+                    <input type="submit" value="Save" id="save-pinned-sites-btn" disabled="disabled">
+                    <a href="http://stackoverflow.com/questions/7491290/how-to-time-expire-rails-fragment-caches#" id="reset-pinned-sites">reset to default list</a>
+                </div>
+    </div>
+    
+    <div class="header">
+        <h3><a href="http://stackexchange.com/sites">more stack exchange communities</a></h3>
+    </div>
+    <div class="modal-content">
+            <div class="child-content"></div>
+    </div>
+</div>
+        </div>
+
+        <div class="network-items">
+
+            <a href="http://stackexchange.com/" class="topbar-icon icon-site-switcher yes-hover js-site-switcher-button js-gps-track" data-gps-track="site_switcher.show" title="A list of all 133 Stack Exchange sites">
+                <span class="hidden-text">Stack Exchange</span>
+            </a>
+
+                <a href="http://stackoverflow.com/questions/7491290/how-to-time-expire-rails-fragment-caches#" class="topbar-icon icon-inbox yes-hover js-inbox-button" title="Recent inbox messages">
+                    <span class="hidden-text">Inbox</span>
+                    <span class="unread-count" style="display:none"></span>
+                </a>
+                <a href="http://stackoverflow.com/questions/7491290/how-to-time-expire-rails-fragment-caches#" class="topbar-icon icon-achievements yes-hover js-achievements-button icon-achievements-unread" data-unread-class="icon-achievements-unread" title="You have new reputation changes">
+                    <span class="hidden-text">Reputation and Badges</span>
+                    <span class="unread-count" style="">
+                        +44
+                    </span>
+                </a>
+        <a href="http://stackoverflow.com/questions/7491290/how-to-time-expire-rails-fragment-caches#" class="topbar-icon yes-hover icon-winterbash"><span class="wb-unread-count">5</span></a></div>
+
+        <div class="topbar-links">
+
+                <a href="http://stackoverflow.com/users/1884428/spitfire109" class="profile-me js-gps-track" data-gps-track="profile_summary.click()">
+                    <div class="gravatar-wrapper-24" title="spitfire109"><img src="./ruby - How to time expire Rails fragment caches  - Stack Overflow_files/Xlvpk.jpg" alt="" width="24" height="24" class="avatar-me js-avatar-me"></div>
+                    <div class="links-container topbar-flair">
+
+                        <span class="reputation" title="your reputation: 237">
+                            237
+                        </span>
+<span title="3 silver badges"><span class="badge2"></span><span class="badgecount">3</span></span><span title="12 bronze badges"><span class="badge3"></span><span class="badgecount">12</span></span>                    </div>
+                </a>
+                <div class="links-container">
+                    <span class="topbar-menu-links">
+
+
+
+
+    <a href="http://stackoverflow.com/questions/7491290/how-to-time-expire-rails-fragment-caches#" class="icon-help js-help-button" title="Help Center and other resources">
+        help
+        <span class="triangle"></span>
+    </a>
+    <div class="topbar-dialog help-dialog js-help-dialog dno">
+        <div class="modal-content">
+            <ul>
+                                    <li>
+                        <a href="http://stackoverflow.com/tour" class="js-gps-track" data-gps-track="help_popup.click({ item_type:1 })">
+                            Tour
+                            <span class="item-summary">
+                                Start here for a quick overview of the site
+                            </span>
+                        </a>
+                    </li>
+                <li>
+                    <a href="http://stackoverflow.com/help" class="js-gps-track" data-gps-track="help_popup.click({ item_type:4 })">
+                        Help Center
+                        <span class="item-summary">
+                            Detailed answers to any questions you might have
+                        </span>
+                    </a>
+                </li>
+                    <li>
+                        <a href="http://meta.stackoverflow.com/" class="js-gps-track" data-gps-track="help_popup.click({ item_type:2 })">
+                            Meta
+                            <span class="item-summary">
+                                Discuss the workings and policies of this site
+                            </span>
+                        </a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+
+                    </span>
+                </div>
+
+            <div class="search-container">
+                <form id="search" action="http://stackoverflow.com/search" method="get" autocomplete="off">
+                    <input name="q" type="text" placeholder="search" value="" tabindex="1" autocomplete="off" maxlength="240">
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+    <script>
+        StackExchange.ready(function() { StackExchange.topbar.init(); });
+    </script>
+
+    <div class="container">
+        <div id="header">
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="http://stackoverflow.com/">
+                    Stack Overflow
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs">
+                    <ul>
+                        <li class="youarehere"><a id="nav-questions" href="http://stackoverflow.com/questions">Questions</a></li>
+                        <li><a id="nav-tags" href="http://stackoverflow.com/tags">Tags</a></li>
+                        <li><a id="nav-users" href="http://stackoverflow.com/users">Users</a></li>
+                        <li><a id="nav-badges" href="http://stackoverflow.com/help/badges">Badges</a></li>
+                        <li><a id="nav-unanswered" href="http://stackoverflow.com/unanswered">Unanswered</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion" href="http://stackoverflow.com/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content" class="snippet-hidden">
+            
+
+<div itemscope="" itemtype="http://schema.org/Question">
+	<link itemprop="image" href="http://cdn.sstatic.net/stackoverflow/img/apple-touch-icon.png">
+			<div id="question-header">
+			<h1 itemprop="name"><a href="./ruby - How to time expire Rails fragment caches  - Stack Overflow_files/ruby - How to time expire Rails fragment caches  - Stack Overflow.html" class="question-hyperlink">How to time expire Rails fragment caches?</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="7491290" id="question">
+
+        <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="7491290">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+    <span itemprop="upvoteCount" class="vote-count-post ">10</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+    
+    <a class="star-off" href="http://stackoverflow.com/questions/7491290/how-to-time-expire-rails-fragment-caches#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b>4</b></div>   
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="text">
+
+        <p>How would I go about expiring a fragment cache after a period of time. I came across references to a <code>timed_fragment_cache</code> gem, but it seems out-dated. </p>
+
+    </div>
+    <div class="post-taglist">
+        <a href="http://stackoverflow.com/questions/tagged/ruby-on-rails" class="post-tag js-gps-track" title="show questions tagged &#39;ruby-on-rails&#39;" rel="tag">ruby-on-rails</a> <a href="http://stackoverflow.com/questions/tagged/ruby" class="post-tag js-gps-track" title="show questions tagged &#39;ruby&#39;" rel="tag">ruby</a> 
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/q/7491290/1884428" title="short permalink to this question" class="short-link" id="link-post-7491290">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/7491290/edit" class="suggest-edit-post" title="revise and improve this post">edit</a><span class="lsep">|</span><a href="http://stackoverflow.com/questions/7491290/how-to-time-expire-rails-fragment-caches#" class="flag-post-link" title="flag this post for serious problems or moderator attention" data-postid="7491290">flag</a></div>        
+    </td>
+    <td class="post-signature owner">
+        <div class="user-info ">
+    <div class="user-action-time">
+        asked <span title="2011-09-20 20:18:59Z" class="relativetime">Sep 20 '11 at 20:18</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/678350/matt-fordham"><div class="gravatar-wrapper-32"><img src="./ruby - How to time expire Rails fragment caches  - Stack Overflow_files/cd9764f01f1237c5843b36162104056a" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/678350/matt-fordham">Matt Fordham</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">914</span><span title="3 gold badges"><span class="badge1"></span><span class="badgecount">3</span></span><span title="18 silver badges"><span class="badge2"></span><span class="badgecount">18</span></span><span title="34 bronze badges"><span class="badge3"></span><span class="badgecount">34</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</div>
+</td>
+        </tr>
+                
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-7491290" class="comments  dno">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="true" data-cansee="false" data-comments-unavailable="false" data-addlink-disabled="false">
+
+                        <tr><td></td><td></td></tr>
+                </tbody>
+				    <tfoot>
+					    <tr>
+						    <td></td>
+						    <td class="comment-form">
+							    <form id="add-comment-7491290" class="" data-placeholdertext="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments."></form>
+						    </td>
+					    </tr>
+				    </tfoot>
+		    </table>
+	    </div>
+            <div id="comments-link-7491290">
+
+                <a class="js-add-link comments-link " title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments." href="http://stackoverflow.com/questions/7491290/how-to-time-expire-rails-fragment-caches#">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span><a class="js-show-link comments-link dno" title="expand to show all comments on this post, or add one of your own" href="http://stackoverflow.com/questions/7491290/how-to-time-expire-rails-fragment-caches#" onclick=""></a>
+            </div>
+    </td>
+</tr>              <tr class="bounty-notification">
+          <td class="votecell"></td>
+          <td>
+          <div style="margin-top:20px">
+            <a class="bounty-link bounty" title="offer some of your reputation for better answers">
+                start a bounty
+            </a>
+          </div>
+          </td>
+          </tr>
+    </tbody></table>
+</div>
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								1 Answer
+                                <span style="display:none;" itemprop="answerCount">1</span>
+						</h2>
+						<div>
+							<div id="tabs">
+        <a class="youarehere" href="http://stackoverflow.com/questions/7491290/how-to-time-expire-rails-fragment-caches?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+        <a href="http://stackoverflow.com/questions/7491290/how-to-time-expire-rails-fragment-caches?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+        <a href="http://stackoverflow.com/questions/7491290/how-to-time-expire-rails-fragment-caches?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="7491331"></a>
+<div id="answer-7491331" class="answer accepted-answer" data-answerid="7491331" itemscope="" itemtype="http://schema.org/Answer" itemprop="acceptedAnswer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="7491331">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span itemprop="upvoteCount" class="vote-count-post ">43</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+        <span class="vote-accepted-on load-accepted-answer-date" title="loading when this answer was accepted...">accepted</span>
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>Using <a href="http://guides.rubyonrails.org/caching_with_rails.html#activesupport-cache-store"><code>ActiveSupport::Cache::Store</code></a>, you should be able to do</p>
+
+<pre class="lang-rb prettyprint prettyprinted"><code><span class="pun">&lt;%</span><span class="pln"> cache</span><span class="pun">(</span><span class="pln">key</span><span class="pun">,</span><span class="pln"> </span><span class="pun">:</span><span class="pln">expires_in </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="lit">1.hour</span><span class="pun">)</span><span class="pln"> </span><span class="kwd">do</span><span class="pln"> </span><span class="pun">%&gt;</span><span class="pln">
+   </span><span class="pun">&lt;!--</span><span class="pln"> content </span><span class="pun">--&gt;</span><span class="pln">
+</span><span class="pun">&lt;%</span><span class="pln"> </span><span class="kwd">end</span><span class="pln"> </span><span class="pun">%&gt;</span></code></pre>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/7491331/1884428" title="short permalink to this answer" class="short-link" id="link-post-7491331">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/7491331/edit" class="suggest-edit-post" title="revise and improve this post">edit</a><span class="lsep">|</span><a href="http://stackoverflow.com/questions/7491290/how-to-time-expire-rails-fragment-caches#" class="flag-post-link" title="flag this post for serious problems or moderator attention" data-postid="7491331">flag</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2011-09-20 20:23:25Z" class="relativetime">Sep 20 '11 at 20:23</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/596068/alex"><div class="gravatar-wrapper-32"><img src="./ruby - How to time expire Rails fragment caches  - Stack Overflow_files/6d2de89487f78c4d7ad1f67db0930cde" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/596068/alex">Alex</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">5,972</span><span title="1 gold badge"><span class="badge1"></span><span class="badgecount">1</span></span><span title="16 silver badges"><span class="badge2"></span><span class="badgecount">16</span></span><span title="32 bronze badges"><span class="badge3"></span><span class="badgecount">32</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-7491331" class="comments ">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="true" data-cansee="false" data-comments-unavailable="false" data-addlink-disabled="false">
+
+
+
+    <tr id="comment-9068862" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                <a class="comment-up comment-up-off" title="this comment adds something useful to the post">upvote</a>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                                <td>
+                                    <a class="comment-flag" title="Flag this comment for serious problems or moderator attention">flag</a>
+                                </td>
+                        </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Excellent, thanks!</span>
+                –&nbsp;
+                    <a href="http://stackoverflow.com/users/678350/matt-fordham" title="914 reputation" class="comment-user owner">Matt Fordham</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/7491290/how-to-time-expire-rails-fragment-caches#comment9068862_7491331"><span title="2011-09-20 20:46:48Z" class="relativetime-clean">Sep 20 '11 at 20:46</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+                </tbody>
+				    <tfoot>
+					    <tr>
+						    <td></td>
+						    <td class="comment-form">
+							    <form id="add-comment-7491331" class="" data-placeholdertext="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></form>
+						    </td>
+					    </tr>
+				    </tfoot>
+		    </table>
+	    </div>
+            <div id="comments-link-7491331">
+
+                <a class="js-add-link comments-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." href="http://stackoverflow.com/questions/7491290/how-to-time-expire-rails-fragment-caches#">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span><a class="js-show-link comments-link dno" title="expand to show all comments on this post, or add one of your own" href="http://stackoverflow.com/questions/7491290/how-to-time-expire-rails-fragment-caches#" onclick=""></a>
+            </div>
+    </td>
+</tr>    </tbody></table>
+</div>
+									<a name="new-answer"></a>
+						<form id="post-form" action="http://stackoverflow.com/questions/7491290/answer/submit" method="post" class="post-form">
+						    <input type="hidden" id="post-id" value="7491290">
+                            <input type="hidden" id="qualityBanWarningShown" name="qualityBanWarningShown" value="false">
+                            <input type="hidden" name="referrer" value="https://www.google.com/">
+							<h2 class="space">Your Answer</h2>
+
+
+
+            <script>
+            StackExchange.ifUsing("editor", function () {
+                StackExchange.using("externalEditor", function () {
+                    StackExchange.using("snippets", function () {
+                        StackExchange.snippets.init();
+                    });
+                });
+            }, "code-snippets");
+        </script>
+    
+
+<script>
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+       
+        StackExchange.using("externalEditor", function() {
+            // Have to fire editor after snippets, if snippets enabled
+            if (StackExchange.options.snippets.enabled) {
+                StackExchange.using("snippets", function() {
+                    createEditor();
+                });
+            }
+            else {
+                createEditor();
+            }
+        });
+
+        function createEditor() {
+            prepareEditor({
+                heartbeatType: 'answer',
+                bindNavPrevention: true,
+                postfix: "",
+                    onDemand: false,
+                    discardSelector: ".discard-answer"
+                
+                });
+                
+
+        }
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"><ul id="wmd-button-row" class="wmd-button-row"><li class="wmd-button" id="wmd-bold-button" title="Strong &lt;strong&gt; Ctrl+B" style="left: 0px;"><span style="background-position: 0px 0px;"></span></li><li class="wmd-button" id="wmd-italic-button" title="Emphasis &lt;em&gt; Ctrl+I" style="left: 25px;"><span style="background-position: -20px 0px;"></span></li><li class="wmd-spacer wmd-spacer1" id="wmd-spacer1"></li><li class="wmd-button" id="wmd-link-button" title="Hyperlink &lt;a&gt; Ctrl+L" style="left: 75px;"><span style="background-position: -40px 0px;"></span></li><li class="wmd-button" id="wmd-quote-button" title="Blockquote &lt;blockquote&gt; Ctrl+Q" style="left: 100px;"><span style="background-position: -60px 0px;"></span></li><li class="wmd-button" id="wmd-code-button" title="Code Sample &lt;pre&gt;&lt;code&gt; Ctrl+K" style="left: 125px;"><span style="background-position: -80px 0px;"></span></li><li class="wmd-button" id="wmd-image-button" title="Image &lt;img&gt; Ctrl+G" style="left: 150px;"><span style="background-position: -100px 0px;"></span></li><li class="wmd-button wmd-snippet-button" style="left:175px" id="wmd-snippet-button" title="Code snippet Ctrl-M"><span style="background-image: url(http://stackoverflow.com/content/balsamiq/wmd-mockup-button.png?v=4);"></span></li><li class="wmd-spacer wmd-spacer2" id="wmd-spacer2" style="left: 200px;"></li><li class="wmd-button" id="wmd-olist-button" title="Numbered List &lt;ol&gt; Ctrl+O" style="left: 225px;"><span style="background-position: -120px 0px;"></span></li><li class="wmd-button" id="wmd-ulist-button" title="Bulleted List &lt;ul&gt; Ctrl+U" style="left: 250px;"><span style="background-position: -140px 0px;"></span></li><li class="wmd-button" id="wmd-heading-button" title="Heading &lt;h1&gt;/&lt;h2&gt; Ctrl+H" style="left: 275px;"><span style="background-position: -160px 0px;"></span></li><li class="wmd-button" id="wmd-hr-button" title="Horizontal Rule &lt;hr&gt; Ctrl+R" style="left: 300px;"><span style="background-position: -180px 0px;"></span></li><li class="wmd-spacer wmd-spacer3" id="wmd-spacer3" style="left: 325px;"></li><li class="wmd-button" id="wmd-undo-button" title="Undo - Ctrl+Z" style="left: 350px;"><span style="background-position: -200px -20px;"></span></li><li class="wmd-button" id="wmd-redo-button" title="Redo - Ctrl+Shift+Z" style="left: 375px;"><span style="background-position: -220px -20px;"></span></li><li class="wmd-button wmd-help-button" id="wmd-help-button" title="Markdown Editing Help" style="right: 0px;"><span style="background-position: -240px 0px;"></span></li></ul></div>
+            <textarea id="wmd-input" class="wmd-input processed" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        <div class="grippie" style="margin-right: -8px;"></div></div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+    <div class="community-option">
+        <input id="communitymode" name="communitymode" type="checkbox">
+        <label for="communitymode" title="Marking an answer community wiki encourages others to edit it by lowering the reputation barrier required to edit. However, you will not gain any upvote reputation from it. This cannot be undone.">community wiki</label>
+    </div>
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="d75a80833917e9b40a5656e79786c8ce">
+        <input id="author" name="author" type="text">
+    </div>
+</div>
+							<div style="position: relative;">
+								
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="http://stackoverflow.com/questions/7491290/how-to-time-expire-rails-fragment-caches#" class="discard-answer dno">discard</a>
+								</div>
+						</form>
+
+
+
+						<h2 class="bottom-notice" data-loc="1">
+Not the answer you're looking for?							Browse other questions tagged <a href="http://stackoverflow.com/questions/tagged/ruby-on-rails" class="post-tag" title="show questions tagged &#39;ruby-on-rails&#39;" rel="tag">ruby-on-rails</a> <a href="http://stackoverflow.com/questions/tagged/ruby" class="post-tag" title="show questions tagged &#39;ruby&#39;" rel="tag">ruby</a>  or <a href="http://stackoverflow.com/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+						    <div class="module question-stats">
+			        <table id="qinfo">
+			            <tbody><tr>
+			                <td>
+			                    <p class="label-key">asked</p>
+			                </td>
+			                <td style="padding-left: 10px">
+			                    <p class="label-key" title="2011-09-20 20:18:59Z"><b>3 years ago</b></p>
+			                </td>
+			            </tr>
+			            <tr>
+			                <td>
+			                    <p class="label-key">viewed</p>
+			                </td>
+
+			                <td style="padding-left: 10px">
+			                    <p class="label-key">
+			                        <b>4493 times</b>
+			                    </p>
+			                </td>
+			            </tr>
+			                <tr>
+			                    <td>
+			                        <p class="label-key">active</p>
+			                    </td>
+			                    <td style="padding-left: 10px">
+			                        <p class="label-key"><b><a href="http://stackoverflow.com/questions/7491290/how-to-time-expire-rails-fragment-caches?lastactivity" class="lastactivity-link" title="2011-09-20 20:23:25Z">3 years ago</a></b></p>
+			                    </td>
+			                </tr>
+			        </tbody></table>
+			    </div>
+			<div class="module community-bulletin" data-tracker="cb=1">
+    <div class="related">
+                <div class="bulletin-title">
+                    Featured on Meta
+                </div>
+                <hr>
+    <div class="spacer">
+        <div class="bulletin-item-type">
+                <a href="http://meta.stackexchange.com/questions/245731/help-us-test-the-stack-exchange-android-tablet-app?cb=1" class="question-hyperlink">
+<div class="favicon favicon-stackexchangemeta" title="Meta Stack Exchange"></div>                </a>
+            </div>
+                <div class="bulletin-item-content">
+                    <a href="http://meta.stackexchange.com/questions/245731/help-us-test-the-stack-exchange-android-tablet-app?cb=1" class="question-hyperlink">Help us test the Stack Exchange Android tablet app</a>
+                </div>
+                <br class="cbt">
+            </div>
+                <div class="bulletin-title">
+                    Hot Meta Posts
+                </div>
+                <hr>
+    <div class="spacer">
+        <div class="bulletin-item-type">
+                <span title="Vote score (upvotes - downvotes)">18</span>
+            </div>
+                <div class="bulletin-item-content">
+                    <a href="http://meta.stackoverflow.com/questions/280672/auto-expire-transitory-comments?cb=1" class="question-hyperlink">Auto-expire transitory comments</a>
+                </div>
+                <br class="cbt">
+            </div>
+    <div class="spacer">
+        <div class="bulletin-item-type">
+                <span title="Vote score (upvotes - downvotes)">3</span>
+            </div>
+                <div class="bulletin-item-content">
+                    <a href="http://meta.stackoverflow.com/questions/280750/why-other-users-dont-see-my-hats?cb=1" class="question-hyperlink">Why other users don't see my hats?</a>
+                </div>
+                <br class="cbt">
+            </div>
+    <div class="spacer">
+        <div class="bulletin-item-type">
+                <span title="Vote score (upvotes - downvotes)">16</span>
+            </div>
+                <div class="bulletin-item-content">
+                    <a href="http://meta.stackoverflow.com/questions/280699/what-to-do-if-you-realize-your-question-is-misunderstood-and-downvoted-too-fast?cb=1" class="question-hyperlink">What to do if you realize your question is misunderstood and downvoted too fa…</a>
+                </div>
+                <br class="cbt">
+            </div>
+    </div>
+</div>			
+			<script>
+                var ados = ados || {};ados.run = ados.run || [];
+                ados.run.push(function() { ados_add_placement(22,8277,"adzerk978639520",[17,2221]).setZone(45) ; });                    
+            </script>
+            <div class="everyonelovesstackoverflow" id="adzerk978639520">
+            </div>  
+        <div id="hireme">
+            <script>
+;(function(d,g){var h=document;var a=window.$;var p=100;var c;var k=location.hash.indexOf("#large")>-1;var q="#sidebar [id^='adzerk'].everyonelovesstackoverflow";var l="#adzerk1";var b="div#hireme, div.hireme";function m(){var u={};if(!location.hash){return u}var s=location.hash.substr(1);var v=/([^&=]+)=([^&=]+)/g;var t;while(t=v.exec(s)){u[t[1].toLowerCase()]=t[2]}return u}function i(s){return a(s).html().replace(/\s+/g,"").length>0}function r(t){var s=a(q);if(s.length===0){return true}return !i(s)}function n(){var u=a(b);if(u.length>0){var v=a.map(u,function(s){return"d="+s.id});var x=h.createElement("script");x.type="text/javascript";x.src=d+(d.indexOf("?")===-1?"?":"&")+v.join("&");if(k||f()){x.src+="&l=1"}if(location.hash){x.src+="&"+location.hash.replace(/^#/,"")}if(g){x.src+="&background=true"}var w=m();var t;if(StackExchange&&StackExchange.options&&StackExchange.options.user&&StackExchange.options.user.accountId){t=StackExchange.options.user.accountId}if(w.accountid){t=w.accountid}if(t){x.src+="&ac="+t}if(w.engine){x.src+="&eng="+w.engine}h.body.appendChild(x)}}function f(){return a("#careersadsdoublehigh").length>0}function e(){return a("#commdoubhi").length>0}function o(){clearTimeout(c);if(r(l)||r(q)){c=setTimeout(o,p);return}var s=location.hash.indexOf("#abort")!==-1||e();if(s){j();return}n()}function j(){clearTimeout(c);if(g){return}var s=a(b);s.each(function(){var t=a(this);if(!i(t)){var v=t;var u=t.parents(".everyonelovesstackoverflow").first();if(u.length>0){v=u}v.remove()}})}setTimeout(j,2000);c=setTimeout(o,p)}).apply(null, ["//clc.stackoverflow.com/j/p",false]);            </script>
+            
+        </div>
+			  
+    
+            
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+                    <div class="related js-gps-related-questions" data-tracker="rq=1">
+                        <div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/896509?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">1
+    </div>
+</a><a href="http://stackoverflow.com/questions/896509/rails-fragment-cache-not-expiring?rq=1" class="question-hyperlink">Rails - fragment cache not expiring</a>
+</div>
+<div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/2295137?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">1
+    </div>
+</a><a href="http://stackoverflow.com/questions/2295137/rails-2-3-caching-by-time?rq=1" class="question-hyperlink">Rails 2.3 caching by time</a>
+</div>
+<div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/5180603?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="http://stackoverflow.com/questions/5180603/ruby-on-rails-cache-is-it-possible-to-increase-the-expiration-time-for-a-cache?rq=1" class="question-hyperlink">Ruby on Rails cache: Is it possible to increase the expiration time for a cache fragment during the execution time?</a>
+</div>
+<div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/5598136?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="http://stackoverflow.com/questions/5598136/rails-3-and-memcached-intelligent-caching-without-expiration?rq=1" class="question-hyperlink">Rails 3 and Memcached - Intelligent caching without expiration</a>
+</div>
+<div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/7302498?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">1
+    </div>
+</a><a href="http://stackoverflow.com/questions/7302498/time-based-expiration-of-cache-in-rails?rq=1" class="question-hyperlink">time-based expiration of cache in Rails?</a>
+</div>
+<div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/8124828?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">3
+    </div>
+</a><a href="http://stackoverflow.com/questions/8124828/testing-fragment-creation-and-expire-fragment-in-rails-3-0-7?rq=1" class="question-hyperlink">Testing fragment creation and expire fragment in Rails (3.0.7)</a>
+</div>
+<div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/8176380?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">0
+    </div>
+</a><a href="http://stackoverflow.com/questions/8176380/how-long-does-the-fragment-cache-in-rail-last?rq=1" class="question-hyperlink">How long does the fragment cache in Rail last?</a>
+</div>
+<div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/10672034?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">6
+    </div>
+</a><a href="http://stackoverflow.com/questions/10672034/how-to-expire-fragment-cache-when-locale-changes?rq=1" class="question-hyperlink">How to expire fragment cache when locale changes?</a>
+</div>
+<div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/17445994?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">13
+    </div>
+</a><a href="http://stackoverflow.com/questions/17445994/rails-4-0-expire-fragment-cache-expiration-not-working?rq=1" class="question-hyperlink">Rails 4.0 expire_fragment/cache expiration not working</a>
+</div>
+<div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/21235072?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">5
+    </div>
+</a><a href="http://stackoverflow.com/questions/21235072/rails-3-file-store-caching-delete-expired-fragments?rq=1" class="question-hyperlink">Rails 3 file_store caching, delete expired fragments</a>
+</div>
+
+                    </div>
+				</div>
+            
+<div id="hot-network-questions" class="module">
+    <h4>
+        <a href="http://stackexchange.com/questions?tab=hot" class="js-gps-track" data-gps-track="posts_hot_network.click({ item_type:1, location:11 })">
+            Hot Network Questions
+        </a>
+    </h4>
+    <ul>
+            <li>
+                <div class="favicon favicon-anime" title="Anime &amp; Manga Stack Exchange"></div><a href="http://anime.stackexchange.com/questions/16882/what-are-the-names-of-these-characters" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:477 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    What are the names of these Characters?
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-outdoors" title="The Great Outdoors Stack Exchange"></div><a href="http://outdoors.stackexchange.com/questions/7406/what-are-safe-effective-leaves-from-around-the-world-for-use-in-tidying-up-your" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:395 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    What are safe/effective leaves from around the world for use in tidying up your backside after answering the call of nature?
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-tridion" title="Tridion Stack Exchange"></div><a href="http://tridion.stackexchange.com/questions/9681/calling-the-load-method-in-anguilla-with-a-callback-for-bookmarklet" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:485 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Calling the load method in Anguilla with a callback for Bookmarklet
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-electronics" title="Electrical Engineering Stack Exchange"></div><a href="http://electronics.stackexchange.com/questions/144569/tri-state-output-to-three-analogue-levels" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:135 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Tri-state output to three analogue levels?
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-ell" title="English Language Learners Stack Exchange"></div><a href="http://ell.stackexchange.com/questions/43461/which-is-thought-too-precious-to-repudiate" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:481 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    which is thought too precious to repudiate
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-academia" title="Academia Stack Exchange"></div><a href="http://academia.stackexchange.com/questions/34547/can-a-discoverer-give-the-name-he-wants-to-his-finding" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:415 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Can a discoverer give the name he wants to his finding?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-scifi" title="Science Fiction &amp; Fantasy Stack Exchange"></div><a href="http://scifi.stackexchange.com/questions/76205/why-did-snape-leave-gryffindors-sword-in-an-icy-lake" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:186 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Why did Snape leave Gryffindor's sword in an icy lake?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-avp" title="Video Production Stack Exchange"></div><a href="http://video.stackexchange.com/questions/13314/d5200-color-levels-change-through-video" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:170 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    D5200 Color levels change through video
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-codereview" title="Code Review Stack Exchange"></div><a href="http://codereview.stackexchange.com/questions/74087/extracting-the-classpath-entries-from-a-jar-files-manifest" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:196 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Extracting the classpath entries from a jar file's manifest
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-math" title="Mathematics Stack Exchange"></div><a href="http://math.stackexchange.com/questions/1074625/quadratic-formula-not-working" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:69 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Quadratic formula not working?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-astronomy" title="Astronomy Stack Exchange"></div><a href="http://astronomy.stackexchange.com/questions/8300/does-the-earth-have-another-moon" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:514 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Does the Earth have another moon?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-biology" title="Biology Stack Exchange"></div><a href="http://biology.stackexchange.com/questions/26046/action-potential-changes-in-low-sodium-concentrations-but-constant-osmotic-press" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:375 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Action potential changes in low sodium concentrations but constant osmotic pressure
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-rpg" title="Role-playing Games Stack Exchange"></div><a href="http://rpg.stackexchange.com/questions/53349/pathfinder-cleric-domain-spell-slot" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:122 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Pathfinder: Cleric Domain Spell Slot
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-serverfault" title="Server Fault"></div><a href="http://serverfault.com/questions/653635/optimize-ssd-storage-on-centos-6-6-kvm" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:2 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Optimize SSD storage on Centos 6.6 - KVM
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-programmers" title="Programmers Stack Exchange"></div><a href="http://programmers.stackexchange.com/questions/266717/are-all-magic-numbers-created-the-same" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:131 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Are all magic numbers created the same?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-english" title="English Language &amp; Usage Stack Exchange"></div><a href="http://english.stackexchange.com/questions/215822/can-artificial-be-used-alone" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:97 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Can 'artificial' be used alone?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-mathoverflow" title="MathOverflow"></div><a href="http://mathoverflow.net/questions/191099/results-about-moduli-of-surfaces" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:504 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Results about moduli of surfaces
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-space" title="Space Exploration Stack Exchange"></div><a href="http://space.stackexchange.com/questions/6482/center-of-mass-location-on-any-popular-rocket-in-any-typical-condition" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:508 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Center of mass location on any popular rocket in any typical condition?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-magento" title="Magento Stack Exchange"></div><a href="http://magento.stackexchange.com/questions/48888/getting-error-in-magneto-2-installation" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:479 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Getting Error in Magneto 2 Installation
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-stackoverflow" title="Stack Overflow"></div><a href="http://stackoverflow.com/questions/27551167/what-is-the-endianness-of-binary-literals-in-c14" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:1 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    What is the endianness of binary literals in C++14?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-scifi" title="Science Fiction &amp; Fantasy Stack Exchange"></div><a href="http://scifi.stackexchange.com/questions/76121/why-did-saruman-seem-to-believe-that-sauron-wouldnt-return" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:186 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Why did Saruman seem to believe that Sauron wouldn't return?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-aviation" title="Aviation Stack Exchange"></div><a href="http://aviation.stackexchange.com/questions/11225/tires-exploding-vs-deflating" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:528 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Tires exploding vs deflating
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-worldbuilding" title="Worldbuilding Stack Exchange"></div><a href="http://worldbuilding.stackexchange.com/questions/6747/a-small-group-recreating-modern-technology" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:579 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    A small group recreating modern technology
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-mathoverflow" title="MathOverflow"></div><a href="http://mathoverflow.net/questions/191120/the-letters-of-the-word-art" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:504 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    The letters of the word "ART"
+                </a>
+
+            </li>
+    </ul>
+
+        <a href="http://stackoverflow.com/questions/7491290/how-to-time-expire-rails-fragment-caches#" class="show-more js-show-more js-gps-track" data-gps-track="posts_hot_network.click({ item_type:3, location:11 })">
+            more hot questions
+        </a>
+</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text">
+        <a href="http://stackoverflow.com/feeds/question/7491290" title="feed of this question and its answers">
+            <span class="feed-icon"></span>question feed
+        </a>
+    </div>
+</div>	<script>
+StackExchange.ready(function(){$.get('/posts/7491290/ivc/bd3a');});
+</script>
+<noscript>
+    &lt;div&gt;&lt;img src="/posts/7491290/ivc/bd3a" class="dno" alt="" width="0" height="0"&gt;&lt;/div&gt;
+</noscript><div style="display:none" id="prettify-lang">lang-rb</div></div>
+
+    <script>
+        $('#wmd-input').one("keypress", function() {
+            $.ajax({
+                url: '/accounts/email-settings-form',
+                cache: false,
+                success: function(data) {
+                    $('#submit-button').parent().prepend(data);
+                }
+            });
+        });
+
+    </script>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="http://stackoverflow.com/tour">tour</a>
+                    <a href="http://stackoverflow.com/help">help</a>
+                    <a href="http://blog.stackoverflow.com/?blb=1">blog</a>
+                        <a href="http://chat.stackoverflow.com/">chat</a>
+                    <a href="http://data.stackexchange.com/">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/work-here">work here</a>
+                    <a href="http://stackexchange.com/mediakit">advertising info</a>
+
+                    <a onclick="StackExchange.switchMobile(&quot;on&quot;)">mobile</a>
+                    <b><a href="http://stackoverflow.com/contact">contact us</a></b>
+                        <b><a href="http://meta.stackoverflow.com/">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tbody><tr>
+            <th colspan="3">
+                Technology
+            </th>
+            <th>
+                Life / Arts
+            </th>
+            <th>
+                Culture / Recreation
+            </th>
+            <th>
+                Science
+            </th>
+            <th>
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com/" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com/" title="professional system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com/" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com/" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com/" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com/" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com/" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com/" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com/" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com/" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com/" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com/" title="WordPress developers and administrators">WordPress Development</a></li>
+                        <li><a href="http://gis.stackexchange.com/" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com/" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com/" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com/" title="Information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com/" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com/" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com/" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com/" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com/" title="users of Mathematica">Mathematica</a></li>
+                        <li><a href="http://salesforce.stackexchange.com/" title="Salesforce administrators, implementation experts, developers and anybody in-between">Salesforce</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com/" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com/" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://graphicdesign.stackexchange.com/" title="Graphic Design professionals, students, and enthusiasts">Graphic Design</a></li>
+                        <li><a href="http://cooking.stackexchange.com/" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com/" title="contractors and serious DIYers">Home Improvement</a></li>
+                        <li><a href="http://money.stackexchange.com/" title="people who want to be financially literate">Personal Finance &amp; Money</a></li>
+                        <li><a href="http://academia.stackexchange.com/" title="academics and those enrolled in higher education">Academia</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (10)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com/" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com/" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com/" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com/" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com/" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com/" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com/" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com/" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com/" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com/" title="people interested in statistics, machine learning, data analysis, data mining, and data visualization">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com/" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com/" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net/" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com/" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackexchange.com/" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Exchange</a></li>
+                        <li><a href="http://area51.stackexchange.com/" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com/?utm_source=stackoverflow.com&utm_medium=site-ui&utm_campaign=footerlink">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</tbody></table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo © 2014 stack exchange inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc by-sa 3.0</a>                   with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="svnrev">
+                rev 2014.12.19.2129
+            </div>
+            
+        </div>
+    </div>
+    <noscript>
+        &lt;div id="noscript-warning"&gt;Stack Overflow works best with JavaScript enabled&lt;img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"&gt;&lt;/div&gt;
+    </noscript>
+<script>var p = "http", d = "static"; if (document.location.protocol == "https:") { p += "s"; d = "engine"; } var z = document.createElement("script"); z.type = "text/javascript"; z.async = true; z.src = p + "://" + d + ".adzerk.net/ados.js"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(z, s);</script>
+<script>
+    var ados = ados || {};
+    ados.run = ados.run || [];
+    ados.run.push(function () { ados_setKeywords('ruby-on-rails,ruby,x-user-registered,x-200plus-rep');; ados_load(); });         
+</script>
+
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () { (i[r].q = i[r].q || []).push(arguments) }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m);
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-5620270-1');        
+        ga('set', 'dimension1', '2121238');         
+        ga('set', 'dimension2', '|ruby-on-rails|ruby|');         
+        ga('send', 'pageview');
+        var _qevents = _qevents || [],
+            _comscore = _comscore || [];
+        (function () {
+            var ssl='https:'==document.location.protocol,
+                s=document.getElementsByTagName('script')[0],
+                qc=document.createElement('script');
+            qc.async=true;
+            qc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+            s.parentNode.insertBefore(qc, s);
+            var sc=document.createElement('script');
+            sc.async=true;
+            sc.src=(ssl?'https://sb':'http://b') + '.scorecardresearch.com/beacon.js';
+            s.parentNode.insertBefore(sc, s);
+        })();
+        _comscore.push({ c1: "2", c2: "17440561" });
+        _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>        
+    
+    
+</body></html>
