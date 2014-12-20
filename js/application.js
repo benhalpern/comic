@@ -379,6 +379,7 @@ function addTextEdit(group,x,y) {
     x: x - 150,
     y: y -101,
     fontFamily: 'Comic Sans MS',
+    fontSize: 20,
     fill: '#000000',
     //text: "placeholder",
     // pasteModal id to support ctrl+v paste.
