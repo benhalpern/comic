@@ -222,5 +222,8 @@ body {
       width: 870px !important; }
     body .right-controls {
       left: 1040px; } }
+  @media screen and (max-height: 700px) {
+    body .container {
+      padding-top: 90px !important; } }
 
 /*# sourceMappingURL=new_style.css.map */

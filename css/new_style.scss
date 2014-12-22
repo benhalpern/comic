@@ -233,7 +233,6 @@ body{
   }
 
   .container{
-    //background:$blue;
     padding-top:130px;
     margin-bottom:60px;
 
@@ -306,7 +305,11 @@ body{
       left:1040px;
     }
   }
-
+  @media screen and ( max-height: 700px ){
+    .container{
+      padding-top:90px !important;
+    }
+  }
 
 
 
