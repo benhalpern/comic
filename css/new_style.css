@@ -159,6 +159,12 @@ body {
           border-bottom: 2px solid #FFD90F; }
           body .controls.right-controls a:not(.explain-link)#uploaded:hover {
             background: #ff431e; }
+        body .controls.right-controls a:not(.explain-link)#reddit {
+          background: #336699;
+          border-bottom: 2px solid #ff5700;
+          display: none; }
+          body .controls.right-controls a:not(.explain-link)#reddit:hover {
+            background: #376ea4; }
     body .controls.left-controls {
       height: 100%;
       width: 160px;

@@ -140,7 +140,7 @@ $(document).ready(function(){
     //do it for all stages
     if($(".tv:visible").length > 0){
       uploadedAlbum = false;
-      $("#uploaded").slideUp();
+      $("#uploaded,#reddit").slideUp();
       inchForward(13);
       $(this).addClass('uploading')
       $(this).text('Uploading to Imgur')
@@ -825,14 +825,14 @@ function uploadAlbum(){
     success: function(response) {
       $("#uploaded").attr("href", 'http://imgur.com/a/' + response["data"]["id"]);
       $("#loading").animate({"width":"100%"},280)
-
+      $("#reddit").attr("href", 'http://www.reddit.com/submit?url=http://imgur.com/a/' + response["data"]["id"] + '&title=' + comicTitle);
       setTimeout(function(){
         $("#loading").animate({"opacity":"0"},2000)
-        $("#uploaded").slideDown();
+        $("#uploaded,#reddit").slideDown();
         setTimeout(function(){
           $("#imgur").text("Upload to Imgur")
           $("#imgur").removeClass("uploading")
-        },550)
+        },750)
       },500)
 
 

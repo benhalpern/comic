@@ -11,6 +11,8 @@ $yellow: #FFD90F;
 $blue: #1791FF;
 $red: #FF360F;
 $green: #61BDA8;
+$reddit-blue: #336699;
+$reddit-orange: #ff5700;
 $helvetica: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 $simpsons: "simpsons", Verdana, Tahoma;
 
@@ -213,7 +215,15 @@ body{
           border-bottom:2px solid $yellow;
 
           &:hover{
-            background:lighten($red,3%)
+            background:lighten($red,3%);
+          }
+        }
+        &#reddit{
+          background:$reddit-blue;
+          border-bottom:2px solid $reddit-orange;
+          display:none;
+          &:hover{
+            background:lighten($reddit-blue,3%);
           }
         }
 
