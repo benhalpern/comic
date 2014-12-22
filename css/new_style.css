@@ -222,6 +222,9 @@ body {
         body .container .canvas.bg-holder .background-image img {
           width: 200px;
           height: 150px; }
+      body .container .canvas.bg-holder .loader {
+        margin-top: 160px;
+        margin-left: 250px; }
   @media all and (max-width: 1200px) {
     body .top-controls {
       width: 862px !important; }
