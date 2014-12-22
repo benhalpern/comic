@@ -36,10 +36,16 @@ body {
     height: 16px;
     font-family: "simpsons", Verdana, Tahoma;
     color: yellow;
-    padding: 35px 0;
+    padding: 28px 0;
     text-align: center;
     border-bottom-right-radius: 10px;
     font-size: 20px; }
+    body #logo #beta {
+      position: fixed;
+      font-size: 15px;
+      color: #1791FF;
+      left: 118px;
+      padding-top: 2px; }
   body .controls {
     background-color: rgba(0, 0, 0, 0.6);
     position: fixed; }

@@ -56,10 +56,17 @@ body{
     height:16px;
     font-family:$simpsons;
     color:yellow;
-    padding:35px 0;
+    padding:28px 0;
     text-align:center;
     border-bottom-right-radius:10px;
     font-size:20px;
+    #beta{
+      position:fixed;
+      font-size:15px;
+      color:$blue;
+      left:118px;
+      padding-top:2px;
+    }
   }
 
   .controls{
