@@ -76,7 +76,7 @@ $(document).ready(function(){
       console.log(lastTv.offset().top + 500)
       $(".tv,.bg-holder").removeClass("active")
       lastTv.after('<div id="bg_'+random+'" class="active canvas bg-holder"></div><div id="tv_'+random+'" class="active canvas tv"></div><br><br>')
-      $("body").animate({ scrollTop: lastTv.offset().top + 400}, 800);
+      $("body").animate({ scrollTop: lastTv.offset().top + 400}, 400);
       $("#bg_"+random).html($("#bg_0").html())
       stage = new Kinetic.Stage({
         container: "tv_" + random,
@@ -86,7 +86,7 @@ $(document).ready(function(){
       stages.push(stage);
     }
     else{
-      $("body").animate({ scrollTop: $(".bg-holder:visible").offset().top + 400}, 800);
+      $("body").animate({ scrollTop: $(".bg-holder:visible").offset().top + 400}, 400);
 
     }
 
