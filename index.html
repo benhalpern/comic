@@ -1,88 +1,139 @@
 <html>
 
-  <head>
-    <title>Ben Halpern</title>
-    <link rel="stylesheet" href="css/application.css">
-    <link rel="shortcut icon" type="image/png" href="./images/benpic.ico"/>
-    <script type="text/javascript" src="./js/lib/jquery.js"></script>
-    <script type="text/javascript" src="./js/lib/kinetic-v5.1.0.min.js"></script>
-    <script src="./js/lib/kinetic.editable.js"></script>
-    <script type="text/javascript" src="./js/application.js"></script>
-    <script type="text/javascript" src="./js/beauty.js"></script>
+<head>
+  <title>Ben Halpern</title>
+  <link rel="stylesheet" href="css/new_style.css">
+  <link rel="shortcut icon" type="image/png" href="./images/benpic.ico"/>
+  <script type="text/javascript" src="./js/lib/jquery.js"></script>
+  <script type="text/javascript" src="./js/lib/kinetic-v5.1.0.min.js"></script>
+  <script src="./js/lib/kinetic.editable.js"></script>
+  <script type="text/javascript" src="./js/application.js"></script>
+  <script type="text/javascript" src="./js/beauty.js"></script>
 
-    <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-    ga('create', 'UA-57171361-1', 'auto');
-    ga('send', 'pageview');
-    </script>
+  ga('create', 'UA-57171361-1', 'auto');
+  ga('send', 'pageview');
+  </script>
 
-  </head>
+</head>
 
-  <body>
-    <section id="container">
-      <div id="headline">
-        <h1>Comic Maker, a Work in Progress</h1>
+<body>
+  <div id="logo">
+    Comic Maker
+  </div>
+  <div id="background"></div>
+
+  <section class="controls top-controls">
+    <div id="pose-wrapper">
+      <div id="poses">
       </div>
-      <div id="explainer">
-        Select a collection, select a background, add characters and word bubbles, make awesome comic.
-      </div>
-      <div id="story-wrapper">
-        <div id="bg_0" class="bg-holder active">
-          <div class="background-image loading-image"><img src="./images/loading.gif"></div>
-          <div class="background-image loading-image"><img src="./images/loading.gif"></div>
-          <div class="background-image loading-image"><img src="./images/loading.gif"></div>
-          <div class="background-image loading-image"><img src="./images/loading.gif"></div>
-          <div class="background-image loading-image"><img src="./images/loading.gif"></div>
-          <div class="background-image loading-image"><img src="./images/loading.gif"></div>
-          <div class="background-image loading-image"><img src="./images/loading.gif"></div>
-          <div class="background-image loading-image"><img src="./images/loading.gif"></div>
-          <div class="background-image loading-image"><img src="./images/loading.gif"></div>
-          <div class="background-image loading-image"><img src="./images/loading.gif"></div>
-          <div class="background-image loading-image"><img src="./images/loading.gif"></div>
-          <div class="background-image loading-image"><img src="./images/loading.gif"></div>
-          <div class="background-image loading-image"><img src="./images/loading.gif"></div>
-          <div class="background-image loading-image"><img src="./images/loading.gif"></div>
-          <div class="background-image loading-image"><img src="./images/loading.gif"></div>
-        </div>
-        <div id="tv_0" class="tv active">
-        </div>
-
-      </div>
-      <div id="resources">
-        <div id="bubbles">
-          <img src="./images/bubble.png" class="active">
-          <img src="./images/thoughtbubble.svg">
-          <img src="./images/bubble1.png">
-          <img src="./images/crazybubble.png">
-          <img src="./images/bubble2.png">
-        </div>
-        <select id="collections">
-        </select>
-
-        <select id="characters">
-        </select>
-        <ul id="poses">
-        </ul>
-      </div>
-    </section>
-    <div id="controls">
-      <a href="#" id="save">save to computer</a>
-      <a href="#" id="imgur">save to Imgur</a>
-      <a href="#" id="uploaded" class="uploading" target="_blank"><span class="hidden-text"></span></a>
-
     </div>
-    <div id="footer">
-      Made by Ben Halpern, follow me on Twitter at <a href="http://twitter.com/bhalp1">@bhalp1</a>.
-      <br>
-      Comic Maker (temp name) is a work in progress and any feedback is greatly appreciated.
-      <br>
-      All images here are user generated and should be used for non-commercial art/fun. Contact me at <a href="mailto:bendhalpern@gmail.com">bendhalpern@gmail.com</a> if you have any issues with Comic Maker.
+  </section>
+
+  <section class="controls bottom-controls">
+    <ul id="bubbles">
+      <li class="bubble">
+        <img src="./images/bubble.png">
+      </li>
+      <li class="bubble">
+        <img src="./images/thoughtbubble.svg">
+      </li>
+      <li class="bubble">
+        <img src="./images/bubble1.png">
+      </li>
+      <li class="bubble">
+        <img src="./images/crazybubble.png">
+      </li>
+      <li class="bubble">
+        <img src="./images/bubble2.png">
+      </li>
+      <li class="bubble">
+        <img src="./images/bubble.png">
+      </li>
+      <li class="bubble">
+        <img src="./images/thoughtbubble.svg">
+      </li>
+      <li class="bubble">
+        <img src="./images/bubble1.png">
+      </li>
+      <li class="bubble">
+        <img src="./images/crazybubble.png">
+      </li>
+      <li class="bubble">
+        <img src="./images/bubble2.png">
+      </li>
+      <li class="bubble">
+        <img src="./images/bubble.png">
+      </li>
+      <li class="bubble">
+        <img src="./images/thoughtbubble.svg">
+      </li>
+      <li class="bubble">
+        <img src="./images/bubble1.png">
+      </li>
+      <li class="bubble">
+        <img src="./images/crazybubble.png">
+      </li>
+      <li class="bubble">
+        <img src="./images/bubble2.png">
+      </li>
+      <li class="bubble">
+        <img src="./images/bubble.png">
+      </li>
+      <li class="bubble">
+        <img src="./images/thoughtbubble.svg">
+      </li>
+      <li class="bubble">
+        <img src="./images/bubble1.png">
+      </li>
+      <li class="bubble">
+        <img src="./images/crazybubble.png">
+      </li>
+      <li class="bubble">
+        <img src="./images/bubble2.png">
+      </li>
+      <li class="bubble">
+        <img src="./images/crazybubble.png">
+      </li>
+      <li class="bubble">
+        <img src="./images/bubble2.png">
+      </li>
+      <li class="bubble">
+        <img src="./images/crazybubble.png">
+      </li>
+      <li class="bubble">
+        <img src="./images/bubble2.png">
+      </li>
+
+    </ul>
+  </section>
+
+  <section class="controls left-controls">
+    <select id="collections">
+    </select>
+    <ul id="characters">
+    </ul>
+  </section>
+
+  <section class="controls right-controls">
+    <a id="imgur">Upload to Imgur</a>
+    <a id="uploaded" target="_blank">View on Imgur</a>
+
+  </section>
+
+  <section class='container'>
+    <div id="bg_0" class="bg-holder active canvas">
     </div>
+    <div id="tv_0" class="tv active canvas">
+    </div>
+  </section>
 
-  </body>
+  <div id="loading"></div>
 
-</html>
+
+</body>

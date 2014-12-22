@@ -1,0 +1,223 @@
+@font-face {
+  font-family: "simpsons";
+  src: url(./simpfont.ttf) format("truetype"); }
+body {
+  margin: 0;
+  background: black;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  min-width: 1200px; }
+  body #background {
+    background-image: url("./room.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    opacity: 0.4;
+    z-index: -10;
+    padding: 0;
+    margin: 0; }
+  body #loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0px;
+    background: #FF360F;
+    height: 10px;
+    z-index: 100; }
+  body #logo {
+    position: fixed;
+    z-index: 10;
+    width: 162px;
+    height: 16px;
+    font-family: "simpsons", Verdana, Tahoma;
+    color: yellow;
+    padding: 35px 0;
+    text-align: center;
+    border-bottom-right-radius: 10px;
+    font-size: 20px; }
+  body .controls {
+    background-color: rgba(0, 0, 0, 0.6);
+    position: fixed; }
+    body .controls.top-controls {
+      height: 70px;
+      width: calc(100% - 348px);
+      margin-left: 170px;
+      margin-right: 170px;
+      z-index: 2;
+      padding: 4px; }
+      body .controls.top-controls #poses {
+        margin: 0;
+        padding-left: 0;
+        width: 100%;
+        font-size: 30px;
+        vertical-align: -70px;
+        color: white;
+        font-family: "simpsons", Verdana, Tahoma; }
+        body .controls.top-controls #poses .pose {
+          list-style-type: none;
+          cursor: pointer;
+          float: left;
+          position: relative; }
+          body .controls.top-controls #poses .pose .image {
+            height: 55px;
+            min-width: 15px;
+            background-color: rgba(255, 255, 255, 0.1);
+            margin: 5px 5px;
+            padding: 5px; }
+            body .controls.top-controls #poses .pose .image:hover {
+              background-color: rgba(255, 255, 255, 0.4); }
+          body .controls.top-controls #poses .pose .thumb-preview {
+            height: 150;
+            width: 150;
+            position: absolute;
+            display: none;
+            background: rgba(0, 0, 0, 0.6);
+            top: 55px;
+            left: 48px;
+            z-index: 20;
+            text-align: center;
+            border: 2px solid black; }
+          body .controls.top-controls #poses .pose:hover {
+            position: relative;
+            display: block; }
+            body .controls.top-controls #poses .pose:hover .thumb-preview {
+              display: block;
+              position: absolute; }
+    body .controls.bottom-controls {
+      height: 70px;
+      bottom: 0;
+      width: calc(100% - 340px);
+      margin-left: 170px;
+      margin-right: 170px; }
+      body .controls.bottom-controls #bubbles {
+        overflow-x: hidden; }
+        body .controls.bottom-controls #bubbles .bubble {
+          float: left;
+          cursor: pointer;
+          padding-top: 4px;
+          margin-bottom: 50px; }
+          body .controls.bottom-controls #bubbles .bubble:hover {
+            background: #DDDDDD; }
+          body .controls.bottom-controls #bubbles .bubble img {
+            height: 35px; }
+    body .controls.right-controls {
+      height: 100%;
+      width: 160px;
+      right: 0;
+      padding-top: 80px;
+      padding-left: 7px;
+      padding-right: 3px;
+      text-align: center; }
+      body .controls.right-controls a {
+        width: 96%;
+        font-size: 15.5px;
+        background: #61BDA8;
+        color: white;
+        border: 0;
+        font-family: "simpsons", Verdana, Tahoma;
+        padding: 10px 2px;
+        cursor: pointer;
+        margin-bottom: 10px;
+        text-decoration: none;
+        display: block; }
+        body .controls.right-controls a:hover {
+          background: #45a690; }
+        body .controls.right-controls a#imgur {
+          background: #4aa9ff; }
+          body .controls.right-controls a#imgur:hover {
+            background: #59b0ff; }
+        body .controls.right-controls a.uploading {
+          background: #007ff2 !important; }
+        body .controls.right-controls a#uploaded {
+          background: #FF360F;
+          color: #FFD90F;
+          display: none; }
+          body .controls.right-controls a#uploaded:hover {
+            background: #ff431e; }
+    body .controls.left-controls {
+      height: 100%;
+      width: 160px;
+      left: 0;
+      padding: 80px 5px;
+      font-size: 15px;
+      color: white;
+      font-weight: 400; }
+      body .controls.left-controls #collections {
+        width: 100%;
+        font-size: 16px;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        cursor: pointer;
+        padding: 4px; }
+      body .controls.left-controls #characters {
+        padding-left: 0;
+        margin-top: 5px; }
+        body .controls.left-controls #characters .character {
+          padding: 4px;
+          list-style-type: none;
+          cursor: pointer; }
+          body .controls.left-controls #characters .character:hover {
+            background-color: rgba(0, 0, 0, 0.6); }
+          body .controls.left-controls #characters .character.active {
+            background: rgba(97, 189, 168, 0.7);
+            color: white; }
+  body .container {
+    padding-top: 130px;
+    margin-bottom: 60px; }
+    body .container .canvas {
+      margin-left: auto;
+      margin-right: auto;
+      background: white;
+      box-shadow: 0px 3px 70px 15px #000;
+      height: 500px;
+      width: 800px;
+      overflow: auto;
+      margin-bottom: 30px; }
+      body .container .canvas.tv {
+        display: none;
+        opacity: 0.52;
+        cursor: pointer; }
+        body .container .canvas.tv:hover {
+          opacity: 0.88; }
+        body .container .canvas.tv.active {
+          opacity: 1;
+          cursor: default; }
+          body .container .canvas.tv.active:hover {
+            opacity: 1; }
+      body .container .canvas.bg-holder .background-image {
+        float: left;
+        cursor: pointer;
+        width: 200px;
+        height: 150px; }
+        body .container .canvas.bg-holder .background-image img {
+          width: 200px;
+          height: 150px; }
+  body .add-scene {
+    margin-left: calc(50% - 430px);
+    margin-top: -36px;
+    width: 60px;
+    height: 60px;
+    font-size: 32px;
+    background: #FF360F;
+    color: #FFD90F;
+    border: 0px;
+    z-index: 40px;
+    border-radius: 6px;
+    cursor: pointer; }
+    body .add-scene:hover {
+      background: #ff4b29; }
+  @media all and (max-width: 1200px) {
+    body .top-controls {
+      width: 862px !important; }
+    body .bottom-controls {
+      width: 870px !important; }
+    body .right-controls {
+      left: 1040px; } }
+
+/*# sourceMappingURL=new_style.css.map */
