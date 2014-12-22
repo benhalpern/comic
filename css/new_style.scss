@@ -157,7 +157,24 @@ body{
       padding-right:3px;
       text-align:center;
 
-      a{
+      #explainer{
+        margin-top:20px;
+        color:white;
+        font-size:13px;
+        text-align:left;
+        border-top:2px solid $medium-gray;
+        border-bottom:2px solid $medium-gray;
+        padding-top:10px;
+        padding-bottom:10px;
+
+        a{
+          color:$blue;
+          text-decoration:none;
+        }
+
+      }
+
+      a:not(.explain-link){
         width:97%;
         font-size:15.5px;
         background:$green;

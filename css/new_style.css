@@ -116,7 +116,19 @@ body {
       padding-left: 7px;
       padding-right: 3px;
       text-align: center; }
-      body .controls.right-controls a {
+      body .controls.right-controls #explainer {
+        margin-top: 20px;
+        color: white;
+        font-size: 13px;
+        text-align: left;
+        border-top: 2px solid #494949;
+        border-bottom: 2px solid #494949;
+        padding-top: 10px;
+        padding-bottom: 10px; }
+        body .controls.right-controls #explainer a {
+          color: #1791FF;
+          text-decoration: none; }
+      body .controls.right-controls a:not(.explain-link) {
         width: 97%;
         font-size: 15.5px;
         background: #61BDA8;
@@ -129,23 +141,23 @@ body {
         text-decoration: none;
         display: block;
         border-bottom: 2px solid #DDDDDD; }
-        body .controls.right-controls a:hover {
+        body .controls.right-controls a:not(.explain-link):hover {
           background: #45a690; }
-        body .controls.right-controls a#imgur {
+        body .controls.right-controls a:not(.explain-link)#imgur {
           background: #4aa9ff; }
-          body .controls.right-controls a#imgur:hover {
+          body .controls.right-controls a:not(.explain-link)#imgur:hover {
             background: #59b0ff; }
-        body .controls.right-controls a.uploading {
+        body .controls.right-controls a:not(.explain-link).uploading {
           background: #007ff2 !important;
           border-bottom: 2px solid #FF360F; }
-        body .controls.right-controls a.no-scene {
+        body .controls.right-controls a:not(.explain-link).no-scene {
           background: #b71e00 !important; }
-        body .controls.right-controls a#uploaded {
+        body .controls.right-controls a:not(.explain-link)#uploaded {
           background: #FF360F;
           color: #FFD90F;
           display: none;
           border-bottom: 2px solid #FFD90F; }
-          body .controls.right-controls a#uploaded:hover {
+          body .controls.right-controls a:not(.explain-link)#uploaded:hover {
             background: #ff431e; }
     body .controls.left-controls {
       height: 100%;
