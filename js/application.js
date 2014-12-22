@@ -592,9 +592,9 @@ function drawLogo(layer){
   var img = new Kinetic.Image({
     image: $('#logo-pic')[0],
     x: 706,
-    y:406,
+    y:422,
     width: 90,
-    height: 90,
+    height: 74,
     draggable: false
   })
   layer.add(img)
