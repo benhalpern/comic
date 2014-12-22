@@ -39,7 +39,8 @@ body {
     padding: 28px 0;
     text-align: center;
     border-bottom-right-radius: 10px;
-    font-size: 20px; }
+    font-size: 20px;
+    text-decoration: none; }
     body #logo #beta {
       position: fixed;
       font-size: 15px;
