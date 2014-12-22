@@ -321,6 +321,7 @@ function drawBackground(stage,imageObj){
   })
 
   layer.add(img);
+  drawLogo(layer)
   stage.add(layer);
 }
 
@@ -585,6 +586,18 @@ function addLayerDownButton(group, x, y){
 
   group.add(butt);
 
+}
+
+function drawLogo(layer){
+  var img = new Kinetic.Image({
+    image: $('#logo-pic')[0],
+    x: 706,
+    y:406,
+    width: 90,
+    height: 90,
+    draggable: false
+  })
+  layer.add(img)
 }
 
 
