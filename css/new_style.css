@@ -114,13 +114,13 @@ body {
       padding-right: 3px;
       text-align: center; }
       body .controls.right-controls a {
-        width: 96%;
+        width: 97%;
         font-size: 15.5px;
         background: #61BDA8;
         color: white;
         border: 0;
         font-family: "simpsons", Verdana, Tahoma;
-        padding: 10px 2px;
+        padding: 10px 1px;
         cursor: pointer;
         margin-bottom: 10px;
         text-decoration: none;
@@ -149,12 +149,15 @@ body {
       font-weight: 400; }
       body .controls.left-controls #collections {
         width: 100%;
-        font-size: 16px;
+        font-size: 16.5px;
         -webkit-appearance: none;
         -moz-appearance: none;
         appearance: none;
         cursor: pointer;
-        padding: 4px; }
+        padding: 4px;
+        border-radius: 0;
+        font-weight: 500;
+        color: #005db0; }
       body .controls.left-controls #characters {
         padding-left: 0;
         margin-top: 5px; }

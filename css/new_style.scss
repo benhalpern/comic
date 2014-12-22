@@ -152,13 +152,13 @@ body{
       text-align:center;
 
       a{
-        width:96%;
+        width:97%;
         font-size:15.5px;
         background:$green;
         color:white;
         border:0;
         font-family:$simpsons;
-        padding:10px 2px;
+        padding:10px 1px;
         cursor:pointer;
         margin-bottom:10px;
         text-decoration:none;
@@ -202,13 +202,16 @@ body{
       font-weight:400;
       #collections{
         width: 100%;
-        font-size:16px;
+        font-size:16.5px;
 
         -webkit-appearance: none;
         -moz-appearance: none;
         appearance: none;
         cursor:pointer;
         padding:4px;
+        border-radius:0;
+        font-weight:500;
+        color:darken($blue,20%);
       }
       #characters{
         padding-left: 0;
