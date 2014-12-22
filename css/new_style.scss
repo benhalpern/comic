@@ -47,6 +47,7 @@ body{
     background:$red;
     height:10px;
     z-index:100;
+
   }
 
   #logo{
@@ -168,6 +169,8 @@ body{
         margin-bottom:10px;
         text-decoration:none;
         display:block;
+        border-bottom:2px solid $light-gray;
+
         &:hover{
           background:darken($green,10%)
         }
@@ -180,12 +183,18 @@ body{
         }
         &.uploading{
           background:darken($blue,7%) !important;
+          border-bottom:2px solid $red;
+        }
+        &.no-scene{
+          background:darken($red,17%) !important;
 
         }
         &#uploaded{
           background:$red;
           color:$yellow;
           display:none;
+          border-bottom:2px solid $yellow;
+
           &:hover{
             background:lighten($red,3%)
           }
@@ -253,6 +262,7 @@ body{
         display:none;
         opacity:0.52;
         cursor:pointer;
+        position:relative;
         &:hover{
           opacity:0.88;
 
@@ -280,22 +290,6 @@ body{
           }
         }
       }
-    }
-  }
-  .add-scene{
-    margin-left:calc(50% - 430px);
-    margin-top:-36px;
-    width:60px;
-    height:60px;
-    font-size:32px;
-    background:$red;
-    color:$yellow;
-    border:0px;
-    z-index:40px;
-    border-radius:6px;
-    cursor:pointer;
-    &:hover{
-      background:lighten($red,5%);
     }
   }
 

@@ -23,8 +23,6 @@ $(document).ready(function(){
 
   stages.push(stage);
 
-  $(".controls").animate({"opacity":"1"},1300)
-
   //events
 
   $( "body" ).delegate( ".image", "click", function() {
@@ -54,11 +52,9 @@ $(document).ready(function(){
     $('.tv').removeClass("active")
     $(".tv:last").addClass("active")
     $(".tv.active").show();
-    $(".add-scene").remove();
-    $(".tv:last").after('<button id="add-scene" class="add-scene">+</button>');
     setTimeout(function(){
       $("#controls a").slideDown('slow');
-      $(".add-scene").animate({"opacity":"1"},400);
+
     },200)
     stage = stages[$('.tv').index($('.tv.active'))]
 
@@ -74,19 +70,25 @@ $(document).ready(function(){
   })
 
   $( "body" ).delegate( ".add-scene", "click", function() {
-    var random = Math.floor(Math.random() * 1000) + 1
-    $(".tv,.bg-holder").removeClass("active")
-    $(this).after('<div id="bg_'+random+'" class="canvas bg-holder active"></div><div id="tv_'+random+'" class="canvas tv active"></div><br><br>')
-    $(this).remove();
+    if($(".bg-holder:visible").length == 0){
+      var random = Math.floor(Math.random() * 1000) + 1
+      lastTv = $(".tv.active:last")
+      console.log(lastTv.offset().top + 500)
+      $(".tv,.bg-holder").removeClass("active")
+      lastTv.after('<div id="bg_'+random+'" class="active canvas bg-holder"></div><div id="tv_'+random+'" class="active canvas tv"></div><br><br>')
+      $("body").animate({ scrollTop: lastTv.offset().top + 400}, 800);
+      $("#bg_"+random).html($("#bg_0").html())
+      stage = new Kinetic.Stage({
+        container: "tv_" + random,
+        width: 800,
+        height: 500
+      });
+      stages.push(stage);
+    }
+    else{
+      $("body").animate({ scrollTop: $(".bg-holder:visible").offset().top + 400}, 800);
 
-    $("body").animate({ scrollTop: $('body')[0].scrollHeight}, 1000);
-    $(".bg-holder.active").html($("#bg_0").html())
-    stage = new Kinetic.Stage({
-      container: "tv_" + random,
-      width: 800,
-      height: 500
-    });
-    stages.push(stage);
+    }
 
 
 
@@ -137,7 +139,7 @@ $(document).ready(function(){
     if($(".tv:visible").length > 0){
       uploadedAlbum = false;
       $("#uploaded").slideUp();
-      inchForward(44);
+      inchForward(13);
       $(this).addClass('uploading')
       $(this).text('Uploading to Imgur')
       $.each(stages, function( index, stage ) {
@@ -150,13 +152,13 @@ $(document).ready(function(){
     }
     else{
       $("#imgur").text('No Scene Detected')
-      $("#imgur").addClass('uploading')
+      $("#imgur").addClass('no-scene')
 
       setTimeout(function(){
         $("#imgur").text('Upload to Imgur')
-        $("#imgur").removeClass('uploading')
+        $("#imgur").removeClass('no-scene')
 
-      },800)
+      },500)
     }
     return false;
   })
@@ -735,13 +737,13 @@ function loadCollections(){
 }
 
 function loadBackgrounds(id){
-  $(".bg-holder.active").html("")
+  $(".bg-holder").html("")
 
   $.ajax( serverDomain + "/backgrounds.json?c=" + id)
   .done(function(data) {
     $(".loading-image").remove("")
     $.each(data, function( index, value ) {
-      $(".bg-holder.active").append('<div id="bg_image_'+ index +'" class="background-image" data-fitted= "'+ value.image.image.fitted.url +'" data-tiny= "'+ value.image.image.fitted.url +'"><img crossorigin= "" src="'+ value.image.image.thumb.url +'"></div>')
+      $(".bg-holder").append('<div id="bg_image_'+ index +'" class="background-image" data-fitted= "'+ value.image.image.fitted.url +'" data-tiny= "'+ value.image.image.fitted.url +'"><img crossorigin= "" src="'+ value.image.image.thumb.url +'"></div>')
     });
   })
   .fail(function() {
@@ -846,15 +848,17 @@ function uploadAlbum(){
 
 
 function inchForward(pixels){
-  $("#loading").animate({"width":"+=" + pixels},200)
+  $("#loading").animate({"width":"+=" + pixels},120)
+  adjustedPixels = Math.floor(Math.random() * (pixels + 11) )
+  console.log(adjustedPixels)
   setTimeout(function(){
     if(!uploadedAlbum){
-      if( pixels == 2 ){
-        inchForward(pixels)
+      if( pixels <= 6 ){
+        inchForward(adjustedPixels +8)
 
       }
       else{
-        inchForward(pixels -1)
+        inchForward(adjustedPixels -1)
       }
     }
   },202)

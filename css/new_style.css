@@ -127,7 +127,8 @@ body {
         cursor: pointer;
         margin-bottom: 10px;
         text-decoration: none;
-        display: block; }
+        display: block;
+        border-bottom: 2px solid #DDDDDD; }
         body .controls.right-controls a:hover {
           background: #45a690; }
         body .controls.right-controls a#imgur {
@@ -135,11 +136,15 @@ body {
           body .controls.right-controls a#imgur:hover {
             background: #59b0ff; }
         body .controls.right-controls a.uploading {
-          background: #007ff2 !important; }
+          background: #007ff2 !important;
+          border-bottom: 2px solid #FF360F; }
+        body .controls.right-controls a.no-scene {
+          background: #b71e00 !important; }
         body .controls.right-controls a#uploaded {
           background: #FF360F;
           color: #FFD90F;
-          display: none; }
+          display: none;
+          border-bottom: 2px solid #FFD90F; }
           body .controls.right-controls a#uploaded:hover {
             background: #ff431e; }
     body .controls.left-controls {
@@ -188,7 +193,8 @@ body {
       body .container .canvas.tv {
         display: none;
         opacity: 0.52;
-        cursor: pointer; }
+        cursor: pointer;
+        position: relative; }
         body .container .canvas.tv:hover {
           opacity: 0.88; }
         body .container .canvas.tv.active {
@@ -204,20 +210,6 @@ body {
         body .container .canvas.bg-holder .background-image img {
           width: 200px;
           height: 150px; }
-  body .add-scene {
-    margin-left: calc(50% - 430px);
-    margin-top: -36px;
-    width: 60px;
-    height: 60px;
-    font-size: 32px;
-    background: #FF360F;
-    color: #FFD90F;
-    border: 0px;
-    z-index: 40px;
-    border-radius: 6px;
-    cursor: pointer; }
-    body .add-scene:hover {
-      background: #ff4b29; }
   @media all and (max-width: 1200px) {
     body .top-controls {
       width: 862px !important; }
