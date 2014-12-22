@@ -81,13 +81,10 @@ body {
             left: 48px;
             z-index: 20;
             text-align: center;
-            border: 2px solid black; }
-          body .controls.top-controls #poses .pose:hover {
-            position: relative;
+            border: 2px solid black;
+            opacity: 0; }
+          body .controls.top-controls #poses .pose:hover .thumb-preview {
             display: block; }
-            body .controls.top-controls #poses .pose:hover .thumb-preview {
-              display: block;
-              position: absolute; }
     body .controls.bottom-controls {
       height: 70px;
       bottom: 0;

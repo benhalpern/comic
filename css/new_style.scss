@@ -106,13 +106,11 @@ body{
             z-index:20;
             text-align:center;
             border:2px solid black;
+            opacity:0;
           }
           &:hover{
-            position:relative;
-            display:block;
             .thumb-preview{
               display:block;
-              position:absolute
             }
           }
 

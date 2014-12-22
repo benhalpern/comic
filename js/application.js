@@ -110,15 +110,25 @@ $(document).ready(function(){
   $('body').delegate('.pose','mouseenter', function(event) {
     var preloader = new Image(),
     thumb = $(this).find('img').data("thumb"),
-    fitted = $(this).find('img').data("fitted")
+    fitted = $(this).find('img').data("fitted"),
+    thumbImage = new Image(),
+    pose = this;
+    thumbImage.crossOrigin = ""
+    $(thumbImage).one("load", function() {
+      $('.thumb-preview',pose).html('<img crossorigin="" src="'+thumb+'">')
+      $(pose).find('.thumb-preview').animate({"opacity":"1"},150);
+    }).attr("src", thumb);
 
-    $('.thumb-preview',this).html('<img crossorigin="" src="'+thumb+'">')
+
     preloader.crossOrigin = ""
     preloader.src = fitted
   });
 
-  $('body').delegate('#poses img','mouseleave', function(event) {
-    console.log("mouseleave")
+  $('body').delegate('.pose','mouseleave', function(event) {
+    $(this).find('.thumb-preview').animate({"opacity":"0"},40);
+  });
+  $('body').delegate('.pose','click', function(event) {
+    $(this).find('.thumb-preview').animate({"opacity":"0"},40);
   });
 
 
