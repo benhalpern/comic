@@ -23,7 +23,7 @@ $(document).ready(function(){
 
   stages.push(stage);
 
-  $("#background").animate({"opacity":"0.33"},400)
+  $("#background").animate({"opacity":"0.38"},420)
 
   //events
 
