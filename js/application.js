@@ -156,7 +156,7 @@ $(document).ready(function(){
         $("#imgur").text('Upload to Imgur')
         $("#imgur").removeClass('uploading')
 
-      },1000)
+      },800)
     }
     return false;
   })
