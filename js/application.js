@@ -849,18 +849,18 @@ function uploadAlbum(){
 
 function inchForward(pixels){
   $("#loading").animate({"width":"+=" + pixels},120)
-  adjustedPixels = Math.floor(Math.random() * (pixels + 11) )
-  console.log(adjustedPixels)
+  var adjustedPixels = Math.floor(Math.random() * (pixels + 11) )
+    var loadingWidth = parseFloat($("#loading").css("width").replace(/[^-\d\.]/g, ''))
+    var windowWidth = parseFloat($("body").css("width").replace(/[^-\d\.]/g, ''))
   setTimeout(function(){
     if(!uploadedAlbum){
-      if( pixels <= 6 ){
-        inchForward(adjustedPixels +8)
-
+      if( loadingWidth < (windowWidth*0.66) ){
+        inchForward(adjustedPixels +6)
       }
       else{
-        inchForward(adjustedPixels -1)
+        inchForward(1)
       }
     }
-  },202)
+  },155)
 
 }
