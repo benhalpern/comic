@@ -23,6 +23,8 @@ $(document).ready(function(){
 
   stages.push(stage);
 
+  $("#background").animate({"opacity":"0.33"},400)
+
   //events
 
   $( "body" ).delegate( ".image", "click", function() {
