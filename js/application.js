@@ -786,7 +786,7 @@ function loadPoses(id,characterName){
   $.ajax( serverDomain + "/poses.json?c=" + id )
   .done(function(data) {
     $("#poses").html("")
-    $.each(data, function( index, value ) {
+    $.each(data.slice(0, 11), function( index, value ) {
       $('#poses').append('<div class="pose"><img crossorigin data-thumb="'+ value.image.image.thumb.url +'" data-fitted= "'+ value.image.image.fitted.url +'" class="image" src="'+ value.image.image.tiny.url +'" data-character="'+ characterName +'">\
       <div class="thumb-preview"></div></div>')
 
