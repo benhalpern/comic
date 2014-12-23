@@ -763,6 +763,10 @@ function loadBackgrounds(id){
     $.each(data, function( index, value ) {
       $(".bg-holder").append('<div id="bg_image_'+ index +'" class="background-image" data-fitted= "'+ value.image.image.fitted.url +'" data-tiny= "'+ value.image.image.fitted.url +'"><img crossorigin= "" src="'+ value.image.image.thumb.url +'"></div>')
     });
+    if (data.length == 0){
+      $(".bg-holder").html("<div class='no-bg-message'>This collection only has characters, no backgrounds.</div>")
+    }
+
   })
   .fail(function() {
     console.log( "error loading characters" );
@@ -774,6 +778,11 @@ function loadCharacters(id){
   $.ajax( serverDomain + "/characters.json?c=" + id )
   .done(function(data) {
     $("#characters").html("")
+    console.log(data.length)
+    if (data.length == 0){
+      $("#characters").html("This collection only has backgrounds, no characters.")
+    }
+
     $.each(data, function( index, value ) {
       $("#characters").append('<li data-id="'+ value.id +'" class="character">'+ value.name +'</li>')
     });
