@@ -889,7 +889,7 @@ function loadBackgroundImage(){
 
     console.log(myImage.src)
     $("#background").animate({"opacity":"0.38"},420)
-  }).attr("src", "./css/nyc.png");
+  }).attr("src", "./css/spider-man.jpg");
 
 
 
