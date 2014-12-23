@@ -595,7 +595,9 @@ function drawLogo(layer){
     width: 80,
     height: 75,
     draggable: false,
-    opacity:1
+    opacity:1,
+    name: "logo"
+
   })
   layer.add(img)
 }
