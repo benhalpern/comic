@@ -744,6 +744,7 @@ function loadCollections(){
     $.each(data, function( index, value ) {
       $("#collections").append('<option value="'+ value.id +'">'+ value.name +'</option>')
     });
+    $(".bg-holder").animate({"opacity":"1"},1300)
     loadCharacters(data[0]["id"])
     loadBackgrounds(data[0]["id"])
   })

@@ -7,7 +7,7 @@ body {
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   min-width: 1200px; }
   body #background {
-    background-image: url("./room.jpg");
+    background-image: url("./nyc.png");
     background-repeat: no-repeat;
     background-position: center center;
     background-attachment: fixed;
@@ -221,17 +221,19 @@ body {
           cursor: default; }
           body .container .canvas.tv.active:hover {
             opacity: 1; }
-      body .container .canvas.bg-holder .background-image {
-        float: left;
-        cursor: pointer;
-        width: 200px;
-        height: 150px; }
-        body .container .canvas.bg-holder .background-image img {
+      body .container .canvas.bg-holder {
+        opacity: 0; }
+        body .container .canvas.bg-holder .background-image {
+          float: left;
+          cursor: pointer;
           width: 200px;
           height: 150px; }
-      body .container .canvas.bg-holder .loader {
-        margin-top: 160px;
-        margin-left: 250px; }
+          body .container .canvas.bg-holder .background-image img {
+            width: 200px;
+            height: 150px; }
+        body .container .canvas.bg-holder .loader {
+          margin-top: 160px;
+          margin-left: 250px; }
   @media all and (max-width: 1200px) {
     body .top-controls {
       width: 862px !important; }

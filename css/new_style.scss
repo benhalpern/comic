@@ -25,7 +25,7 @@ body{
   min-width:1200px;
 
   #background{
-    background-image:url('./room.jpg');
+    background-image:url('./nyc.png');
     background-repeat: no-repeat;
     background-position: center center;
     background-attachment: fixed;
@@ -306,6 +306,7 @@ body{
         }
       }
       &.bg-holder{
+        opacity:0;
         .background-image{
           float:left;
           cursor:pointer;
