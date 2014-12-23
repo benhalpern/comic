@@ -76,7 +76,7 @@ $(document).ready(function(){
       lastTv = $(".tv.active:last")
       console.log(lastTv.offset().top + 500)
       $(".tv,.bg-holder").removeClass("active")
-      lastTv.after('<div id="bg_'+random+'" class="active canvas bg-holder"></div><div id="tv_'+random+'" class="active canvas tv"></div><br><br>')
+      lastTv.after('<div id="bg_'+random+'" class="active canvas bg-holder" style="opacity:1"></div><div id="tv_'+random+'" class="active canvas tv"></div><br><br>')
       $("body").animate({ scrollTop: lastTv.offset().top + 400}, 400);
       $("#bg_"+random).html($("#bg_0").html())
       stage = new Kinetic.Stage({
