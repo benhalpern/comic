@@ -23,8 +23,7 @@ $(document).ready(function(){
 
   stages.push(stage);
 
-  $("#background").animate({"opacity":"0.38"},420)
-
+  loadBackgroundImage();
   //events
 
   $( "body" ).delegate( ".image", "click", function() {
@@ -879,5 +878,19 @@ function inchForward(pixels){
       }
     }
   },155)
+
+}
+
+function loadBackgroundImage(){
+  var myImage = new Image();
+  $(myImage).one("load", function() {
+    //$("#backround").css("background-image", 'url(./css/nyc.png)');
+    $("#backround").css("color",'blue');
+
+    console.log(myImage.src)
+    $("#background").animate({"opacity":"0.38"},420)
+  }).attr("src", "./css/nyc.png");
+
+
 
 }
