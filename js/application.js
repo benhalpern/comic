@@ -823,7 +823,8 @@ function uploadImage(dataUrl, index){
     },
     success: function(response) {
       results[index] = response["data"]["id"]
-      $(".tv:eq("+index+")").after('<a class="imgur-link-a" href="'+response["data"]["link"]+'" target="_blank"><div class="imgur-link"><span class="name">Direct: </span>'+response["data"]["link"]+'</div></a>')
+      $('#imgur_link_'+index).remove();
+      $(".tv:eq("+index+")").after('<a id="imgur_link_'+index+'" class="imgur-link-a" href="'+response["data"]["link"]+'" target="_blank"><div class="imgur-link"><span class="name">Direct: </span>'+response["data"]["link"]+'</div></a>')
       if( results.length == stages.length ){
         uploadAlbum()
       }
