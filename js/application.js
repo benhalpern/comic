@@ -121,8 +121,6 @@ $(document).ready(function(){
       $('.thumb-preview',pose).html('<img crossorigin="" src="'+thumb+'">')
       $(pose).find('.thumb-preview').animate({"opacity":"1"},150);
     }).attr("src", thumb);
-
-
     preloader.crossOrigin = ""
     preloader.src = fitted
   });
@@ -320,7 +318,7 @@ function drawBackground(stage,imageObj){
   })
 
   layer.add(img);
-  drawLogo(layer)
+  //drawLogo(layer)
   stage.add(layer);
 }
 
@@ -825,8 +823,7 @@ function uploadImage(dataUrl, index){
     },
     success: function(response) {
       results[index] = response["data"]["id"]
-      console.log(results)
-      console.log(results.length)
+      $(".tv:eq("+index+")").after('<a class="imgur-link-a" href="'+response["data"]["link"]+'" target="_blank"><div class="imgur-link"><span class="name">Direct: </span>'+response["data"]["link"]+'</div></a>')
       if( results.length == stages.length ){
         uploadAlbum()
       }
@@ -850,7 +847,11 @@ function uploadAlbum(){
       'description': "Made with Comic Maker"
     },
     success: function(response) {
-      $("#uploaded").attr("href", 'http://imgur.com/a/' + response["data"]["id"]);
+      var link = 'http://imgur.com/a/' + response["data"]["id"]
+      $("#uploaded").attr("href", link );
+      $(".album-link").remove();
+      $(".container").prepend('<a class="imgur-link-a album-link" href="'+link+'" target="_blank"><div class="imgur-link album"><span class="name">Album: </span>'+link+'</div></a>')
+      $(".imgur-link").slideDown();
       $("#loading").animate({"width":"100%"},280)
       $("#reddit").attr("href", 'http://www.reddit.com/submit?url=http://imgur.com/a/' + response["data"]["id"] + '&title=' + comicTitle);
       setTimeout(function(){

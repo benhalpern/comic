@@ -199,7 +199,7 @@ body {
             color: white; }
   body .container {
     padding-top: 130px;
-    margin-bottom: 60px; }
+    margin-bottom: 88px; }
     body .container .canvas {
       margin-left: auto;
       margin-right: auto;
@@ -238,6 +238,28 @@ body {
           padding: 20px;
           text-align: center;
           margin-top: 30px; }
+    body .container .imgur-link-a {
+      color: #0077e3;
+      text-decoration: none;
+      font-size: 15px; }
+      body .container .imgur-link-a .imgur-link {
+        display: none;
+        width: 300px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 6px;
+        background: #ececec;
+        text-align: center;
+        margin-bottom: 30px;
+        box-shadow: 0px 3px 40px 10px #000;
+        border-bottom: 3px solid #1791FF; }
+        body .container .imgur-link-a .imgur-link .name {
+          color: #494949; }
+        body .container .imgur-link-a .imgur-link:hover {
+          background: white; }
+        body .container .imgur-link-a .imgur-link.album {
+          margin-top: -30px;
+          border-top: 3px solid #1791FF; }
   @media all and (max-width: 1200px) {
     body .top-controls {
       width: 862px !important; }

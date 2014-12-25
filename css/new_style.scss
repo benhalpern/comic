@@ -276,7 +276,7 @@ body{
 
   .container{
     padding-top:130px;
-    margin-bottom:60px;
+    margin-bottom:88px;
 
     .canvas{
       margin-left:auto;margin-right:auto;
@@ -327,6 +327,34 @@ body{
           margin-top:30px;
         }
 
+      }
+    }
+    .imgur-link-a{
+      color:darken($blue,10%);
+      text-decoration:none;
+      font-size:15px;
+      .imgur-link{
+        display:none;
+        width:300px;
+        margin-left:auto;
+        margin-right:auto;
+        padding:6px;
+        background:lighten($light-gray,6%);
+        text-align:center;
+        margin-bottom:30px;
+        box-shadow:0px 3px 40px 10px #000;
+        border-bottom:3px solid $blue;
+        .name{
+          color:$medium-gray;
+        }
+        &:hover{
+          background:white;
+        }
+        &.album{
+          margin-top:-30px;
+          border-top:3px solid $blue;
+
+        }
       }
     }
   }
