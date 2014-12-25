@@ -170,6 +170,12 @@ $(document).ready(function(){
       loadBackgrounds(this.value)
       $('.collections').val(this.value);
     }
+    else{
+      //$(".bg-holder:visible").hide();
+      //$(".starter").show();
+      //$("#starter_collections").val(0);
+
+    }
   })
   $( "body" ).delegate( ".character", "click", function() {
     loadPoses($(this).data("id"),$(this).text())
