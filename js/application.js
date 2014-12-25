@@ -393,7 +393,7 @@ function addTextEdit(group,x,y) {
     // find click position.
     x: x - 150,
     y: y -101,
-    fontFamily: 'Comic Sans MS',
+    fontFamily: 'komika',
     fontSize: 20,
     fill: '#000000',
     //text: "placeholder",

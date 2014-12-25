@@ -1,6 +1,12 @@
 @font-face {
   font-family: "simpsons";
   src: url(./simpfont.ttf) format("truetype"); }
+@font-face {
+  font-family: "action";
+  src: url(./Action_Man.ttf) format("truetype"); }
+@font-face {
+  font-family: "komika";
+  src: url(./Komika_display.ttf) format("truetype"); }
 body {
   margin: 0;
   background: black;
