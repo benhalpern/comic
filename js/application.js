@@ -24,6 +24,9 @@ $(document).ready(function(){
   stages.push(stage);
 
   loadBackgroundImage();
+
+  $(".starter").animate({'opacity':'1'},900)
+
   //events
 
   $( "body" ).delegate( ".image", "click", function() {

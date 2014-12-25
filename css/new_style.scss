@@ -339,6 +339,7 @@ body{
 
       }
       &.starter{
+        opacity:0;
         text-align:center;
         font-size:25px;
         background-image:url('./graycomic.jpg');
@@ -359,6 +360,7 @@ body{
           border-bottom:3px solid $blue;
           &:hover{
             border-bottom:3px solid $red;
+
           }
 
         }
