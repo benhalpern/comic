@@ -318,7 +318,7 @@ function drawBackground(stage,imageObj){
   })
 
   layer.add(img);
-  //drawLogo(layer)
+  drawLogo(layer)
   stage.add(layer);
 }
 
