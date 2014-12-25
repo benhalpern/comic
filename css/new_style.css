@@ -261,9 +261,9 @@ body {
           border-radius: 0;
           font-weight: bold;
           border: 0;
-          border-bottom: 2px solid #1791FF; }
+          border-bottom: 3px solid #1791FF; }
           body .container .canvas.starter .collections:hover {
-            border-bottom: 2px solid #FF360F; }
+            border-bottom: 3px solid #FF360F; }
         body .container .canvas.starter #imageLoader {
           display: none; }
         body .container .canvas.starter #file-upload-styled {
@@ -274,10 +274,10 @@ body {
           margin-left: auto;
           text-align: left;
           font-weight: bold;
-          border-bottom: 2px solid #1791FF;
+          border-bottom: 3px solid #1791FF;
           cursor: pointer; }
           body .container .canvas.starter #file-upload-styled:hover {
-            border-bottom: 2px solid #FF360F; }
+            border-bottom: 3px solid #FF360F; }
     body .container .imgur-link-a {
       color: #0077e3;
       text-decoration: none;

@@ -356,11 +356,11 @@ body{
           border-radius:0;
           font-weight:bold;
           border:0;
-          border-bottom:2px solid $blue;
+          border-bottom:3px solid $blue;
           &:hover{
-            border-bottom:2px solid $red;
+            border-bottom:3px solid $red;
           }
-          
+
         }
         #imageLoader{
           display:none;
@@ -372,10 +372,10 @@ body{
           margin-right:auto;margin-left:auto;
           text-align:left;
           font-weight:bold;
-          border-bottom:2px solid $blue;
+          border-bottom:3px solid $blue;
           cursor:pointer;
           &:hover{
-            border-bottom:2px solid $red;
+            border-bottom:3px solid $red;
           }
         }
       }
