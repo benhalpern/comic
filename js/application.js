@@ -75,10 +75,11 @@ $(document).ready(function(){
       var random = Math.floor(Math.random() * 1000) + 1
       lastTv = $(".tv.active:last")
       console.log(lastTv.offset().top + 500)
-      $(".tv,.bg-holder").removeClass("active")
+      $(".tv,.bg-holder,.starter").removeClass("active")
       lastTv.after('<div id="bg_'+random+'" class="active canvas bg-holder" style="opacity:1"></div><div id="tv_'+random+'" class="active canvas tv"></div><br><br>')
       $("body").animate({ scrollTop: lastTv.offset().top + 400}, 400);
       $("#bg_"+random).html($("#bg_0").html())
+      $("#bg_"+random).show();
       stage = new Kinetic.Stage({
         container: "tv_" + random,
         width: 800,
@@ -163,9 +164,12 @@ $(document).ready(function(){
   })
 
 
-  $("#collections").change(function(){
-    loadCharacters(this.value)
-    loadBackgrounds(this.value)
+  $(".collections").change(function(){
+    if(this.value != 0){
+      loadCharacters(this.value)
+      loadBackgrounds(this.value)
+      $('.collections').val(this.value);
+    }
   })
   $( "body" ).delegate( ".character", "click", function() {
     loadPoses($(this).data("id"),$(this).text())
@@ -183,6 +187,10 @@ $(document).ready(function(){
     drawBubble(stage,360,120,$("img.active")[0]);
 
 
+  })
+
+  $("#file-upload-styled").click(function(){
+    $("#imageLoader").click();
   })
 
 
@@ -234,9 +242,11 @@ $(document).ready(function(){
       focusedText.getParent().getX() + 50,
       focusedText.getParent().getY() + 50)
     }
-
-
   });
+
+  $("#imageLoader").change(function(e){
+    handleImageUpload(e)
+  })
 
 
 
@@ -741,13 +751,13 @@ function loadCollections(){
   $.ajax( serverDomain + "/collections.json" )
   .done(function(data) {
     $.each(data, function( index, value ) {
-      $("#collections").append('<option value="'+ value.id +'">'+ value.name +'</option>')
+      $(".collections").append('<option value="'+ value.id +'">'+ value.name +'</option>')
     });
     setTimeout(function(){
       $(".bg-holder").animate({"opacity":"1"},1420)
     },250)
-    loadCharacters(data[0]["id"])
-    loadBackgrounds(data[0]["id"])
+    //loadCharacters(data[0]["id"])
+    //loadBackgrounds(data[0]["id"])
   })
   .fail(function() {
     console.log( "error loading collections" );
@@ -765,6 +775,11 @@ function loadBackgrounds(id){
     });
     if (data.length == 0){
       $(".bg-holder").html("<div class='no-bg-message'>This collection only has characters, no backgrounds.</div>")
+    }
+    if ($(".starter:visible").length > 0){
+      $(".starter").hide();
+      $(".bg-holder").show();
+
     }
 
   })
@@ -905,7 +920,23 @@ function loadBackgroundImage(){
     console.log(myImage.src)
     $("#background").animate({"opacity":"0.38"},420)
   }).attr("src", "./css/spider-man.jpg");
+}
 
-
-
+function handleImageUpload(e){
+  var reader = new FileReader();
+  reader.onload = function(event){
+    var img = new Image();
+    img.onload = function(){
+      //canvas.width = img.width;
+      //canvas.height = img.height;
+      //ctx.drawImage(img,0,0);
+      var stage = stages[$('.tv').index($('.tv.active'))]
+      img.crossOrigin = ""
+      drawBackground(stage,img);
+      $(".tv.active").show();
+      $(".starter").hide();
+    }
+    img.src = event.target.result;
+  }
+  reader.readAsDataURL(e.target.files[0]);
 }

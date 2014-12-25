@@ -228,7 +228,7 @@ body {
           body .container .canvas.tv.active:hover {
             opacity: 1; }
       body .container .canvas.bg-holder {
-        opacity: 0; }
+        display: none; }
         body .container .canvas.bg-holder .background-image {
           float: left;
           cursor: pointer;
@@ -244,6 +244,40 @@ body {
           padding: 20px;
           text-align: center;
           margin-top: 30px; }
+      body .container .canvas.starter {
+        text-align: center;
+        font-size: 25px;
+        background-image: url("./graycomic.jpg"); }
+        body .container .canvas.starter .collections {
+          margin-top: 126px;
+          width: 422px;
+          font-size: 25px;
+          text-align: center;
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          appearance: none;
+          cursor: pointer;
+          padding: 15px;
+          border-radius: 0;
+          font-weight: bold;
+          border: 0;
+          border-bottom: 2px solid #1791FF; }
+          body .container .canvas.starter .collections:hover {
+            border-bottom: 2px solid #FF360F; }
+        body .container .canvas.starter #imageLoader {
+          display: none; }
+        body .container .canvas.starter #file-upload-styled {
+          background: white;
+          width: 400px;
+          padding: 15px;
+          margin-right: auto;
+          margin-left: auto;
+          text-align: left;
+          font-weight: bold;
+          border-bottom: 2px solid #1791FF;
+          cursor: pointer; }
+          body .container .canvas.starter #file-upload-styled:hover {
+            border-bottom: 2px solid #FF360F; }
     body .container .imgur-link-a {
       color: #0077e3;
       text-decoration: none;
@@ -264,8 +298,7 @@ body {
         body .container .imgur-link-a .imgur-link:hover {
           background: white; }
         body .container .imgur-link-a .imgur-link.album {
-          margin-top: -30px;
-          border-top: 3px solid #1791FF; }
+          margin-top: -30px; }
   @media all and (max-width: 1200px) {
     body .top-controls {
       width: 862px !important; }

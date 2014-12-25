@@ -115,7 +115,8 @@
   </section>
 
   <section class="controls left-controls">
-    <select id="collections">
+    <select id="collections" class="collections">
+      <option value="0">Choose Collection</option>
     </select>
     <ul id="characters">
     </ul>
@@ -143,8 +144,18 @@
 
   <section class='container'>
     <div id="bg_0" class="bg-holder active canvas">
-      <img class="loader" src="./images/loading.gif">
     </div>
+    <div id="starter_0" class="starter active canvas">
+      <select id="starter_collections" class="collections">
+        <option value="0"> &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;Choose a Collection</option>
+      </select>
+      <h1>or</h1>
+
+      <div id="file-upload-styled"> &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;Upload a Background</div>
+      <input type="file" id="imageLoader" name="imageLoader"/>
+
+    </div>
+
     <div id="tv_0" class="tv active canvas">
     </div>
   </section>
