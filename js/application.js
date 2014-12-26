@@ -368,7 +368,7 @@ function drawBubble(stage,x,y,activeBubble,height,width,offsetleft){
     height: imageHeight,
     width: imageWidth,
     brightness: 0,
-    name: "bubble"
+    name: "image"
   })
   bubble.offsetleft = offsetleft;
 
@@ -687,11 +687,14 @@ function update(group, activeHandle) {
   }
 
 
+  console.log(image)
 
   // Calculate new dimensions. Height is simply the dy of the handles.
   // Width is increased/decreased by a factor of how much the height changed.
   newHeight = bottomLeft.getY() - topLeft.getY();
   newWidth = image.getWidth() * newHeight / image.getHeight();
+  console.log(newWidth)
+  console.log(newHeight)
 
   // It's too small: move the active handle back to the old position
   if( newWidth < minWidth || newHeight < minHeight ){
