@@ -58,7 +58,7 @@ body {
     body #logo #comics {
       font-family: "abril";
       color: #1791FF; }
-    body #logo #makeown {
+    body #logo #subhead {
       position: fixed;
       font-size: 14px;
       color: #FFD90F;
@@ -67,7 +67,7 @@ body {
     body #logo #beta {
       position: fixed;
       font-size: 14px;
-      color: #FF360F;
+      color: #FFD90F;
       left: 132px;
       padding-top: 0px; }
   body .controls {
