@@ -13,6 +13,8 @@ var focusedText,
 $(document).ready(function(){
   loadCollections()
 
+  //addBackground(1)
+
   //onload
 
   stage = new Kinetic.Stage({
@@ -968,4 +970,9 @@ function handleImageUpload(e){
     img.src = event.target.result;
   }
   reader.readAsDataURL(e.target.files[0]);
+}
+
+function addBackground(id){
+  var url = "http://i.imgur.com/onMCpXt.jpg"
+  $.post( serverDomain + "/backgrounds.json", { collection_id: id, remote_image_url: url } );
 }
