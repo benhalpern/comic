@@ -153,7 +153,7 @@ $(document).ready(function(){
       $("#uploaded,#reddit").slideUp();
       inchForward(13);
       $(this).addClass('uploading')
-      $(this).text('Uploading to Imgur')
+      $(this).text('Uploading')
       $.each(stages, function( index, stage ) {
         stage.toDataURL({
           callback: function(dataUrl) {

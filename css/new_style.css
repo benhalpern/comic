@@ -7,6 +7,12 @@
 @font-face {
   font-family: "komika";
   src: url(./Komika_display.ttf) format("truetype"); }
+@font-face {
+  font-family: "fredoka";
+  src: url(./fredoka.ttf) format("truetype"); }
+@font-face {
+  font-family: "abril";
+  src: url(./abril.ttf) format("truetype"); }
 body {
   margin: 0;
   background: black;
@@ -41,18 +47,29 @@ body {
     width: 162px;
     height: 16px;
     font-family: "simpsons", Verdana, Tahoma;
-    color: yellow;
-    padding: 28px 0;
+    color: #FFD90F;
+    padding: 18px 0;
     text-align: center;
     border-bottom-right-radius: 10px;
-    font-size: 20px;
+    font-size: 25px;
     text-decoration: none; }
+    body #logo #fuzz {
+      font-family: "fredoka"; }
+    body #logo #comics {
+      font-family: "abril";
+      color: #1791FF; }
+    body #logo #makeown {
+      position: fixed;
+      font-size: 14px;
+      color: #FFD90F;
+      left: 10px;
+      padding-top: 0px; }
     body #logo #beta {
       position: fixed;
-      font-size: 15px;
-      color: #1791FF;
-      left: 118px;
-      padding-top: 2px; }
+      font-size: 14px;
+      color: #FF360F;
+      left: 132px;
+      padding-top: 0px; }
   body .controls {
     background-color: rgba(0, 0, 0, 0.6);
     position: fixed; }
@@ -137,11 +154,11 @@ body {
           text-decoration: none; }
       body .controls.right-controls a:not(.explain-link) {
         width: 97%;
-        font-size: 15.5px;
+        font-size: 18px;
         background: #61BDA8;
         color: white;
         border: 0;
-        font-family: "simpsons", Verdana, Tahoma;
+        font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
         padding: 10px 1px;
         cursor: pointer;
         margin-bottom: 10px;
