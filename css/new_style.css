@@ -245,11 +245,11 @@ body {
           text-align: center;
           margin-top: 30px; }
       body .container .canvas.starter {
-        opacity: 0;
         text-align: center;
         font-size: 25px;
-        background-image: url("./graycomic.jpg"); }
-        body .container .canvas.starter .collections {
+        background-image: url("./graycomic.jpg");
+        display: none; }
+        body .container .canvas.starter .starter-collections {
           margin-top: 126px;
           width: 422px;
           font-size: 25px;
@@ -263,11 +263,11 @@ body {
           font-weight: bold;
           border: 0;
           border-bottom: 3px solid #1791FF; }
-          body .container .canvas.starter .collections:hover {
+          body .container .canvas.starter .starter-collections:hover {
             border-bottom: 3px solid #FF360F; }
         body .container .canvas.starter #imageLoader {
           display: none; }
-        body .container .canvas.starter #file-upload-styled {
+        body .container .canvas.starter .file-upload-styled {
           background: white;
           width: 400px;
           padding: 15px;
@@ -277,7 +277,7 @@ body {
           font-weight: bold;
           border-bottom: 3px solid #1791FF;
           cursor: pointer; }
-          body .container .canvas.starter #file-upload-styled:hover {
+          body .container .canvas.starter .file-upload-styled:hover {
             border-bottom: 3px solid #FF360F; }
     body .container .imgur-link-a {
       color: #0077e3;

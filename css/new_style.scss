@@ -339,12 +339,13 @@ body{
 
       }
       &.starter{
-        opacity:0;
+        //opacity:0;
         text-align:center;
         font-size:25px;
         background-image:url('./graycomic.jpg');
-
-        .collections{
+        display:none;
+        
+        .starter-collections{
           margin-top:126px;
           width: 422px;
           font-size:25px;
@@ -367,7 +368,7 @@ body{
         #imageLoader{
           display:none;
         }
-        #file-upload-styled{
+        .file-upload-styled{
           background:white;
           width:400px;
           padding:15px;

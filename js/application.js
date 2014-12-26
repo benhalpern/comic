@@ -25,7 +25,7 @@ $(document).ready(function(){
 
   loadBackgroundImage();
 
-  $(".starter").animate({'opacity':'1'},900)
+  $(".starter").fadeIn();
 
   //events
 
@@ -74,15 +74,20 @@ $(document).ready(function(){
   })
 
   $( "body" ).delegate( ".add-scene", "click", function() {
-    if($(".bg-holder:visible").length == 0){
+    if($(".bg-holder:visible").length == 0 && $(".starter:visible").length == 0){
       var random = Math.floor(Math.random() * 1000) + 1
       lastTv = $(".tv.active:last")
-      console.log(lastTv.offset().top + 500)
       $(".tv,.bg-holder,.starter").removeClass("active")
-      lastTv.after('<div id="bg_'+random+'" class="active canvas bg-holder" style="opacity:1"></div><div id="tv_'+random+'" class="active canvas tv"></div><br><br>')
+      lastTv.after('<div id="starter_'+random+'" class="starter active canvas"></div><div id="bg_'+random+'" class="active canvas bg-holder" style="opacity:1"></div><div id="tv_'+random+'" class="active canvas tv"></div><br><br>')
       $("body").animate({ scrollTop: lastTv.offset().top + 400}, 400);
+      $("#starter_"+random).html($("#starter_0").html())
       $("#bg_"+random).html($("#bg_0").html())
-      $("#bg_"+random).show();
+      if($("#collections option:selected").attr("value") == 0){
+        $("#starter_"+random).show();
+      }
+      else{
+        $("#bg_"+random).show();
+      }
       stage = new Kinetic.Stage({
         container: "tv_" + random,
         width: 800,
@@ -91,7 +96,12 @@ $(document).ready(function(){
       stages.push(stage);
     }
     else{
-      $("body").animate({ scrollTop: $(".bg-holder:visible").offset().top + 400}, 400);
+      if($(".bg-holder:visible").length > 0){
+        $("body").animate({ scrollTop: $(".bg-holder:visible").offset().top + 400}, 400);
+      }
+      else{
+        $("body").animate({ scrollTop: $(".starter:visible").offset().top + 400}, 400);
+      }
 
     }
 
@@ -167,17 +177,18 @@ $(document).ready(function(){
   })
 
 
-  $(".collections").change(function(){
-    if(this.value != 0){
+  $( "body" ).delegate( ".collections", "change", function() {
       loadCharacters(this.value)
-      loadBackgrounds(this.value)
-      $('.collections').val(this.value);
-    }
-    else{
-      //$(".bg-holder:visible").hide();
-      //$(".starter").show();
-      //$("#starter_collections").val(0);
-
+    if($(".bg-holder:visible").length > 0 || $(".starter:visible").length == 1 ){
+      if(this.value != 0){
+        loadBackgrounds(this.value)
+        $('.collections').val(this.value);
+      }
+      else{
+        $(".starter.active").show();
+        $(".bg-holder.active").hide();
+        $(".collections").val(0);
+      }
     }
   })
   $( "body" ).delegate( ".character", "click", function() {
@@ -197,9 +208,8 @@ $(document).ready(function(){
 
 
   })
-
-  $("#file-upload-styled").click(function(){
-    $("#imageLoader").click();
+  $( "body" ).delegate( ".file-upload-styled", "click", function() {
+    $(this).next().click();
   })
 
 
@@ -253,7 +263,7 @@ $(document).ready(function(){
     }
   });
 
-  $("#imageLoader").change(function(e){
+  $("body").delegate('.imageLoader', "change", function(e) {
     handleImageUpload(e)
   })
 
@@ -765,8 +775,6 @@ function loadCollections(){
     setTimeout(function(){
       $(".bg-holder").animate({"opacity":"1"},1420)
     },250)
-    //loadCharacters(data[0]["id"])
-    //loadBackgrounds(data[0]["id"])
   })
   .fail(function() {
     console.log( "error loading collections" );
@@ -785,11 +793,8 @@ function loadBackgrounds(id){
     if (data.length == 0){
       $(".bg-holder").html("<div class='no-bg-message'>This collection only has characters, no backgrounds.</div>")
     }
-    if ($(".starter:visible").length > 0){
-      $(".starter").hide();
-      $(".bg-holder").show();
-
-    }
+    $(".starter").hide();
+    $(".bg-holder.active").show();
 
   })
   .fail(function() {
@@ -799,21 +804,27 @@ function loadBackgrounds(id){
 }
 
 function loadCharacters(id){
-  $.ajax( serverDomain + "/characters.json?c=" + id )
-  .done(function(data) {
-    $("#characters").html("")
-    console.log(data.length)
-    if (data.length == 0){
-      $("#characters").html("This collection only has backgrounds, no characters.")
-    }
+  if (id == 0){
+    $("#characters").html("Choose a collection to add a character.")
+  }
+  else{
+    $.ajax( serverDomain + "/characters.json?c=" + id )
+    .done(function(data) {
+      $("#characters").html("")
+      console.log(data.length)
+      if (data.length == 0){
+        $("#characters").html("This collection only has backgrounds, no characters.")
+      }
 
-    $.each(data, function( index, value ) {
-      $("#characters").append('<li data-id="'+ value.id +'" class="character">'+ value.name +'</li>')
-    });
-  })
-  .fail(function() {
-    console.log( "error loading characters" );
-  })
+      $.each(data, function( index, value ) {
+        $("#characters").append('<li data-id="'+ value.id +'" class="character">'+ value.name +'</li>')
+      });
+    })
+    .fail(function() {
+      console.log( "error loading characters" );
+    })
+
+  }
 }
 
 function loadPoses(id,characterName){
