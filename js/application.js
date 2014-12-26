@@ -22,7 +22,7 @@ $(document).ready(function(){
     width: 800,
     height: 500
   });
-
+  $("body").animate({"opacity":"1"},500)
   stages.push(stage);
 
   loadBackgroundImage();
