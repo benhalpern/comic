@@ -202,8 +202,7 @@ $(document).ready(function(){
     //console.log(adjustedY)
     $("#bubbles img").removeClass("active");
     $(this).addClass("active");
-    console.log(stage.getY())
-    drawBubble(stage,360,120,$("img.active")[0]);
+    drawBubble(stage,360,120,$("img.active")[0],($(this).height()*6),($(this).width()*6),$(this).data("offsetleft"));
 
 
   })
@@ -255,10 +254,13 @@ $(document).ready(function(){
   });
 
   $(document).on('mouseup', '.tv', function(e) {
+    console.log("bubble")
+    console.log(focusedText.getParent().find('.bubble')[0].offsetleft)
     if(focusedText != undefined && focusedText["attrs"]["text"] && focusedText["attrs"]["text"].length < 2 ){
       addTextEdit(focusedText.getParent(),
-      focusedText.getParent().getX() + 50,
-      focusedText.getParent().getY() + 50)
+      focusedText.getParent().getX() + (focusedText.getParent().find('.bubble')[0].attrs["width"]/4),
+      focusedText.getParent().getY() + (focusedText.getParent().find('.bubble')[0].attrs["height"]/4),
+      focusedText.getParent().find('.bubble')[0].offsetleft)
     }
   });
 
@@ -350,11 +352,11 @@ function drawBackground(stage,imageObj){
   stage.add(layer);
 }
 
-function drawBubble(stage,x,y,activeBubble){
+function drawBubble(stage,x,y,activeBubble,height,width,offsetleft){
 
   var layer,group,bubble,imageObj = activeBubble,
-      imageHeight = 200,
-      imageWidth = 300;
+      imageHeight = height,
+      imageWidth = width;
   if( focusedText != undefined ){
     focusedText.unfocus();
   }
@@ -366,8 +368,10 @@ function drawBubble(stage,x,y,activeBubble){
     height: imageHeight,
     width: imageWidth,
     brightness: 0,
-    name: "image"
+    name: "bubble"
   })
+  bubble.offsetleft = offsetleft;
+
 
   group = new Kinetic.Group({
     x: x,
@@ -381,8 +385,9 @@ function drawBubble(stage,x,y,activeBubble){
   group.add(bubble);
   stage.add(layer);
   console.log(x)
-  console.log(y)
-  addTextEdit(group,x + 50,y + 50);
+  console.log("bubbe" + (bubble.attrs["width"]/2))
+
+  addTextEdit(group,x +(bubble.attrs["width"]/4),y + (bubble.attrs["height"]/4),offsetleft);
   addAnchor(group, -(imageWidth/2), -(imageHeight/2), "topLeft");
   addAnchor(group, imageWidth/2, -(imageHeight/2), "topRight");
   addAnchor(group, imageWidth/2, imageHeight/2, "bottomRight");
@@ -416,10 +421,10 @@ function drawBubble(stage,x,y,activeBubble){
 }
 
 
-function addTextEdit(group,x,y) {
+function addTextEdit(group,x,y,offsetleft) {
   var newText = new Kinetic.EditableText({
     // find click position.
-    x: x - 150,
+    x: x - 150 + offsetleft,
     y: y -101,
     fontFamily: 'komika',
     fontSize: 20,
