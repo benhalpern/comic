@@ -25,7 +25,6 @@ $(document).ready(function(){
 
   loadBackgroundImage();
 
-  $(".starter").fadeIn('2500');
 
   //events
 
@@ -939,7 +938,7 @@ function loadBackgroundImage(){
 
   mySecondImage = new Image();
   $(mySecondImage).one("load", function() {
-    $(".starter").fadeIn('slow')
+    $(".starter").fadeIn()
   }).attr("src", "./css/graycomic.jpg");
 
 }
