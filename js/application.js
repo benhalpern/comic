@@ -25,7 +25,7 @@ $(document).ready(function(){
 
   loadBackgroundImage();
 
-  $(".starter").fadeIn();
+  $(".starter").fadeIn('2500');
 
   //events
 
@@ -932,14 +932,16 @@ function inchForward(pixels){
 }
 
 function loadBackgroundImage(){
-  var myImage = new Image();
+  var myImage = new Image(),mySecondImage;
   $(myImage).one("load", function() {
-    //$("#backround").css("background-image", 'url(./css/nyc.png)');
-    $("#backround").css("color",'blue');
-
-    console.log(myImage.src)
     $("#background").animate({"opacity":"0.38"},420)
   }).attr("src", "./css/spider-man.jpg");
+
+  mySecondImage = new Image();
+  $(mySecondImage).one("load", function() {
+    $(".starter").fadeIn('slow')
+  }).attr("src", "./css/graycomic.jpg");
+
 }
 
 function handleImageUpload(e){
