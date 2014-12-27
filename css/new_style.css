@@ -272,8 +272,8 @@ body {
         background-image: url("./graycomic.jpg");
         display: none; }
         body .container .canvas.starter .starter-collections {
-          margin-top: 126px;
-          width: 422px;
+          margin-top: 50px;
+          width: 430px;
           font-size: 25px;
           text-align: center;
           -webkit-appearance: none;
@@ -289,7 +289,7 @@ body {
             border-bottom: 3px solid #FF360F; }
         body .container .canvas.starter #imageLoader {
           display: none; }
-        body .container .canvas.starter .file-upload-styled {
+        body .container .canvas.starter .file-upload-styled, body .container .canvas.starter .web-upload-styled {
           background: white;
           width: 400px;
           padding: 15px;
@@ -299,8 +299,27 @@ body {
           font-weight: bold;
           border-bottom: 3px solid #1791FF;
           cursor: pointer; }
-          body .container .canvas.starter .file-upload-styled:hover {
+          body .container .canvas.starter .file-upload-styled:hover, body .container .canvas.starter .web-upload-styled:hover {
             border-bottom: 3px solid #FF360F; }
+        body .container .canvas.starter .web-upload-styled {
+          margin-top: 20px;
+          padding: 14px;
+          width: 402px; }
+          body .container .canvas.starter .web-upload-styled input {
+            width: 100%;
+            border: 0px;
+            font-size: 25px;
+            outline: none; }
+            body .container .canvas.starter .web-upload-styled input ::-webkit-input-placeholder {
+              color: black; }
+            body .container .canvas.starter .web-upload-styled input :-moz-placeholder {
+              /* Firefox 18- */
+              color: black; }
+            body .container .canvas.starter .web-upload-styled input ::-moz-placeholder {
+              /* Firefox 19+ */
+              color: black; }
+            body .container .canvas.starter .web-upload-styled input :-ms-input-placeholder {
+              color: black; }
     body .container .imgur-link-a {
       color: #0077e3;
       text-decoration: none;

@@ -212,6 +212,13 @@ $(document).ready(function(){
     $(this).next().click();
   })
 
+  $( "body" ).delegate( "#urlLoader", "paste", function() {
+    console.log("web input")
+    setTimeout(function(){
+      handleWebUpload($("#urlLoader").val())
+    },5)
+  })
+
 
   //text edit
 
@@ -970,6 +977,21 @@ function handleImageUpload(e){
   reader.readAsDataURL(e.target.files[0]);
   $("#bubbles").animate({"opacity":"1"},2000)
 }
+
+function handleWebUpload(src){
+  if(src.match(/\.(png|jpg|jpeg|gif)$/)){
+    var img = new Image();
+    img.src = src
+    img.crossOrigin = ""
+    var stage = stages[$('.tv').index($('.tv.active'))]
+    console.log(stage)
+    drawBackground(stage,img);
+    $(".tv.active").show();
+    $(".starter").hide();
+  }
+
+}
+
 
 function addBackground(id){
   var url = "http://i.imgur.com/onMCpXt.jpg"

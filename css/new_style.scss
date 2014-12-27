@@ -376,8 +376,8 @@ body{
         display:none;
 
         .starter-collections{
-          margin-top:126px;
-          width: 422px;
+          margin-top:50px;
+          width: 430px;
           font-size:25px;
           text-align:center;
           -webkit-appearance: none;
@@ -398,7 +398,7 @@ body{
         #imageLoader{
           display:none;
         }
-        .file-upload-styled{
+        .file-upload-styled,.web-upload-styled{
           background:white;
           width:400px;
           padding:15px;
@@ -409,6 +409,33 @@ body{
           cursor:pointer;
           &:hover{
             border-bottom:3px solid $red;
+          }
+        }
+        .web-upload-styled{
+          margin-top:20px;
+          padding:14px;
+          width:402px;
+
+          input{
+            width:100%;
+            border:0px;
+            font-size:25px;
+            outline: none;
+            ::-webkit-input-placeholder {
+              color: black;
+            }
+
+            :-moz-placeholder { /* Firefox 18- */
+              color: black;
+            }
+
+            ::-moz-placeholder {  /* Firefox 19+ */
+              color: black;
+            }
+
+            :-ms-input-placeholder {
+              color: black;
+            }
           }
         }
       }
