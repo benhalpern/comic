@@ -981,8 +981,8 @@ function handleImageUpload(e){
 function handleWebUpload(src){
   if(src.match(/\.(png|jpg|jpeg|gif)$/)){
     var img = new Image();
-    img.src = src
     img.crossOrigin = ""
+    img.src = src
     var stage = stages[$('.tv').index($('.tv.active'))]
     console.log(stage)
     drawBackground(stage,img);
