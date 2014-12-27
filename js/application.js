@@ -345,14 +345,26 @@ function drawImage(stage,imageObj,character){
 }
 
 function drawBackground(stage,imageObj){
+  var ratio = 800/imageObj.width
+  var oldHeight = imageObj.height
+  var newHeight = oldHeight * ratio
+  var newWidth = 800
+  var offsetWidth = 0
+  if( newHeight > 600 ){
+    var offsetHeight = parseInt(-((newWidth-newHeight)/4))
+  }
+  else{
+    var offsetHeight = 0;
+
+  }
 
   var layer = new Kinetic.Layer();
   var img = new Kinetic.Image({
     image: imageObj,
-    x: 0,
-    y:0,
-    width: 800,
-    height: 500,
+    x: offsetWidth,
+    y: offsetHeight,
+    width: newWidth,
+    height: newHeight,
     draggable: false
   })
 
@@ -985,9 +997,11 @@ function handleWebUpload(src){
     img.src = src
     var stage = stages[$('.tv').index($('.tv.active'))]
     console.log(stage)
-    drawBackground(stage,img);
-    $(".tv.active").show();
-    $(".starter").hide();
+    setTimeout(function(){
+      drawBackground(stage,img);
+      $(".tv.active").show();
+      $(".starter").hide();
+    },90)
   }
 
 }
