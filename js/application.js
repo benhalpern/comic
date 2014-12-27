@@ -257,12 +257,12 @@ $(document).ready(function(){
 
   $(document).on('mouseup', '.tv', function(e) {
     console.log("bubble")
-    console.log(focusedText.getParent().find('.bubble')[0].offsetleft)
+    console.log(focusedText.getParent().find('.image')[0].offsetleft)
     if(focusedText != undefined && focusedText["attrs"]["text"] && focusedText["attrs"]["text"].length < 2 ){
       addTextEdit(focusedText.getParent(),
-      focusedText.getParent().getX() + (focusedText.getParent().find('.bubble')[0].attrs["width"]/4),
-      focusedText.getParent().getY() + (focusedText.getParent().find('.bubble')[0].attrs["height"]/4),
-      focusedText.getParent().find('.bubble')[0].offsetleft)
+      focusedText.getParent().getX() + (focusedText.getParent().find('.image')[0].attrs["width"]/4),
+      focusedText.getParent().getY() + (focusedText.getParent().find('.image')[0].attrs["height"]/4),
+      focusedText.getParent().find('.image')[0].offsetleft)
     }
   });
 
