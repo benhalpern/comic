@@ -170,6 +170,7 @@ body{
 
       #bubbles{
         overflow-x:hidden;
+        opacity:0;
         .bubble{
           float:left;
           cursor:pointer;
@@ -303,6 +304,11 @@ body{
             color:white;
           }
         }
+        p{
+          font-size:13px;
+          padding-left:5px;
+        }
+
       }
     }
   }

@@ -792,7 +792,6 @@ function loadCollections(){
 
 function loadBackgrounds(id){
   $(".bg-holder").html("")
-
   $.ajax( serverDomain + "/backgrounds.json?c=" + id)
   .done(function(data) {
     $(".loading-image").remove("")
@@ -809,6 +808,7 @@ function loadBackgrounds(id){
   .fail(function() {
     console.log( "error loading characters" );
   })
+  $("#bubbles").animate({"opacity":"1"},2000)
 
 }
 
@@ -824,7 +824,6 @@ function loadCharacters(id){
       if (data.length == 0){
         $("#characters").html("This collection only has backgrounds, no characters.")
       }
-
       $.each(data, function( index, value ) {
         $("#characters").append('<li data-id="'+ value.id +'" class="character">'+ value.name +'</li>')
       });
@@ -950,7 +949,6 @@ function loadBackgroundImage(){
   $(mySecondImage).one("load", function() {
     $(".starter").fadeIn()
   }).attr("src", "./css/graycomic.jpg");
-
 }
 
 function handleImageUpload(e){
@@ -970,6 +968,7 @@ function handleImageUpload(e){
     img.src = event.target.result;
   }
   reader.readAsDataURL(e.target.files[0]);
+  $("#bubbles").animate({"opacity":"1"},2000)
 }
 
 function addBackground(id){
