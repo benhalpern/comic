@@ -1000,14 +1000,12 @@ function handleWebUpload(src){
   if(src.match(/\.(png|jpg|jpeg|gif)$/)){
     var img = new Image();
     img.crossOrigin = ""
-    img.src = src
     var stage = stages[$('.tv').index($('.tv.active'))]
-    console.log(stage)
-    setTimeout(function(){
+    $(img).one("load", function() {
       drawBackground(stage,img);
       $(".tv.active").show();
       $(".starter").hide();
-    },90)
+    }).attr("src", src);
   }
 
 }
