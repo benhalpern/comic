@@ -351,11 +351,17 @@ function drawBackground(stage,imageObj){
   var newWidth = 800
   var offsetWidth = 0
   if( newHeight > 600 ){
-    var offsetHeight = parseInt(-((newWidth-newHeight)/4))
+    var offsetHeight = parseInt(-((newWidth-newHeight)/3))
   }
   else{
     var offsetHeight = 0;
+  }
 
+  if(newHeight < 500){
+    ratio = 500/newHeight
+    newHeight = 500;
+    newWidth = newWidth*ratio;
+    offsetWidth = parseInt(-((newWidth-800)/3));
   }
 
   var layer = new Kinetic.Layer();
