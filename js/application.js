@@ -623,10 +623,10 @@ function addLayerDownButton(group, x, y){
 function drawLogo(layer){
   var img = new Kinetic.Image({
     image: $('#logo-pic')[0],
-    x: 728,
-    y:431,
-    width: 70,
-    height: 67,
+    x: 732,
+    y:436,
+    width: 66,
+    height: 62,
     draggable: false,
     opacity:1,
     name: "logo"
