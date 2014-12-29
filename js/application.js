@@ -1007,6 +1007,8 @@ function handleWebUpload(src){
       $(".starter").hide();
     }).attr("src", src);
   }
+  $("#bubbles").animate({"opacity":"1"},2000)
+  
 
 }
 
