@@ -648,10 +648,10 @@ function addLayerDownButton(group, x, y){
 function drawLogo(layer){
   var img = new Kinetic.Image({
     image: $('#logo-pic')[0],
-    x: 732,
-    y:436,
-    width: 66,
-    height: 62,
+    x: 753,
+    y:455,
+    width: 45,
+    height: 43,
     draggable: false,
     opacity:1,
     name: "logo"
@@ -1008,7 +1008,7 @@ function handleWebUpload(src){
     }).attr("src", src);
   }
   $("#bubbles").animate({"opacity":"1"},2000)
-  
+
 
 }
 
