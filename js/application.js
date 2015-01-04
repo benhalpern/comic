@@ -999,9 +999,9 @@ function handleImageUpload(e){
 function handleWebUpload(src){
   if(src.match(/\.(png|jpg|jpeg|gif)$/)){
     var img = new Image();
-    img.crossOrigin = ""
     var stage = stages[$('.tv').index($('.tv.active'))]
     $(img).one("load", function() {
+      img.crossOrigin = ""
       drawBackground(stage,img);
       $(".tv.active").show();
       $(".starter").hide();
